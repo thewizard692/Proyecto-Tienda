@@ -17,6 +17,7 @@ require_once BASE_PATH . '/middleware/authMiddleware.php';
 $router = new SimpleRouter();
 $productoController = new ProductoController();
 
+//*******VENDEDOR**********
 $router->post('/vendedor', function() use ($productoController) {
     $data = json_decode(file_get_contents("php://input"), true);
     return json_encode($productoController->crearProducto($data));
@@ -41,6 +42,9 @@ $router->post('/vendedor/detalle', function() use ($productoController) {
     return json_encode($productoController->obtenerProductoPorId($id));
 });
 
+
+
+//*******USUARIO**********
 $router->get('/usuario', function() use ($productoController) {
     return json_encode($productoController->obtenerProductos());
 });
