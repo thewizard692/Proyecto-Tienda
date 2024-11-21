@@ -1,6 +1,6 @@
 <?php
-  require BASE_PATH . '/repositories/vendedorRepository.php';
-  require BASE_PATH . '/models/productoModel.php';
+  require_once BASE_PATH . '/repositories/vendedorRepository.php';
+  require_once BASE_PATH . '/models/productoModel.php';
 
   class VendedorController {
     private $vendedorRepository;

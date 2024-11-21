@@ -1,6 +1,6 @@
 <?php
-  require BASE_PATH . '/repositories/usuarioRepository.php';
-  require BASE_PATH . '/models/productoModel.php';
+  require_once BASE_PATH . '/repositories/usuarioRepository.php';
+  require_once BASE_PATH . '/models/productoModel.php';
 
   class UsuarioController {
     private $usuarioRepository;
@@ -18,15 +18,15 @@
     }
 
     public function obtenerProductosPorCategoria($id) {
-      return $this->usuarioRepository->obtenerProductoPorId($id['id']);
+      return $this->usuarioRepository->obtenerProductosPorCategoria($id['id']);
     }
 
-    public function agregarAlCarrito($idproducto, $idusuario){
-      return $this->usuarioRepository->agregarAlCarrito($idproducto, $idusuario);
+    public function agregarAlCarrito($idproducto, $usr_id){
+      return $this->usuarioRepository->agregarAlCarrito($idproducto, $usr_id);
     }
 
-    public function quitarDelCarrito($idproducto, $idusuario){
-      return $this->usuarioRepository->quitarDelCarrito($idproducto, $idusuario);
+    public function quitarDelCarrito($idproducto, $usr_id){
+      return $this->usuarioRepository->quitarDelCarrito($idproducto, $usr_id);
     }
 
   }

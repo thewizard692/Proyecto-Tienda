@@ -13,11 +13,13 @@
 require_once BASE_PATH . '/simpleRouter.php';
 require_once BASE_PATH . '/controllers/vendedorController.php';
 require_once BASE_PATH . '/controllers/usuarioController.php';
+require_once BASE_PATH . '/controllers/cuentaController.php';
 require_once BASE_PATH . '/middleware/authMiddleware.php';
 
 $router = new SimpleRouter();
 $VendedorController = new VendedorController();
 $UsuarioController = new UsuarioController();
+$CuentaController = new CuentaController();
 
 //*******VENDEDOR**********
 $router->post('/usuario/vendedor', function() use ($VendedorController) {
@@ -58,12 +60,37 @@ $router->get('/usuario', function() use ($UsuarioController) {
     return json_encode($UsuarioController->obtenerProductosPorCategoria());
 });
 
-$router->get('/usuario', function() use ($UsuarioController) {
+$router->post('/usuario', function() use ($UsuarioController) {
     return json_encode($UsuarioController->agregarAlCarrito());
 });
 
-$router->get('/usuario', function() use ($UsuarioController) {
+$router->delete('/usuario', function() use ($UsuarioController) {
     return json_encode($UsuarioController->quitarDelCarrito());
+});
+
+
+//*******CUENTA**********
+
+$router->post('/cuenta', function() use ($CuentaController) {
+    $data = json_decode(file_get_contents("php://input"), true);
+    error_log(print_r($data, true)); 
+    return json_encode($CuentaController->crearUsuario($data));
+});
+
+$router->post('/cuentaini', function() use ($CuentaController) {
+    $data = json_decode(file_get_contents("php://input"), true);
+    error_log(print_r($data, true)); 
+    return json_encode($CuentaController->iniciarSesion($data));
+});
+
+$router->put('/cuenta', function() use ($CuentaController) {
+    $data = json_decode(file_get_contents("php://input"), true);
+    return json_encode($CuentaController->actualizarUsuario($data));
+});
+
+$router->delete('/cuenta', function() use ($CuentaController) {
+      $id = json_decode(file_get_contents("php://input"), true);
+    return json_encode($CuentaController->borrarUsuario($id));
 });
 
 $router->dispatch();

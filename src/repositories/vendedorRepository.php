@@ -2,7 +2,7 @@
 require_once BASE_PATH . '/config/database.php';
 require_once BASE_PATH . '/interfaces/vendedorinterface.php';
 
-class ProductoRepository implements IProducto
+class VendedorRepository implements IVendedor
 {
     private $conn;
 

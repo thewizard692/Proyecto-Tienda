@@ -1,37 +1,14 @@
 <?php
 session_start();
-include '../config/database.php'; // Ajusta la ruta según la estructura de tu proyecto
+require_once '.../src/controllers/cuentaController.php';
+
+$error = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $usuario = $_POST['usuario'];
-    $password = $_POST['password'];
-
-    // Consulta para buscar el usuario
-    $busca = 'SELECT * FROM usuarios WHERE usr_usuario = ?';
-    $prep = $conexion->prepare($busca);
-    $prep->bind_param('s', $usuario);
-    $prep->execute();
-    $resultado = $prep->get_result();
-
-    if ($resultado->num_rows > 0) {
-        $dato = $resultado->fetch_assoc();
-        // Verificar la contraseña encriptada
-        if (password_verify($password, $dato['usr_psword'])) {
-            $_SESSION['usuario'] = $dato['usr_usuario'];
-            $_SESSION['nombre'] = $dato['usr_nombre'];
-
-            // Redirigir con mensaje de éxito usando JavaScript
-            echo "<script>
-                    alert('¡Bienvenido! Has iniciado sesión correctamente.');
-                    window.location.href = 'index.html';
-                  </script>";
-            exit();
-        } else {
-            $error = 'Contraseña incorrecta';
-        }
-    } else {
-        $error = 'Usuario no encontrado';
-    }
+ 
+    $controller = new cuentaController();
+    $controller->iniciarSesion($_POST);
+    
 }
 ?>
 
@@ -58,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                        <input type="password" class="form-control" required name="password" placeholder="Contraseña">
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+                    
                     <?php if (!empty($error)): ?>
                       <div class="alert alert-danger mt-3">
                         <?php echo $error; ?>
@@ -71,4 +49,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>
-
