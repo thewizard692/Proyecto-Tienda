@@ -21,12 +21,12 @@
       return $this->usuarioRepository->obtenerProductoPorId($id['id']);
     }
 
-    public function agregarAlCarrito($productoId, $usuarioId){
-      return $this->usuarioRepository->agregarAlCarrito($productoId, $usuarioId);
+    public function agregarAlCarrito($idproducto, $idusuario){
+      return $this->usuarioRepository->agregarAlCarrito($idproducto, $idusuario);
     }
 
-    public function quitarDelCarrito($productoId, $usuarioId){
-      return $this->usuarioRepository->quitarDelCarrito($productoId, $usuarioId);
+    public function quitarDelCarrito($idproducto, $idusuario){
+      return $this->usuarioRepository->quitarDelCarrito($idproducto, $idusuario);
     }
 
   }
