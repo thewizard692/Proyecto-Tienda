@@ -11,8 +11,8 @@
 }
 
 require_once BASE_PATH . '/simpleRouter.php';
-require_once BASE_PATH . '/controllers/VendedorController.php';
-require_once BASE_PATH . '/controllers/UsuarioController.php';
+require_once BASE_PATH . '/controllers/vendedorController.php';
+require_once BASE_PATH . '/controllers/usuarioController.php';
 require_once BASE_PATH . '/middleware/authMiddleware.php';
 
 $router = new SimpleRouter();
@@ -47,23 +47,23 @@ $router->post('/usuario/vendedor/detalle', function() use ($VendedorController) 
 
 //*******USUARIO**********
 $router->get('/usuario', function() use ($UsuarioController) {
-    return json_encode($VendedorController->obtenerProductos());
+    return json_encode($UsuarioController->obtenerProductos());
 });
 
 $router->get('/usuario', function() use ($UsuarioController) {
-    return json_encode($VendedorController->obtenerProductosPorNombre());
+    return json_encode($UsuarioController->obtenerProductosPorNombre());
 });
 
 $router->get('/usuario', function() use ($UsuarioController) {
-    return json_encode($VendedorController->obtenerProductosPorCategoria());
+    return json_encode($UsuarioController->obtenerProductosPorCategoria());
 });
 
 $router->get('/usuario', function() use ($UsuarioController) {
-    return json_encode($VendedorController->agregarAlCarrito());
+    return json_encode($UsuarioController->agregarAlCarrito());
 });
 
 $router->get('/usuario', function() use ($UsuarioController) {
-    return json_encode($VendedorController->quitarDelCarrito());
+    return json_encode($UsuarioController->quitarDelCarrito());
 });
 
 $router->dispatch();
