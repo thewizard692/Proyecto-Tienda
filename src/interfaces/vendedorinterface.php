@@ -1,5 +1,5 @@
 <?php
-    interface IProducto {
+    interface IVendedor {
         public function crearProducto($producto);
         public function actualizarProducto($producto);
         public function borrarProducto($idproducto);

@@ -11,58 +11,59 @@
 }
 
 require_once BASE_PATH . '/simpleRouter.php';
-require_once BASE_PATH . '/controllers/productoController.php';
+require_once BASE_PATH . '/controllers/VendedorController.php';
+require_once BASE_PATH . '/controllers/UsuarioController.php';
 require_once BASE_PATH . '/middleware/authMiddleware.php';
 
 $router = new SimpleRouter();
-$productoController = new ProductoController();
+$VendedorController = new VendedorController();
+$UsuarioController = new UsuarioController();
 
 //*******VENDEDOR**********
-$router->post('/vendedor', function() use ($productoController) {
+$router->post('/usuario/vendedor', function() use ($VendedorController) {
     $data = json_decode(file_get_contents("php://input"), true);
-    return json_encode($productoController->crearProducto($data));
+    return json_encode($VendedorController->crearProducto($data));
 });
 
-$router->put('/vendedor', function() use ($productoController) {
+$router->put('/usuario/vendedor', function() use ($VendedorController) {
     $data = json_decode(file_get_contents("php://input"), true);
-    return json_encode($productoController->actualizarProducto($data));
+    return json_encode($VendedorController->actualizarProducto($data));
 });
 
-$router->delete('/vendedor', function() use ($productoController) {
+$router->delete('/usuario/vendedor', function() use ($VendedorController) {
       $id = json_decode(file_get_contents("php://input"), true);
-    return json_encode($productoController->borrarProducto($id));
+    return json_encode($VendedorController->borrarProducto($id));
 });
 
-$router->get('/vendedor', function() use ($productoController) {
-    return json_encode($productoController->obtenerProductos());
+$router->get('/usuario/vendedor', function() use ($VendedorController) {
+    return json_encode($VendedorController->obtenerProductos());
 });
 
-$router->post('/vendedor/detalle', function() use ($productoController) {
+$router->post('/usuario/vendedor/detalle', function() use ($VendedorController) {
     $id = json_decode(file_get_contents("php://input"), true);
-    return json_encode($productoController->obtenerProductoPorId($id));
+    return json_encode($VendedorController->obtenerProductoPorId($id));
 });
-
 
 
 //*******USUARIO**********
-$router->get('/usuario', function() use ($productoController) {
-    return json_encode($productoController->obtenerProductos());
+$router->get('/usuario', function() use ($UsuarioController) {
+    return json_encode($VendedorController->obtenerProductos());
 });
 
-$router->get('/usuario', function() use ($productoController) {
-    return json_encode($productoController->obtenerProductosPorBusqueda());
+$router->get('/usuario', function() use ($UsuarioController) {
+    return json_encode($VendedorController->obtenerProductosPorNombre());
 });
 
-$router->get('/usuario', function() use ($productoController) {
-    return json_encode($productoController->obtenerProductosPorCategoria());
+$router->get('/usuario', function() use ($UsuarioController) {
+    return json_encode($VendedorController->obtenerProductosPorCategoria());
 });
 
-$router->get('/usuario', function() use ($productoController) {
-    return json_encode($productoController->agregarAlCarrito());
+$router->get('/usuario', function() use ($UsuarioController) {
+    return json_encode($VendedorController->agregarAlCarrito());
 });
 
-$router->get('/usuario', function() use ($productoController) {
-    return json_encode($productoController->quitarDelCarrito());
+$router->get('/usuario', function() use ($UsuarioController) {
+    return json_encode($VendedorController->quitarDelCarrito());
 });
 
 $router->dispatch();

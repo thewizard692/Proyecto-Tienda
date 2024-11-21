@@ -1,57 +1,54 @@
 <?php
-require_once BASE_PATH . '/repositories/productoRepository.php';
-require BASE_PATH . '/models/productoModel.php';
+  require BASE_PATH . '/repositories/vendedorRepository.php';
+  require BASE_PATH . '/models/productoModel.php';
 
-class ProductoController
-{
-    public $ProductoRepository;
+  class VendedorController {
+    private $vendedorRepository;
 
-    public function __construct()
-    {
-        $this->ProductoRepository = new ProductoRepository();
+    public function __construct() {
+      $this->vendedorRepository = new vendedorRepository();
     }
 
-    public function crearProducto($data)
-    {
-        $producto = new Producto();
-        $producto->nombre = $data['nombre'];
-        $producto->descripcion = $data['descripcion'];
-        $producto->tipo = $data['tipo'];
-        $producto->precio = $data['precio'];
-        $producto->imagen = $data['imagen'];
-        return $this->ProductoRepository->crearProducto($producto);
+    public function crearProducto($data) {
+      $producto = new Producto();
+      $producto->prd_nombre = $data['nombre'];
+      $producto->prd_descripcion = $data['descripcion'];
+      $producto->prd_marca = $data['marca'];
+      $producto->prd_estado = $data['estado'];
+      $producto->prd_categoria = $data['categoria'];
+      //$producto->prd_idpublicacion = $data['idpublicacion'];
+      //$producto->prd_idventedor = $data['idvendedor'];
+      return $this->vendedorRepository->crearProducto($producto);
     }
 
-    public function actualizarProducto($data)
-    {
-        $producto = new Producto();
-        $producto->idproducto = $data['idproducto'];
-        $producto->nombre = $data['nombre'];
-        $producto->descripcion = $data['descripcion'];
-        $producto->tipo = $data['tipo'];
-        $producto->precio = $data['precio'];
-        $producto->imagen = $data['imagen'];
-        return $this->ProductoRepository->actualizarProducto($producto);
+    public function actualizarProducto($data) {
+      $producto = new Producto();
+      $producto->prd_idproducto = $data['idproducto'];
+      $producto->prd_nombre = $data['nombre'];
+      $producto->prd_descripcion = $data['descripcion'];
+      $producto->prd_marca = $data['marca'];
+      $producto->prd_estado = $data['estado'];
+      $producto->prd_categoria = $data['categoria'];
+      //$producto->prd_idpublicacion = $data['idpublicacion'];
+      //$producto->prd_idventedor = $data['idvendedor'];
+      return $this->vendedorRepository->actualizarProducto($producto);
     }
 
-    public function borrarProducto($idproducto)
-    {
-        return $this->ProductoRepository->borrarProducto($idproducto['id']);
+    public function borrarProducto($idproducto) {
+      return $this->vendedorRepository->borrarProducto($idproducto['id']);
     }
 
-    public function obtenerProductos()
-    {
-        return $this->ProductoRepository->obtenerProductos();
+    public function obtenerProductos() {
+      return $this->vendedorRepository->obtenerProductos();
     }
 
-    public function obtenerProductosPorNombre($nombre)
-    {
-        return $this->ProductoRepository->obtenerProductosPorNombre($nombre);
+    public function obtenerProductosPorNombre($nombre) {
+      return $this->vendedorRepository->obtenerProductosPorNombre($nombre);
     }
 
-    public function obtenerProductoPorId($id)
-    {
-        return $this->ProductoRepository->obtenerProductoPorId($id['id']);
+    public function obtenerProductoPorId($id) {
+      //se tiene que poner $id['id'] para que mande el valor del atributo y no el arreglo completo del id
+      return $this->vendedorRepository->obtenerProductoPorId($id['id']);
     }
-}
+  }
 ?>
