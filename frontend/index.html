@@ -5,6 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda Online</title>
     <link rel="stylesheet" href="index.css">
+    <style>
+        /* Estilos para el menú lateral */
+        .side-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            padding-top: 20px;
+            z-index: 1000;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
+        }
+
+        .side-menu a {
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .side-menu a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Botón para abrir el menú */
+        .menu-btn {
+            font-size: 18px;
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Estilos del contenido principal */
+        main {
+            padding-left: 20px;
+        }
+
+        /* Estilos para ocultar el menú lateral */
+        .side-menu.open {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -15,10 +64,17 @@
         </div>
         <nav class="nav-links">
             <a href="#carrito">Carrito</a>
-            <a href="#cuenta">Mi Cuenta</a>
+            <!-- Aquí agregamos el botón para mostrar el menú lateral -->
+            <button class="menu-btn" onclick="toggleMenu()">Mi Cuenta</button>
         </nav>
     </header>
-    
+
+    <!-- Menú Lateral -->
+    <div class="side-menu" id="sideMenu">
+        <a href="../src/views/login.php">Iniciar Sesión</a>
+        <a href="../src/views/registro.html">Registrar</a>
+    </div>
+
     <main>
         <section class="categorias">
             <h2>Categorías</h2>
@@ -33,7 +89,6 @@
         <section class="productos">
             <h2>Productos Destacados</h2>
             <div class="productos-grid">
-                
                 <div class="producto">
                     <img src="https://via.placeholder.com/150" alt="Producto">
                     <h3>Nombre del Producto</h3>
@@ -49,5 +104,13 @@
     </footer>
 
     <script src="index.js"></script>
+    <script>
+        // Función para abrir y cerrar el menú lateral
+        function toggleMenu() {
+            var menu = document.getElementById('sideMenu');
+            menu.classList.toggle('open');
+        }
+    </script>
 </body>
 </html>
+
