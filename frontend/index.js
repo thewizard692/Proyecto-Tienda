@@ -77,8 +77,11 @@ const loadProductos = async () => {
             <td>${item.idproducto}</td>
             <td>${item.nombre}</td>
             <td>${item.descripcion}</td>
-            <td>${item.tipo}</td>
             <td>${item.precio}</td>
+            <td>${item.marca}</td>
+            <td>${item.estado}</td>
+            <td>${item.categoria}</td>
+            
             <img src="${item.imagen}" width="100">
             <td>
             <button class="btn btn-warning btn-sm" data_id="${item.idproducto}">Editar</button>
