@@ -1,12 +1,8 @@
 <?php
   class Vendedor {
-    public $idusuario;
-    public $nombre;
-    public $usuario;
-    public $password;
-    public $correo;
-    public $telefono;
-    public $direccion;
+    public $usr_fk_usuario;
+    public $usr_ranking;
+    public $usr_numventas;
   }
 
 ?>

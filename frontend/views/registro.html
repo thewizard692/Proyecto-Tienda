@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Usuario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .form-container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #f8f9fa;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1 class="text-center h4 mb-4">Registro de Usuario Nuevo</h1>
+        <form id="userForm" onsubmit="crearUsuario(); return false;">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" id="nombre" name="nombre" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="apaterno" class="form-label">Apellido Paterno</label>
+                <input type="text" id="apaterno" name="apaterno" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="amaterno" class="form-label">Apellido Materno</label>
+                <input type="text" id="amaterno" name="amaterno" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="usuario" class="form-label">Usuario</label>
+                <input type="text" id="usuario" name="usuario" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="correo" class="form-label">Correo Electrónico</label>
+                <input type="email" id="correo" name="correo" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="telefono" class="form-label">Teléfono</label>
+                <input type="text" id="telefono" name="telefono" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="direccion" class="form-label">Dirección</label>
+                <input type="text" id="direccion" name="direccion" class="form-control" required>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" id="vendedor" name="vendedor" value="vendedor" class="form-check-input">
+                <label for="vendedor" class="form-check-label">Vendedor</label>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Agregar</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="../index.js"></script>
+</body>
+</html>

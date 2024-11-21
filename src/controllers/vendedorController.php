@@ -1,6 +1,6 @@
 <?php
-  require BASE_PATH . '/repositories/vendedorRepository.php';
-  require BASE_PATH . '/models/productoModel.php';
+  require_once BASE_PATH . '/repositories/vendedorRepository.php';
+  require_once BASE_PATH . '/models/productoModel.php';
 
   class VendedorController {
     private $vendedorRepository;
@@ -13,6 +13,7 @@
       $producto = new Producto();
       $producto->prd_nombre = $data['nombre'];
       $producto->prd_descripcion = $data['descripcion'];
+      $producto->prd_precio = $data['precio'];
       $producto->prd_marca = $data['marca'];
       $producto->prd_estado = $data['estado'];
       $producto->prd_categoria = $data['categoria'];
@@ -26,6 +27,7 @@
       $producto->prd_idproducto = $data['idproducto'];
       $producto->prd_nombre = $data['nombre'];
       $producto->prd_descripcion = $data['descripcion'];
+      $producto->prd_precio = $data['precio'];
       $producto->prd_marca = $data['marca'];
       $producto->prd_estado = $data['estado'];
       $producto->prd_categoria = $data['categoria'];

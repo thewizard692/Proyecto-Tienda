@@ -8,7 +8,6 @@
     public $prd_categoria;
     public $prd_idpublicacion;
     public $prd_idvendedor;
-
   }
 
 ?>

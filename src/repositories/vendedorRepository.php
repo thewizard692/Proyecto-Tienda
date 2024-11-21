@@ -2,7 +2,7 @@
 require_once BASE_PATH . '/config/database.php';
 require_once BASE_PATH . '/interfaces/vendedorinterface.php';
 
-class ProductoRepository implements IProducto
+class VendedorRepository implements IVendedor
 {
     private $conn;
 
@@ -14,14 +14,14 @@ class ProductoRepository implements IProducto
 
     public function crearProducto($producto)
     {
-        $sql = "INSERT INTO productos (nombre, descripcion, tipo, precio, imagen) VALUES (:nombre, :descripcion, :tipo, :precio, :imagen)";
+        $sql = "INSERT INTO Productos (prd_nombre, prd_descripcion, prd_tipo, prd_precio, prd_estado, prd_categoria) VALUES (:nombre, :descripcion, :tipo, :precio, :estado,:categoria)";
         $resultado = $this->conn->prepare($sql);
-        $resultado->bindParam(':nombre',$producto->nombre);
-        $resultado->bindParam(':descripcion',$producto->descripcion);
-        $resultado->bindParam(':tipo',$producto->tipo);
-        $resultado->bindParam(':precio',$producto->precio);
-        $resultado->bindParam(':imagen',$producto->imagen);
-
+        $resultado->bindParam(':nombre',$producto->prd_nombre);
+        $resultado->bindParam(':descripcion',$producto->prd_descripcion);
+        $resultado->bindParam(':tipo',$producto->prd_tipo);
+        $resultado->bindParam(':precio',$producto->prd_precio);
+        $resultado->bindParam(':estado',$producto->prd_estado);
+        $resultado->bindParam(':categoria',$producto->prd_categoria);
         if($resultado->execute()){
             return ['mensaje' => 'Producto Creado'];
         } else{
@@ -31,14 +31,16 @@ class ProductoRepository implements IProducto
 
     public function actualizarProducto($producto)
     {
-        $sql = "UPDATE productos SET nombre = :nombre, descripcion = :descripcion, tipo = :tipo, precio = :precio, imagen = :imagen WHERE idproducto = :idproducto";
+        $sql = "UPDATE Productos SET prd_nombre = :nombre, prd_descripcion = :descripcion, prd_tipo = :tipo, prd_precio = :precio, prd_estado =:estado, prd_categoria = :categoria,
+         WHERE idproducto = :idproducto";
         $resultado = $this->conn->prepare($sql);
-        $resultado->bindParam(':idproducto',$producto->idproducto);
-        $resultado->bindParam(':nombre',$producto->nombre);
-        $resultado->bindParam(':descripcion',$producto->descripcion);
-        $resultado->bindParam(':tipo',$producto->tipo);
-        $resultado->bindParam(':precio',$producto->precio);
-        $resultado->bindParam(':imagen',$producto->imagen);
+        $resultado->bindParam(':idproducto',$producto->prd_idproducto);
+        $resultado->bindParam(':nombre',$producto->prd_nombre);
+        $resultado->bindParam(':descripcion',$producto->prd_descripcion);
+        $resultado->bindParam(':tipo',$producto->prd_tipo);
+        $resultado->bindParam(':precio',$producto->prd_precio);
+        $resultado->bindParam(':estado',$producto->prd_estado);
+        $resultado->bindParam(':categoria',$producto->prd_categoria);
       
 
         if($resultado->execute()){
@@ -50,7 +52,7 @@ class ProductoRepository implements IProducto
 
     public function borrarProducto($idproducto)
     {
-        $sql = "DELETE FROM productos WHERE idproducto = :idproducto";
+        $sql = "DELETE FROM Productos WHERE idproducto = :idproducto";
         $resultado = $this->conn->prepare($sql);
         $resultado->bindParam(':idproducto',$idproducto);
        
@@ -63,7 +65,7 @@ class ProductoRepository implements IProducto
 
     public function obtenerProductos()
     {
-        $sql = "SELECT * FROM productos";
+        $sql = "SELECT * FROM Productos";
         $resultado = $this->conn->prepare($sql);
         $resultado->execute();
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -71,7 +73,7 @@ class ProductoRepository implements IProducto
 
     public function obtenerProductosPorNombre($nombre)
     {
-        $sql = "SELECT * FROM productos WHERE nombre = :nombre";
+        $sql = "SELECT * FROM Productos WHERE prd_nombre = :nombre";
         $resultado = $this->conn->prepare($sql);
         $resultado->bindParam(':nombre',$nombre->nombre);
         $resultado->execute();
@@ -80,7 +82,7 @@ class ProductoRepository implements IProducto
 
     public function obtenerProductoPorId($id)
     {
-        $sql = "SELECT * FROM productos WHERE idproducto = :id";
+        $sql = "SELECT * FROM Productos WHERE idproducto = :id";
         $resultado = $this->conn->prepare($sql);
         $resultado->bindParam(':id',$id);
         $resultado->execute();

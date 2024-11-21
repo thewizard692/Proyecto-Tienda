@@ -1,4 +1,4 @@
-const apiURL = 'http://localhost:8888/tienda-php/src/index.php'
+const apiURL = 'http://localhost:8888/Proyecto-Tienda/src/index.php'
 const productForm = document.getElementById('productForm')
 const alertContainer = document.getElementById('alertContainer')
 const productTableBody = document.getElementById('productTableBody')
@@ -15,6 +15,50 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+const crearUsuario = async () => {
+    //const usuarioId = document.getElementById('usuarioId').value;
+    
+    const usuario = {
+        nombre: document.getElementById('nombre').value || 'N/A',
+        apaterno: document.getElementById('apaterno').value || 'N/A',
+        amaterno: document.getElementById('amaterno').value || 'N/A',
+        usuario: document.getElementById('usuario').value || 'usuario_default',
+        password: document.getElementById('password').value || '',
+        correo: document.getElementById('correo').value || 'correo@dominio.com',
+        telefono: document.getElementById('telefono').value || '0000000000',
+        direccion: document.getElementById('direccion').value || 'Dirección no especificada',
+    };
+
+
+    const url = `${apiURL}/cuenta`;
+    const method = 'POST';
+    const respuesta = await fetch(url, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(usuario),
+    });
+
+    const resultado = await respuesta.json();
+    console.log(resultado);
+
+    /*const response = await resultado.json();
+    if (response.mensaje === 'Usuario Creado') {
+        showAlert('Usuario Registrado Correctamente', 'success');
+        loadUsuario();
+        userForm.reset();
+    } else if (response.mensaje === 'Usuario Actualizado') {
+        showAlert('Usuario Actualizado Correctamente', 'success');
+        loadUsuario();
+        userForm.reset();
+    } else {
+        showAlert('Error al registrar el usuario', 'danger');
+    }*/
+
+    //document.getElementById('usuarioId').value = '';
+    //console.log('@@@ response => ', response);
+};
 
 const loadProductos = async () => {
     try {
@@ -33,8 +77,11 @@ const loadProductos = async () => {
             <td>${item.idproducto}</td>
             <td>${item.nombre}</td>
             <td>${item.descripcion}</td>
-            <td>${item.tipo}</td>
             <td>${item.precio}</td>
+            <td>${item.marca}</td>
+            <td>${item.estado}</td>
+            <td>${item.categoria}</td>
+            
             <img src="${item.imagen}" width="100">
             <td>
             <button class="btn btn-warning btn-sm" data_id="${item.idproducto}">Editar</button>
