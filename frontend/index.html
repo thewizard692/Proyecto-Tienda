@@ -6,7 +6,54 @@
     <title>Tienda Online</title>
     <link rel="stylesheet" href="index.css">
     <style>
-        /* Estilos para el menú lateral */
+        /* General */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #232f3e;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .header .search-bar input {
+            padding: 5px;
+            width: 300px;
+            border: none;
+            border-radius: 3px;
+        }
+
+        .header .search-bar button {
+            padding: 6px 10px;
+            background-color: #febd69;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .header .nav-links a {
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .header .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Menú lateral */
         .side-menu {
             display: none;
             position: fixed;
@@ -34,24 +81,61 @@
             color: black;
         }
 
-        /* Botón para abrir el menú */
-        .menu-btn {
-            font-size: 18px;
-            background-color: #333;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-        }
-
-        /* Estilos del contenido principal */
-        main {
-            padding-left: 20px;
-        }
-
-        /* Estilos para ocultar el menú lateral */
         .side-menu.open {
             display: block;
+        }
+
+        /* Categorías destacadas */
+        .categorias-destacadas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .categoria {
+            background-color: white;
+            border-radius: 5px;
+            text-align: center;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .categoria img {
+            max-width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .categoria h3 {
+            margin: 15px 0 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .categoria a {
+            color: #0073e6;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: auto;
+        }
+
+        .categoria a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            background-color: #232f3e;
+            color: white;
+            padding: 10px 0;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -64,37 +148,57 @@
         </div>
         <nav class="nav-links">
             <a href="#carrito">Carrito</a>
-            <!-- Aquí agregamos el botón para mostrar el menú lateral -->
             <button class="menu-btn" onclick="toggleMenu()">Mi Cuenta</button>
         </nav>
     </header>
 
-    <!-- Menú Lateral -->
+    <!-- Menú lateral -->
     <div class="side-menu" id="sideMenu">
         <a href="./views/login.php">Iniciar Sesión</a>
         <a href="./views/registro.html">Registrar</a>
     </div>
 
     <main>
-        <section class="categorias">
-            <h2>Categorías</h2>
-            <ul>
-                <li><a href="#">Electrónicos</a></li>
-                <li><a href="#">Ropa</a></li>
-                <li><a href="#">Hogar</a></li>
-                <li><a href="#">Libros</a></li>
-            </ul>
-        </section>
-
-        <section class="productos">
-            <h2>Productos Destacados</h2>
-            <div class="productos-grid">
-                <div class="producto">
-                    <img src="https://via.placeholder.com/150" alt="Producto">
-                    <h3>Nombre del Producto</h3>
-                    <p>$99.99</p>
-                    <button class="btn-agregar">Agregar al Carrito</button>
-                </div>
+        <section class="categorias-destacadas">
+            <div class="categoria">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_Softlines._SY304_CB408655762_.jpg" alt="Ropa">
+                <h3>Descubre Ropa de Mujer</h3>
+                <a href="#ropa">Ver más</a>
+            </div>
+            <div class="categoria">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_CE._SY304_CB408649900_.jpg" alt="Electrónicos">
+                <h3>Descubre Electrónicos</h3>
+                <a href="#electronicos">Ver más</a>
+            </div>
+            <div class="categoria">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_VG._SY304_CB408657586_.jpg" alt="Videojuegos">
+                <h3>Descubre Videojuegos</h3>
+                <a href="#videojuegos">Ver más</a>
+            </div>
+            <div class="categoria">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_Books._SY304_CB408654706_.jpg" alt="Libros">
+                <h3>Descubre Libros</h3>
+                <a href="#libros">Ver más</a>
+            </div>
+            <div class="categoria">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_kitchen._SY304_CB408652357_.jpg" alt="Hogar y Cocina">
+                <h3>Descubre selección de Hogar y Cocina</h3>
+                <a href="#cocina">Ver más</a>
+            </div>
+            <div class="categoria">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_pets._SY304_CB408652357_.jpg" alt="Mascotas">
+                <h3>Descubre selección para Mascotas</h3>
+                <a href="#mascotas">Ver más</a>
+            </div>
+            <div class="categoria">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_Toys._SY304_CB408652357_.jpg" alt="Juguetes">
+                <h3>Descubre selección de Juguetes</h3>
+                <a href="#juguetes">Ver más</a>
+            </div>
+            <div class="categoria">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_grocery._SY304_CB408652357_.jpg" alt="Bebidas">
+                <h3>Descubre selección de Bebidas</h3>
+                <a href="#bebidas">Ver más</a>
             </div>
         </section>
     </main>
@@ -103,7 +207,6 @@
         <p>© 2024 Tienda Online. Todos los derechos reservados.</p>
     </footer>
 
-    <script src="index.js"></script>
     <script>
         // Función para abrir y cerrar el menú lateral
         function toggleMenu() {
