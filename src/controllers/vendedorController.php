@@ -11,22 +11,22 @@
 
     public function crearProducto($data) {
       $producto = new Producto();
-      $producto->nombre = $data['nombre'];
-      $producto->descrip = $data['descripcion'];
-      $producto->precio = $data['precio'];
-      $producto->marca = $data['marca'];
-      $producto->estado = $data['estado'];
+      $producto->prd_nombre = $data['prd_nombre'];
+      $producto->prd_descrip = $data['prd_descrip'];
+      $producto->prd_precio = $data['prd_precio'];
+      $producto->prd_marca = $data['prd_marca'];
+      $producto->prd_estado = $data['prd_estado'];
       return $this->vendedorRepository->crearProducto($producto);
     }
 
     public function actualizarProducto($data) {
       $producto = new Producto();
       $producto->idproducto = $data['idproducto'];
-      $producto->nombre = $data['nombre'];
-      $producto->descrip = $data['descripcion'];
-      $producto->precio = $data['precio'];
-      $producto->marca = $data['marca'];
-      $producto->estado = $data['estado'];
+      $producto->prd_nombre = $data['prd_nombre'];
+      $producto->prd_descrip = $data['prd_descrip'];
+      $producto->prd_precio = $data['prd_precio'];
+      $producto->prd_marca = $data['prd_marca'];
+      $producto->prd_estado = $data['prd_estado'];
       return $this->vendedorRepository->actualizarProducto($producto);
     }
 
