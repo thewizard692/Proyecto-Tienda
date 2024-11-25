@@ -1,13 +1,12 @@
 <?php
   class Producto {
     public $idproducto;
-    public $prd_nombre;
-    public $prd_descripcion;
-    public $prd_marca;
-    public $prd_estado;
-    public $prd_categoria;
-    public $prd_idpublicacion;
-    public $prd_idvendedor;
+    public $nombre;
+    public $descrip;
+    public $precio;
+    public $marca;
+    public $estado;
+    //public $categoria;
   }
 
 ?>
