@@ -200,6 +200,7 @@ const agregarAlCarrito = async () => {
           <td>${item.prd_descrip}</td>
           <td>${item.prd_precio}</td>
           <td>${item.prd_marca}</td>
+          <td>${item.prd_estado}</td>
           <td>
             <button class="btn btn-warning btn-sm" data_id="${item.idproducto}">Editar</button>
             <button class="btn btn-danger btn-sm" data_id="${item.idproducto}">Borrar</button>
