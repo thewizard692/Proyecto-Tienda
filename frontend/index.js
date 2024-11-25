@@ -64,19 +64,19 @@ const agregarAlCarrito = async () => {
     if (idproducto){
       producto = {
         idproducto: idproducto,
-        nombre: document.getElementById('nombre').value,
-        descripcion: document.getElementById('descripcion').value,
-        precio: document.getElementById('precio').value,
-        marca: document.getElementById('marca').value,
-        estado: document.getElementById('estado').value,
+        prd_nombre: document.getElementById('prd_nombre').value,
+        prd_descrip: document.getElementById('prd_descrip').value,
+        prd_precio: document.getElementById('prd_precio').value,
+        prd_marca: document.getElementById('prd_marca').value,
+        prd_estado: document.getElementById('prd_estado').value,
       }
     }else {
     producto = {
-      nombre: document.getElementById('nombre').value,
-      descripcion: document.getElementById('descripcion').value,
-      precio: document.getElementById('precio').value,
-      marca: document.getElementById('marca').value,
-      estado: document.getElementById('estado').value,
+      prd_nombre: document.getElementById('prd_nombre').value,
+      prd_descrip: document.getElementById('prd_descrip').value,
+      prd_precio: document.getElementById('prd_precio').value,
+      prd_marca: document.getElementById('prd_marca').value,
+      prd_estado: document.getElementById('prd_estado').value,
     }
   }
     const url = `${apiURL}/usuario/vendedor`
@@ -119,11 +119,11 @@ const agregarAlCarrito = async () => {
       const producto = await res.json()
       if (producto) {
         document.getElementById('idproducto').value = producto.idproducto
-        document.getElementById('nombre').value = producto.nombre
-        document.getElementById('descripcion').value = producto.descripcion
-        document.getElementById('precio').value = producto.precio
-        document.getElementById('marca').value = producto.marca
-        document.getElementById('estado').estado = producto.estado
+        document.getElementById('prd_nombre').value = producto.prd_nombre
+        document.getElementById('prd_descrip').value = producto.prd_descrip
+        document.getElementById('prd_precio').value = producto.prd_precio
+        document.getElementById('prd_marca').value = producto.prd_marca
+        document.getElementById('prd_estado').value = producto.prd_estado
       }
       console.log('@@ producto =>', producto)
       } 
@@ -131,7 +131,7 @@ const agregarAlCarrito = async () => {
       console.error('Error: ', error)
     }
   }
-  //CARGA DE PRODUCTOS
+  //CARGA DE PRODUCTOS Y MUESTRA EN LA TABLA
   const loadProductos = async () => {
     try {
       const res = await fetch(apiURL + '/usuario/vendedor', {
@@ -147,10 +147,10 @@ const agregarAlCarrito = async () => {
         row.innerHTML =
         `
           <td>${item.idproducto}</td>
-          <td>${item.nombre}</td>
-          <td>${item.descrip}</td>
-          <td>${item.precio}</td>
-          <td>${item.marca}</td>
+          <td>${item.prd_nombre}</td>
+          <td>${item.prd_descrip}</td>
+          <td>${item.prd_precio}</td>
+          <td>${item.prd_marca}</td>
           <td>
             <button class="btn btn-warning btn-sm" data_id="${item.idproducto}">Editar</button>
             <button class="btn btn-danger btn-sm" data_id="${item.idproducto}">Borrar</button>

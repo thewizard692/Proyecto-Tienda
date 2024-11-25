@@ -14,14 +14,14 @@ class VendedorRepository implements IVendedor
 
     public function crearProducto($producto)
     {
-        $sql = "INSERT INTO productos (nombre,descrip,precio,marca,estado) 
-                              VALUES (:nombre,:descrip,:precio,:marca,:estado)";                 
+        $sql = "INSERT INTO productos (prd_nombre,prd_descrip,prd_precio,prd_marca,prd_estado) 
+                              VALUES (:prd_nombre,:prd_descrip,:prd_precio,:prd_marca,:prd_estado)";                 
         $resultado = $this->conn->prepare($sql);
-        $resultado->bindParam(':nombre',$producto->nombre);
-        $resultado->bindParam(':descrip',$producto->descrip);
-        $resultado->bindParam(':precio',$producto->precio);
-        $resultado->bindParam(':marca',$producto->marca);
-        $resultado->bindParam(':estado',$producto->estado);
+        $resultado->bindParam(':prd_nombre',$producto->prd_nombre);
+        $resultado->bindParam(':prd_descrip',$producto->prd_descrip);
+        $resultado->bindParam(':prd_precio',$producto->prd_precio);
+        $resultado->bindParam(':prd_marca',$producto->prd_marca);
+        $resultado->bindParam(':prd_estado',$producto->prd_estado);
 
         if($resultado->execute()){
             return ['mensaje' => 'Producto Creado'];
@@ -34,19 +34,20 @@ class VendedorRepository implements IVendedor
     {
         $sql = "UPDATE productos 
         SET 
-        nombre = :nombre,
-        descrip= descrip,
-        tipo = :tipo,
-        precio = :precio, 
-        estado = :estado,
+        prd_nombre = :prd_nombre,
+        prd_descrip= :prd_descrip,
+        prd_tipo   = :prd_tipo,
+        prd_precio = :prd_precio,
+        prd_marca = :prd_marca, 
+        prd_estado = :prd_estado,
          WHERE idproducto = :idproducto";
         $resultado = $this->conn->prepare($sql);
         $resultado->bindParam(':idproducto',$producto->idproducto);
-        $resultado->bindParam(':nombre',$producto->nombre);
-        $resultado->bindParam(':descrip',$producto->descrip);
-        $resultado->bindParam(':precio',$producto->precio);
-        $resultado->bindParam(':marca',$producto->marca);
-        $resultado->bindParam(':estado',$producto->estado);
+        $resultado->bindParam(':prd_nombre',$producto->prd_nombre);
+        $resultado->bindParam(':prd_descrip',$producto->prd_descrip);
+        $resultado->bindParam(':prd_precio',$producto->prd_precio);
+        $resultado->bindParam(':prd_marca',$producto->prd_marca);
+        $resultado->bindParam(':prd_estado',$producto->prd_estado);
 
         if($resultado->execute()){
             return ['mensaje' => 'Producto Actualizado'];
@@ -78,9 +79,9 @@ class VendedorRepository implements IVendedor
 
     public function obtenerProductosPorNombre($nombre)
     {
-        $sql = "SELECT * FROM productos WHERE nombre = :nombre";
+        $sql = "SELECT * FROM productos WHERE prd_nombre = :prd_nombre";
         $resultado = $this->conn->prepare($sql);
-        $resultado->bindParam(':nombre',$nombre->nombre);
+        $resultado->bindParam(':prd_nombre',$nombre->prd_nombre);
         $resultado->execute();
         return $resultado->fetch(PDO::FETCH_ASSOC);
     }
