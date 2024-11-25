@@ -15,6 +15,21 @@ document.addEventListener('DOMContentLoaded', () => {
             agregarAlCarrito();
         });
     });
+
+    const isLoggedIn = sessionStorage.getItem('loggedIn'); 
+    const loginLink = document.getElementById('loginLink');
+    const logoutLink = document.getElementById('logoutLink');
+    const registerlink = document.getElementById('registerLink');
+        
+    if (isLoggedIn === 'true') {
+        loginLink.classList.add('hide-on-login');
+        registerlink.classList.add('hide-on-login');
+        logoutLink.classList.remove('hide-on-login');
+    } else {
+        loginLink.classList.remove('hide-on-login');
+        registerlink.classList.remove('hide-on-login');
+        logoutLink.classList.add('hide-on-login');
+    }
 });
 
 const agregarAlCarrito = async () => {
@@ -37,7 +52,7 @@ const agregarAlCarrito = async () => {
         method: method,
         body: JSON.stringify(producto)
     })
-    
+
     const response = await resultado.json()
     if (response.mensaje === 'Producto Creado') {
         showAlert('Producto Agregado', 'success')
