@@ -5,55 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda Online</title>
     <link rel="stylesheet" href="index.css">
-    <style>
-        /* Estilos para el menú lateral */
-        .side-menu {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 250px;
-            height: 100%;
-            background-color: #333;
-            padding-top: 20px;
-            z-index: 1000;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-            transition: 0.3s;
-        }
-
-        .side-menu a {
-            color: white;
-            padding: 8px 12px;
-            text-decoration: none;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .side-menu a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-
-        /* Botón para abrir el menú */
-        .menu-btn {
-            font-size: 18px;
-            background-color: #333;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-        }
-
-        /* Estilos del contenido principal */
-        main {
-            padding-left: 20px;
-        }
-
-        /* Estilos para ocultar el menú lateral */
-        .side-menu.open {
-            display: block;
-        }
-    </style>
 </head>
 <body>
     <header class="header">
@@ -71,8 +22,9 @@
 
     <!-- Menú Lateral -->
     <div class="side-menu" id="sideMenu">
-        <a href="./views/login.php">Iniciar Sesión</a>
-        <a href="./views/registro.html">Registrar</a>
+        <a href="./pages/login.html" id="loginLink">Iniciar Sesión</a>
+        <a href="./pages/registro.html" id="registerLink">Registrar</a>
+        <a href="#" id="logoutLink" onclick="cerrarSesion()">Cerrar Sesión</a>
     </div>
 
     <main>
