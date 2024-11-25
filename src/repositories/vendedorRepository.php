@@ -14,7 +14,7 @@ class VendedorRepository implements IVendedor
 
     public function crearProducto($producto)
     {
-        $sql = "INSERT INTO Productos (prd_nombre, prd_descripcion, prd_tipo, prd_precio, prd_estado, prd_categoria) VALUES (:nombre, :descripcion, :tipo, :precio, :estado,:categoria)";
+        $sql = "INSERT INTO productos (prd_nombre, prd_descripcion, prd_tipo, prd_precio, prd_estado, prd_categoria) VALUES (:nombre, :descripcion, :tipo, :precio, :estado,:categoria)";
         $resultado = $this->conn->prepare($sql);
         $resultado->bindParam(':nombre',$producto->prd_nombre);
         $resultado->bindParam(':descripcion',$producto->prd_descripcion);
@@ -31,7 +31,7 @@ class VendedorRepository implements IVendedor
 
     public function actualizarProducto($producto)
     {
-        $sql = "UPDATE Productos SET prd_nombre = :nombre, prd_descripcion = :descripcion, prd_tipo = :tipo, prd_precio = :precio, prd_estado =:estado, prd_categoria = :categoria,
+        $sql = "UPDATE productos SET prd_nombre = :nombre, prd_descripcion = :descripcion, prd_tipo = :tipo, prd_precio = :precio, prd_estado =:estado, prd_categoria = :categoria,
          WHERE idproducto = :idproducto";
         $resultado = $this->conn->prepare($sql);
         $resultado->bindParam(':idproducto',$producto->prd_idproducto);
@@ -52,7 +52,7 @@ class VendedorRepository implements IVendedor
 
     public function borrarProducto($idproducto)
     {
-        $sql = "DELETE FROM Productos WHERE idproducto = :idproducto";
+        $sql = "DELETE FROM productos WHERE idproducto = :idproducto";
         $resultado = $this->conn->prepare($sql);
         $resultado->bindParam(':idproducto',$idproducto);
        
@@ -65,7 +65,7 @@ class VendedorRepository implements IVendedor
 
     public function obtenerProductos()
     {
-        $sql = "SELECT * FROM Productos";
+        $sql = "SELECT * FROM productos";
         $resultado = $this->conn->prepare($sql);
         $resultado->execute();
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -82,7 +82,7 @@ class VendedorRepository implements IVendedor
 
     public function obtenerProductoPorId($id)
     {
-        $sql = "SELECT * FROM Productos WHERE idproducto = :id";
+        $sql = "SELECT * FROM productos WHERE idproducto = :id";
         $resultado = $this->conn->prepare($sql);
         $resultado->bindParam(':id',$id);
         $resultado->execute();
