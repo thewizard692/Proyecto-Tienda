@@ -32,7 +32,7 @@ class VendedorRepository implements IVendedor
 
     public function actualizarProducto($producto)
     {
-        $sql = "UPDATE productos SET 
+        $sql = "UPDATE productosHEAD SET 
         prd_nombre = :prd_nombre, 
         prd_descrip= :prd_descrip, 
         prd_precio = :prd_precio, 
