@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   })
 
-
 const agregarAlCarrito = async () => {
     const idproducto = document.getElementById('idproducto').value
     
