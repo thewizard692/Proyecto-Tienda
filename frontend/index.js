@@ -68,19 +68,19 @@ const crearUsuario = async () => {
 
 //******FUNCIONES PARA CARRITO******
 const agregarAlCarrito = async () => {
-    const productId = document.getElementById('productId').value
+    const idproducto = document.getElementById('idproducto').value
     
     const producto = {
         usuario: document.getElementById('nombre').value || 'N/A',
         producto: document.getElementById('descripcion').value || 'Descripción no disponible'
     }
 
-    if (productId) {
-        producto.idproducto = productId
+    if (idproducto) {
+        producto.idproducto = idproducto
     }
 
     const url = `${apiURL}/usuario`
-    const method = productId ? 'PUT' : 'POST'
+    const method = idproducto ? 'PUT' : 'POST'
 
     console.log('ruta y metodo => ', url, method, producto)
     const resultado = await fetch(url, {
@@ -100,30 +100,24 @@ const agregarAlCarrito = async () => {
     } else {
         showAlert('Error al agregar el producto', 'danger')
     }
-    document.getElementById('productId').value = ''
+    document.getElementById('idproducto').value = ''
 
     console.log('@@@ response => ', response)
 }
 
-
 //****FUNCIONES PARA PRODUCTOS******
-
-  
   //AGREGAR PRODUCTOS - CAMBIO
   const crearProducto = async () => {
-    const productId = document.getElementById('productId').value
+    const idproducto = document.getElementById('idproducto').value
     let producto
-    if (productId){
+    if (idproducto){
       producto = {
-        idproducto: productId,
+        idproducto: idproducto,
         nombre: document.getElementById('nombre').value,
         descripcion: document.getElementById('descripcion').value,
         precio: document.getElementById('precio').value,
         marca: document.getElementById('marca').value,
         estado: document.getElementById('estado').value,
-        categoria: document.getElementById('categoria').value,
-       //imagen: document.getElementById('imagen').value,
-        
       }
     }else {
     producto = {
@@ -132,14 +126,10 @@ const agregarAlCarrito = async () => {
       precio: document.getElementById('precio').value,
       marca: document.getElementById('marca').value,
       estado: document.getElementById('estado').value,
-      categoria: document.getElementById('categoria').value,
-      //imagen: document.getElementById('imagen').value,
-      
     }
   }
     const url = `${apiURL}/usuario/vendedor`
-    const method = productId ? 'PUT' : 'POST'
-  
+    const method = idproducto ? 'PUT' : 'POST'
     console.log('@@@ ruta y metodo => ', url, method, producto) //sal
     const resultado = await fetch(url, {
       method: method,
@@ -159,7 +149,7 @@ const agregarAlCarrito = async () => {
     }else {
       showAlert('Error al agregar el producto', 'danger')
     }
-    document.getElementById('productId').value = ''
+    document.getElementById('idproducto').value = ''
   
     console.log('@@@ response => ', response)
   } //FIN DE AGREGAR PRODUCTOS
@@ -177,14 +167,12 @@ const agregarAlCarrito = async () => {
       })
       const producto = await res.json()
       if (producto) {
-        document.getElementById('productId').value = producto.idproducto
+        document.getElementById('idproducto').value = producto.idproducto
         document.getElementById('nombre').value = producto.nombre
         document.getElementById('descripcion').value = producto.descripcion
         document.getElementById('precio').value = producto.precio
         document.getElementById('marca').value = producto.marca
         document.getElementById('estado').estado = producto.estado
-        document.getElementById('categoria').categoria = producto.categoria
-        //document.getElementById('imagen').value = producto.imagen
       }
       console.log('@@ producto =>', producto)
       } 
@@ -209,10 +197,9 @@ const agregarAlCarrito = async () => {
         `
           <td>${item.idproducto}</td>
           <td>${item.nombre}</td>
-          <td>${item.descripcion}</td>
-          <td>${item.tipo}</td>
+          <td>${item.descrip}</td>
           <td>${item.precio}</td>
-          <td>${item.imagen}</td>
+          <td>${item.marca}</td>
           <td>
             <button class="btn btn-warning btn-sm" data_id="${item.idproducto}">Editar</button>
             <button class="btn btn-danger btn-sm" data_id="${item.idproducto}">Borrar</button>

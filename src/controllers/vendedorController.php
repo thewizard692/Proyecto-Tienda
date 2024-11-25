@@ -11,28 +11,22 @@
 
     public function crearProducto($data) {
       $producto = new Producto();
-      $producto->prd_nombre = $data['nombre'];
-      $producto->prd_descripcion = $data['descripcion'];
-      $producto->prd_precio = $data['precio'];
-      $producto->prd_marca = $data['marca'];
-      $producto->prd_estado = $data['estado'];
-      $producto->prd_categoria = $data['categoria'];
-      //$producto->prd_idpublicacion = $data['idpublicacion'];
-      //$producto->prd_idventedor = $data['idvendedor'];
+      $producto->nombre = $data['nombre'];
+      $producto->descrip = $data['descripcion'];
+      $producto->precio = $data['precio'];
+      $producto->marca = $data['marca'];
+      $producto->estado = $data['estado'];
       return $this->vendedorRepository->crearProducto($producto);
     }
 
     public function actualizarProducto($data) {
       $producto = new Producto();
-      $producto->prd_idproducto = $data['idproducto'];
-      $producto->prd_nombre = $data['nombre'];
-      $producto->prd_descripcion = $data['descripcion'];
-      $producto->prd_precio = $data['precio'];
-      $producto->prd_marca = $data['marca'];
-      $producto->prd_estado = $data['estado'];
-      $producto->prd_categoria = $data['categoria'];
-      //$producto->prd_idpublicacion = $data['idpublicacion'];
-      //$producto->prd_idventedor = $data['idvendedor'];
+      $producto->idproducto = $data['idproducto'];
+      $producto->nombre = $data['nombre'];
+      $producto->descrip = $data['descripcion'];
+      $producto->precio = $data['precio'];
+      $producto->marca = $data['marca'];
+      $producto->estado = $data['estado'];
       return $this->vendedorRepository->actualizarProducto($producto);
     }
 
