@@ -13,7 +13,6 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
         }
 
         public function crearUsuario($usuario) {
-    
             $sql = "INSERT INTO usuarios (usr_nombre, usr_apaterno, usr_amaterno, usr_usuario, usr_psword, usr_correo, usr_telefono, usr_direccion)
                     VALUES (:nombre, :apaterno, :amaterno, :usuario, :password, :correo, :telefono, :direccion)";
             
@@ -26,20 +25,38 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
             $resultado->bindParam(':correo', $usuario->usr_correo);
             $resultado->bindParam(':telefono', $usuario->usr_telefono);
             $resultado->bindParam(':direccion', $usuario->usr_direccion);
-    
+        
             if ($resultado->execute()) {
-                $response['status'] = 'success';
-                $response['message'] = '¡Bienvenido! Su cuenta se ha creado correctamente.
-                Inicie sesión.';
-                $response['redirect'] = './login.html';
+                $usuarioId = $this->conn->lastInsertId();
+        
+                if ($usuario->isvendedor) {
+                    $sqlVendedor = "INSERT INTO vendedor (usr_fk_usuario) VALUES (:usuarioId)";
+                    $prepVendedor = $this->conn->prepare($sqlVendedor);
+                    $prepVendedor->bindParam(':usuarioId', $usuarioId);
+        
+                    if ($prepVendedor->execute()) {
+                        $response['status'] = 'success';
+                        $response['message'] = '¡Bienvenido! Su cuenta se ha creado correctamente, y se ha registrado como vendedor. Inicie sesión.';
+                        $response['redirect'] = './login.html';
+                    } else {
+                        $response['status'] = 'error';
+                        $response['message'] = 'Ocurrió un error al registrar el vendedor.';
+                        $response['redirect'] = '../index.html';
+                    }
+                } else {
+                    $response['status'] = 'success';
+                    $response['message'] = '¡Bienvenido! Su cuenta se ha creado correctamente. Inicie sesión.';
+                    $response['redirect'] = './login.html';
+                }
             } else {
                 $response['status'] = 'error';
-                $response['message'] = 'Ocurrio un error al registrar al usuario.';
+                $response['message'] = 'Ocurrió un error al registrar al usuario.';
                 $response['redirect'] = '../index.html';
             }
+            
+            return $response;
         }
         
-
     public function iniciarSesion($data) {
         
         $usuario = $data['usuario'];
@@ -61,6 +78,7 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
         
                 $_SESSION['usuario'] = $usr_usuario;
                 $_SESSION['nombre'] = $usr_nombre;
+                $_SESSION['correo'] = $usr_correo;
 
                 session_start();
 
