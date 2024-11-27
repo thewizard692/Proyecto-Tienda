@@ -19,6 +19,7 @@
       $usuario->usr_correo = $data['correo'];
       $usuario->usr_telefono = $data['telefono'];
       $usuario->usr_direccion = $data['direccion'];
+      $usuario->isvendedor = $data['vendedor'];
       return $this->cuentaRepository->crearUsuario($usuario);
     }
 
