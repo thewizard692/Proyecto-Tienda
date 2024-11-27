@@ -84,8 +84,6 @@ $router->post('/cuenta/iniciarSesion', function() use ($CuentaController) {
 });
 
 $router->post('/cuenta/cerrarSesion', function() use ($CuentaController) {
-    //$data = json_decode(file_get_contents("php://input"), true);
-    //error_log(print_r($data, true)); 
     return json_encode($CuentaController->cerrarSesion());
 });
 

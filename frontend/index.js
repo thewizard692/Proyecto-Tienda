@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
         logoutLink.classList.add('hide-on-login');
     }
 });
-
 const agregarAlCarrito = async () => {
     const idproducto = document.getElementById('idproducto').value
     
