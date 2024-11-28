@@ -70,6 +70,10 @@ main {
     color: #007185;
 }
 
+.todos {
+    width: auto;
+}
+
 .productos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -113,7 +117,6 @@ main {
     background-color: #005f67;
 }
 
-/* Footer */
 .footer {
     text-align: center;
     background-color: #232f3e;
@@ -122,6 +125,51 @@ main {
     margin-top: 20px;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #232f3e;
+    color: white;
+    padding: 10px 20px;
+}
+
+.header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header .search-bar input {
+    padding: 5px;
+    width: 300px;
+    border: none;
+    border-radius: 3px;
+}
+
+.header .search-bar button {
+    padding: 6px 10px;
+    background-color: #febd69;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.header .nav-links a {
+    margin: 0 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.header .nav-links a:hover {
+    text-decoration: underline;
+}
 .side-menu {
     display: none;
     position: fixed;
@@ -149,21 +197,60 @@ main {
     color: black;
 }
 
-.menu-btn {
-    font-size: 18px;
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-}
-
-main {
-    padding-left: 20px;
-}
-
 .side-menu.open {
     display: block;
+}
+
+.categorias-destacadas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+.categoria {
+    background-color: white;
+    border-radius: 5px;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.categoria img {
+    max-width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.categoria h3 {
+    margin: 15px 0 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.categoria a {
+    color: #0073e6;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: auto;
+}
+
+.categoria a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    background-color: #232f3e;
+    color: white;
+    padding: 10px 0;
+    margin-top: 20px;
 }
 
 .hide-on-login {

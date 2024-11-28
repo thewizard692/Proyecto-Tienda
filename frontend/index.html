@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda Online</title>
+    <title>Tienda online</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
+
     <header class="header">
-        <div class="logo">Tienda Online</div>
+        <div class="logo">Tienda online</div>
         <div class="search-bar">
             <input type="text" id ="BarraBusqueda" placeholder="Buscar productos...">
 
             <button>Buscar</button>
         </div>
         <nav class="nav-links">
-            <a href="#carrito">Carrito</a>
+            <a href="./pages/carrito.html">Carrito</a>
             <button class="menu-btn" onclick="toggleMenu()">Mi Cuenta</button>
         </nav>
     </header>
@@ -27,40 +28,52 @@
     </div>
 
     <main>
-        <section class="categorias">
-            <h2>Categorías</h2>
-            <ul>
-                <li><a href="#">Electrónicos</a></li>
-                <li><a href="#">Ropa</a></li>
-                <li><a href="#">Hogar</a></li>
-                <li><a href="#">Libros</a></li>
-            </ul>
-        </section>
-
-        <section class="productos">
-            <h2>Productos Destacados</h2>
-            <div class="productos-grid">
-                <div class="producto">
-                    <img src="https://via.placeholder.com/150" alt="Producto">
-                    <h3>Nombre del Producto</h3>
-                    <p>$99.99</p>
-                    <button class="btn-agregar">Agregar al Carrito</button>
-                </div>
+    
+        <div style="text-align: center; margin: 20px 0; font-size: 32px; font-weight: bold; color: #333;">
+            Todos los productos
+        </div>
+        <div class="categoria todos" onclick="location.href='pages/todo.html'">
+            <img src="https://images-na.ssl-images-amazon.com/images/G/33/img24/EVENTS/BuenFin/Onsite_Homepage_BuenFin_2024/Reciprocal_Banners_y_ILMS_Devoluciones/T524_D_Banner_Ofertas_BlackFriday_1500x200.jpg" alt="Ropa">
+            <h3>De todo</h3>
+        </div>
+        <section class="categorias-destacadas">
+            <div class="categoria" onclick="location.href='pages/ropa.html'">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_Softlines._SY304_CB408655762_.jpg" alt="Ropa">
+                <h3>Descubre Ropa de Mujer</h3>
+            </div>
+            <div class="categoria" onclick="location.href='pages/electronicos.html'">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_CE._SY304_CB408649900_.jpg" alt="Electrónicos">
+                <h3>Descubre Electrónicos</h3>
+            </div>
+            <div class="categoria" onclick="location.href='pages/videojuegos.html'">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_VG._SY304_CB408657586_.jpg" alt="Videojuegos">
+                <h3>Descubre Videojuegos</h3>
+            </div>
+            <div class="categoria" onclick="location.href='pages/libros.html'">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_Books._SY304_CB408654706_.jpg" alt="Libros">
+                <h3>Descubre Libros</h3>
+            </div>
+            <div class="categoria" onclick="location.href='pages/cocina.html'">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_kitchen._SY304_CB408652357_.jpg" alt="Hogar y Cocina">
+                <h3>Descubre selección de Hogar y Cocina</h3>
+            </div>
+            <div class="categoria" onclick="location.href='pages/mascotas.html'">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_pets._SY304_CB408652357_.jpg" alt="Mascotas">
+                <h3>Descubre selección para Mascotas</h3>
+            </div>
+            <div class="categoria" onclick="location.href='pages/juguetes.html'">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_Toys._SY304_CB408652357_.jpg" alt="Juguetes">
+                <h3>Descubre selección de Juguetes</h3>
+            </div>
+            <div class="categoria" onclick="location.href='pages/bebidas.html'">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_grocery._SY304_CB408652357_.jpg" alt="Bebidas">
+                <h3>Descubre selección de Bebidas</h3>
             </div>
         </section>
     </main>
-
     <footer class="footer">
         <p>© 2024 Tienda Online. Todos los derechos reservados.</p>
     </footer>
-
     <script src="index.js"></script>
-    <script>
-        function toggleMenu() {
-            var menu = document.getElementById('sideMenu');
-            menu.classList.toggle('open');
-        }
-    </script>
 </body>
 </html>
-
