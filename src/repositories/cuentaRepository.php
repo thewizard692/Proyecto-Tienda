@@ -13,7 +13,6 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
         }
 
         public function crearUsuario($usuario) {
-    
             $sql = "INSERT INTO usuarios (usr_nombre, usr_apaterno, usr_amaterno, usr_usuario, usr_psword, usr_correo, usr_telefono, usr_direccion)
                     VALUES (:nombre, :apaterno, :amaterno, :usuario, :password, :correo, :telefono, :direccion)";
             
@@ -26,17 +25,97 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
             $resultado->bindParam(':correo', $usuario->usr_correo);
             $resultado->bindParam(':telefono', $usuario->usr_telefono);
             $resultado->bindParam(':direccion', $usuario->usr_direccion);
-    
+        
             if ($resultado->execute()) {
-                return ['mensaje' => 'Usuario creado con éxito'];
+                $usuarioId = $this->conn->lastInsertId();
+        
+                if ($usuario->isvendedor) {
+                    $sqlVendedor = "INSERT INTO vendedor (usr_fk_usuario, usr_ranking, usr_NumVentas) VALUES (:usuarioId, 0, 0)";
+                    $prepVendedor = $this->conn->prepare($sqlVendedor);
+                    $prepVendedor->bindParam(':usuarioId', $usuarioId);
+        
+                    if ($prepVendedor->execute()) {
+                        $response['status'] = 'success';
+                        $response['message'] = '¡Bienvenido! Su cuenta se ha creado correctamente, y se ha registrado como vendedor. Inicie sesión.';
+                        $response['redirect'] = './login.html';
+                    } else {
+                        $response['status'] = 'error';
+                        $response['message'] = 'Ocurrió un error al registrar el vendedor.';
+                        $response['redirect'] = '../index.html';
+                    }
+                } else {
+                    $response['status'] = 'success';
+                    $response['message'] = '¡Bienvenido! Su cuenta se ha creado correctamente. Inicie sesión.';
+                    $response['redirect'] = './login.html';
+                }
             } else {
-                return ['mensaje' => 'Error al crear el usuario.'];
+                $response['status'] = 'error';
+                $response['message'] = 'Ocurrió un error al registrar al usuario.';
+                $response['redirect'] = '../index.html';
             }
+            
+            return $response;
         }
         
-
     public function iniciarSesion($data) {
-        return 0;
+        
+        $usuario = $data['usuario'];
+        $password = $data['password'];
+
+        $sql = 'SELECT * FROM usuarios WHERE usr_usuario = :usr_usuario';
+        $prep = $this->conn->prepare($sql);
+        $prep->bindParam(':usr_usuario', $usuario);
+        $prep->execute();
+        $resultado = $prep->fetch();
+        $response = [];
+        
+        if (count($resultado) > 0) {
+
+            $usuarioid = $resultado['usuarioId'];
+            $usr_usuario = $resultado['usr_usuario'];
+            $usr_psword = $resultado['usr_psword'];
+            $usr_nombre = $resultado['usr_nombre'];
+
+            if (password_verify($password, $usr_psword)) {
+        
+                session_start();
+
+                $response['status'] = 'success';
+                $response['message'] = '¡Bienvenido! Has iniciado sesión correctamente.';
+                $response['redirect'] = '../index.html';
+                $response['usuarioId'] = $usuarioId;
+                $response['usuario'] = $usr_usuario;
+                $response['nombre'] = $usr_nombre;
+                $response['correo'] = $usr_correo;
+
+            } else {
+                $response['status'] = 'error';
+                $response['message'] = 'Contraseña incorrecta';
+            }
+        } else {
+            $response['status'] = 'error';
+            $response['message'] = 'Usuario no encontrado';
+        }
+
+        echo json_encode($response);
+        exit;
+        return $response;
+    }
+
+    public function cerrarSesion() {
+
+        session_unset();
+        session_destroy(); 
+    
+        $response = [
+            'status' => 'success',
+            'message' => '¡Has cerrado sesión correctamente!',
+            'redirect' => './index.html'
+        ];
+    
+        echo json_encode($response);
+        exit;
+        return $response; 
     }
 
     public function actualizarUsuario($usuario)
@@ -83,7 +162,7 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
     
     public function borrarusuario($idusuario)
     {
-        $sql = "DELETE FROM usuarios WHERE usr_id = :idusuario";
+        $sql = "DELETE FROM usuarios WHERE usuarioId = :idusuario";
         $resultado = $this->conn->prepare($sql);
         $resultado->bindParam(':idusuario',$idusuario);
        
@@ -96,7 +175,7 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
 
     public function obtenerusuarioPorId($id)
     {
-        $sql = "SELECT * FROM usuarios WHERE usr_id = :id";
+        $sql = "SELECT * FROM usuarios WHERE usuarioId = :id";
         $resultado = $this->conn->prepare($sql);
         $resultado->bindParam(':id',$id);
         $resultado->execute();
