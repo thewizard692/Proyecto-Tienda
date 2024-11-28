@@ -19,44 +19,18 @@
       $usuario->usr_correo = $data['correo'];
       $usuario->usr_telefono = $data['telefono'];
       $usuario->usr_direccion = $data['direccion'];
+      $usuario->isvendedor = $data['vendedor'];
       return $this->cuentaRepository->crearUsuario($usuario);
     }
 
     public function iniciarSesion($data) {
-        $usuario = $data['usuario'];
-        $password = $data['password'];
-
-        $busca = 'SELECT * FROM usuarios WHERE usr_usuario = ?';
-        $prep = $this->conexion->prepare($busca);
-        $prep->bind_param('s', $usuario);
-        $prep->execute();
-        $resultado = $prep->get_result();
-
-        if ($resultado->num_rows > 0) {
-            $dato = $resultado->fetch_assoc();
-
-            if (password_verify($password, $dato['usr_psword'])) {
-        
-                $_SESSION['usuario'] = $dato['usr_usuario'];
-                $_SESSION['nombre'] = $dato['usr_nombre'];
-
-                echo "<script>
-                        alert('¡Bienvenido! Has iniciado sesión correctamente.');
-                        window.location.href = 'index.html';
-                      </script>";
-                exit();
-            } else {
-                $error = 'Contraseña incorrecta';
-            }
-        } else {
-            $error = 'Usuario no encontrado';
-        }
-
-        if (isset($error)) {
-            echo "<script>alert('$error');</script>";
-        }
+        return $this->cuentaRepository->iniciarSesion($data);        
     }
     
+    public function cerrarSesion() {
+      return $this->cuentaRepository->cerrarSesion();        
+    }
+
     public function actualizarUsuario($data) {
       $usuario = new usuario();
       $usuario->prd_idusuario = $data['idusuario'];
@@ -68,12 +42,12 @@
       return $this->cuentaRepository->actualizarusuario($usuario);
     }
 
-    public function borrarUsuario($usr_id) {
-      return $this->cuentaRepository->borrarusuario($usr_id['id']);
+    public function borrarUsuario($usuarioId) {
+      return $this->cuentaRepository->borrarusuario($usuarioId['id']);
     }
 
-    public function obtenerusuarioPorId($usr_id) {
-      return $this->cuentaRepository->obtenerusuarioPorId($usr_id['id']);
+    public function obtenerusuarioPorId($usuarioId) {
+      return $this->cuentaRepository->obtenerusuarioPorId($usuarioId['id']);
     }
   }
 ?>
