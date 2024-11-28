@@ -32,35 +32,61 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-const obtenerProductos = async () => {
-
-    const url = `${apiURL}/usuario/productos`;
-    const method = 'POST';
-    const respuesta = await fetch(url, {
-        method: method,
-        headers: {
-            'Content-Type': 'application/json',
+//************FUNCIONES PARA LA BARRA DE BUSQUEDA */
+//BUSQUEDA POR NOMBRE
+const obtenerProductosPorBusqueda = async (busqueda) => {
+    $search = document.getElementById('BarraBusqueda');
+      try {
+        const send = {
+          busqueda: busqueda
         }
-    });
-    const resultado = await respuesta.json();
-
+        const res = await fetch(apiURL +'/usuario/busqueda', {
+          method: 'POST',
+          body: JSON.stringify(send)
+        })
+        const producto = await res.json()
+        if (producto) {
+          document.getElementById('idproducto').value = producto.idproducto
+          document.getElementById('prd_nombre').value = producto.prd_nombre
+          document.getElementById('prd_descrip').value = producto.prd_descrip
+          document.getElementById('prd_precio').value = producto.prd_precio
+          document.getElementById('prd_marca').value = producto.prd_marca
+          document.getElementById('prd_estado').value = producto.prd_estado
+        }
+        console.log('@@ producto =>', producto)
+        } 
+      catch (error) {
+        console.error('Error: ', error)
+      }
 }
 
-const obtenerProductosPorNombre = async () => {
-
-    $search = document.getElementById('loginLink');
-    
-    const url = `${apiURL}/usuario/productos`;
-    const method = 'POST';
-    const respuesta = await fetch(url, {
-        method: method,
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    });
-    const resultado = await respuesta.json();
-
+//OBTENER PRODUCTO POR ID - DETALLES
+const getProducto = async (id) => {
+  try {
+    const send = {
+      id: id
+    }
+    const res = await fetch(apiURL + '/usuario/vendedor', {
+      method: 'POST',
+      body: JSON.stringify(send)
+    })
+    const producto = await res.json()
+    if (producto) {
+      document.getElementById('idproducto').value = producto.idproducto
+      document.getElementById('prd_nombre').value = producto.prd_nombre
+      document.getElementById('prd_descrip').value = producto.prd_descrip
+      document.getElementById('prd_precio').value = producto.prd_precio
+      document.getElementById('prd_marca').value = producto.prd_marca
+      document.getElementById('prd_estado').value = producto.prd_estado
+    }
+    console.log('@@ producto =>', producto)
+    } 
+  catch (error) {
+    console.error('Error: ', error)
+  }
 }
+
+
 const agregarAlCarrito = async () => {
     const idproducto = document.getElementById('idproducto').value
     
@@ -146,34 +172,22 @@ const agregarAlCarrito = async () => {
     document.getElementById('idproducto').value = ''
   
     console.log('@@@ response => ', response)
-  } //FIN DE AGREGAR PRODUCTOS
-  
-  
-  //OBTENER PRODUCTO POR ID - DETALLES
-  const getProducto = async (id) => {
-    try {
-      const send = {
-        id: id
-      }
-      const res = await fetch(apiURL + '/usuario/vendedor', {
-        method: 'POST',
-        body: JSON.stringify(send)
-      })
-      const producto = await res.json()
-      if (producto) {
-        document.getElementById('idproducto').value = producto.idproducto
-        document.getElementById('prd_nombre').value = producto.prd_nombre
-        document.getElementById('prd_descrip').value = producto.prd_descrip
-        document.getElementById('prd_precio').value = producto.prd_precio
-        document.getElementById('prd_marca').value = producto.prd_marca
-        document.getElementById('prd_estado').value = producto.prd_estado
-      }
-      console.log('@@ producto =>', producto)
-      } 
-    catch (error) {
-      console.error('Error: ', error)
-    }
-  }
+  } 
+
+  //OBTENER PRODUCTOS 
+  const obtenerProductos = async () => {
+
+    const url = `${apiURL}/usuario/productos`;
+    const method = 'POST';
+    const respuesta = await fetch(url, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+    const resultado = await respuesta.json();
+
+}
   //CARGA DE PRODUCTOS Y MUESTRA EN LA TABLA
   const loadProductos = async () => {
     try {
@@ -192,9 +206,9 @@ const agregarAlCarrito = async () => {
           <td>${item.idproducto}</td>
           <td>${item.prd_nombre}</td>
           <td>${item.prd_descrip}</td>
-          <td>${item.prd_precio}</td>
           <td>${item.prd_marca}</td>
           <td>${item.prd_estado}</td>
+          <td>${item.prd_precio}</td>
           <td>
             <button class="btn btn-warning btn-sm" data_id="${item.idproducto}">Editar</button>
             <button class="btn btn-danger btn-sm" data_id="${item.idproducto}">Borrar</button>

@@ -79,11 +79,11 @@ class VendedorRepository implements IVendedor
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function obtenerProductosPorNombre($nombre)
+    public function obtenerProductosPorBusqueda($busqueda)
     {
         $sql = "SELECT * FROM productos WHERE prd_nombre = :prd_nombre";
         $resultado = $this->conn->prepare($sql);
-        $resultado->bindParam(':prd_nombre',$nombre->prd_nombre);
+        $resultado->bindParam(':prd_nombre',$busqueda->prd_nombre);
         $resultado->execute();
         return $resultado->fetch(PDO::FETCH_ASSOC);
     }
