@@ -38,13 +38,13 @@ class usuarioRepository implements IUsuario
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function agregarAlCarrito($idproducto, $usr_id)
+    public function agregarAlCarrito($idproducto, $usuarioId)
     {
-        $sql = "INSERT INTO Carrito (car_fk_producto, car_fk_usuario) VALUES (:idproducto, :idusuario)";
+        $sql = "INSERT INTO carrito (car_fk_producto, car_fk_usuario) VALUES (:idproducto, :idusuario)";
         $resultado = $this->conn->prepare($sql);
 
         $resultado->bindParam(':idproducto', $idproducto);
-        $resultado->bindParam(':idusuario', $usr_id);
+        $resultado->bindParam(':idusuario', $usuarioId);
 
         if ($resultado->execute()) {
             return ['mensaje' => 'Producto agregado al carrito'];
@@ -53,13 +53,13 @@ class usuarioRepository implements IUsuario
         }
     }
 
-    public function quitarDelCarrito($idproducto, $usr_id)
+    public function quitarDelCarrito($idproducto, $usuarioId)
     {
         $sql = "DELETE FROM Carrito WHERE car_fk_producto = :idproducto AND car_fk_usuario = :idusuario";
         $resultado = $this->conn->prepare($sql);
 
         $resultado->bindParam(':idproducto', $idproducto);
-        $resultado->bindParam(':idusuario', $usr_id);
+        $resultado->bindParam(':idusuario', $usuarioId);
 
         if ($resultado->execute()) {
             return ['mensaje' => 'Producto eliminado del carrito'];
@@ -68,14 +68,14 @@ class usuarioRepository implements IUsuario
         }
     }
 
-    public function obtenerCarritoPorUsuario($usr_id)
+    public function obtenerCarritoPorUsuario($usuarioId)
     {
         $sql = "SELECT p.prd_id, p.prd_nombre, p.prd_precio, c.cardet_cantidad
                 FROM Productos p
                 JOIN Carrito c ON p.prd_id = c.car_fk_producto
                 WHERE c.car_fk_usuario = :idusuario";
         $resultado = $this->conn->prepare($sql);
-        $resultado->bindParam(':idusuario', $usr_id);
+        $resultado->bindParam(':idusuario', $usuarioId);
         $resultado->execute();
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
