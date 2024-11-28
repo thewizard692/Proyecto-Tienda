@@ -1,3 +1,6 @@
+const apiURL = 'http://localhost:8888/Proyecto-Tienda/src/index.php'
+const alertContainer = document.getElementById('alertContainer')
+
 const iniciarSesion = async () => {
 
     const data = {
@@ -22,7 +25,6 @@ const iniciarSesion = async () => {
 
         sessionStorage.setItem('loggedIn', 'true');
         sessionStorage.setItem('name', resultado.nombre);
-
         
         window.location.href = resultado.redirect;
 
@@ -32,31 +34,4 @@ const iniciarSesion = async () => {
     }
 
     console.log(resultado);
-}
-
-const cerrarSesion = async () => {
-
-    const url = `${apiURL}/cuenta/cerrarSesion`;
-    const method = 'POST';
-    const respuesta = await fetch(url, {
-        method: method,
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    });
-    const resultado = await respuesta.json();
-
-    alert(resultado.message);
-
-    if (resultado.status === 'success') {
- 
-        sessionStorage.removeItem('loggedIn');
-        sessionStorage.removeItem('name');
-
-        document.getElementById('loginLink').classList.remove('hide-on-login');
-        document.getElementById('logoutLink').classList.add('hide-on-login');
-
-        window.location.href = resultado.redirect;
-    }
-   
 }
