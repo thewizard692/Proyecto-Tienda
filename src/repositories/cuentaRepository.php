@@ -78,15 +78,16 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
 
             if (password_verify($password, $usr_psword)) {
         
-                $_SESSION['usuario'] = $usr_usuario;
-                $_SESSION['nombre'] = $usr_nombre;
-                $_SESSION['correo'] = $usr_correo;
-
                 session_start();
 
                 $response['status'] = 'success';
                 $response['message'] = '¡Bienvenido! Has iniciado sesión correctamente.';
                 $response['redirect'] = '../index.html';
+                $response['usuarioId'] = $usuarioId;
+                $response['usuario'] = $usr_usuario;
+                $response['nombre'] = $usr_nombre;
+                $response['correo'] = $usr_correo;
+
             } else {
                 $response['status'] = 'error';
                 $response['message'] = 'Contraseña incorrecta';
@@ -98,6 +99,7 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
 
         echo json_encode($response);
         exit;
+        return $response;
     }
 
     public function cerrarSesion() {
@@ -113,6 +115,7 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
     
         echo json_encode($response);
         exit;
+        return $response; 
     }
 
     public function actualizarUsuario($usuario)

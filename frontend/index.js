@@ -31,6 +31,36 @@ document.addEventListener('DOMContentLoaded', () => {
         logoutLink.classList.add('hide-on-login');
     }
 });
+
+const obtenerProductos = async () => {
+
+    const url = `${apiURL}/usuario/productos`;
+    const method = 'POST';
+    const respuesta = await fetch(url, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+    const resultado = await respuesta.json();
+
+}
+
+const obtenerProductosPorNombre = async () => {
+
+    $search = document.getElementById('loginLink');
+    
+    const url = `${apiURL}/usuario/productos`;
+    const method = 'POST';
+    const respuesta = await fetch(url, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+    const resultado = await respuesta.json();
+
+}
 const agregarAlCarrito = async () => {
     const idproducto = document.getElementById('idproducto').value
     

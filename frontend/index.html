@@ -15,12 +15,10 @@
         </div>
         <nav class="nav-links">
             <a href="#carrito">Carrito</a>
-            <!-- Aquí agregamos el botón para mostrar el menú lateral -->
             <button class="menu-btn" onclick="toggleMenu()">Mi Cuenta</button>
         </nav>
     </header>
 
-    <!-- Menú Lateral -->
     <div class="side-menu" id="sideMenu">
         <a href="./pages/login.html" id="loginLink">Iniciar Sesión</a>
         <a href="./pages/registro.html" id="registerLink">Registrar</a>
@@ -57,7 +55,6 @@
 
     <script src="index.js"></script>
     <script>
-        // Función para abrir y cerrar el menú lateral
         function toggleMenu() {
             var menu = document.getElementById('sideMenu');
             menu.classList.toggle('open');

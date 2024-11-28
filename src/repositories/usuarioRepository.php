@@ -47,9 +47,15 @@ class usuarioRepository implements IUsuario
         $resultado->bindParam(':idusuario', $usuarioId);
 
         if ($resultado->execute()) {
-            return ['mensaje' => 'Producto agregado al carrito'];
+            $response = [
+                'status' => 'success',
+                'message' => 'Se ha agregado el producto al carrito.'
+            ];
         } else {
-            return ['mensaje' => 'Error al agregar el producto al carrito.'];
+            $response = [
+                'status' => 'error',
+                'message' => 'Hubo un error al agregar al carrito.'
+            ];
         }
     }
 
