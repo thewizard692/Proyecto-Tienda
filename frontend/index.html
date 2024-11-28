@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tieda online</title>
+    <title>Tienda online</title>
     <link rel="stylesheet" href="index.css">
     <style>
         /* General */
@@ -155,12 +155,20 @@
 
     <!-- Menú lateral -->
     <div class="side-menu" id="sideMenu">
-        <a href="./views/login.php">Iniciar Sesión</a>
-        <a href="./views/registro.html">Registrar</a>
+        <a href="./pages/login.html">Iniciar Sesión</a>
+        <a href="./pages/registro.html">Registrar</a>
     </div>
 
     <!-- Contenido principal -->
     <main>
+        <!-- Letrero centrado -->
+        <div style="text-align: center; margin: 20px 0; font-size: 32px; font-weight: bold; color: #333;">
+            Todos los productos
+        </div>
+        <div class="categoria todos" onclick="location.href='pages/todo.html'">
+            <img src="https://images-na.ssl-images-amazon.com/images/G/33/img24/EVENTS/BuenFin/Onsite_Homepage_BuenFin_2024/Reciprocal_Banners_y_ILMS_Devoluciones/T524_D_Banner_Ofertas_BlackFriday_1500x200.jpg" alt="Ropa">
+            <h3>De todo</h3>
+        </div>
         <section class="categorias-destacadas">
             <div class="categoria" onclick="location.href='pages/ropa.html'">
                 <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_Softlines._SY304_CB408655762_.jpg" alt="Ropa">
