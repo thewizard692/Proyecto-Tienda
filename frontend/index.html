@@ -3,57 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda Online</title>
+    <title>Tienda online</title>
     <link rel="stylesheet" href="index.css">
+    <style>
+        /* General */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #232f3e;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .header .search-bar input {
+            padding: 5px;
+            width: 300px;
+            border: none;
+            border-radius: 3px;
+        }
+
+        .header .search-bar button {
+            padding: 6px 10px;
+            background-color: #febd69;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .header .nav-links a {
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .header .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Menú lateral */
+        .side-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            padding-top: 20px;
+            z-index: 1000;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
+        }
+
+        .side-menu a {
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .side-menu a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .side-menu.open {
+            display: block;
+        }
+
+        /* Categorías destacadas */
+        .categorias-destacadas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .categoria {
+            background-color: white;
+            border-radius: 5px;
+            text-align: center;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .categoria img {
+            max-width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .categoria h3 {
+            margin: 15px 0 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .categoria a {
+            color: #0073e6;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: auto;
+        }
+
+        .categoria a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            background-color: #232f3e;
+            color: white;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
     <header class="header">
-        <div class="logo">Tienda Online</div>
+        <div class="logo">Tienda online</div>
         <div class="search-bar">
             <input type="text" placeholder="Buscar productos...">
             <button>Buscar</button>
         </div>
         <nav class="nav-links">
-            <a href="#carrito">Carrito</a>
+            <a href="./pages/carrito.html">Carrito</a>
             <button class="menu-btn" onclick="toggleMenu()">Mi Cuenta</button>
         </nav>
     </header>
 
+    <!-- Menú lateral -->
     <div class="side-menu" id="sideMenu">
-        <a href="./pages/login.html" id="loginLink">Iniciar Sesión</a>
-        <a href="./pages/registro.html" id="registerLink">Registrar</a>
-        <a href="#" id="logoutLink" onclick="cerrarSesion()">Cerrar Sesión</a>
+        <a href="./pages/login.html">Iniciar Sesión</a>
+        <a href="./pages/registro.html">Registrar</a>
     </div>
 
+    <!-- Contenido principal -->
     <main>
-        <section class="categorias">
-            <h2>Categorías</h2>
-            <ul>
-                <li><a href="#">Electrónicos</a></li>
-                <li><a href="#">Ropa</a></li>
-                <li><a href="#">Hogar</a></li>
-                <li><a href="#">Libros</a></li>
-            </ul>
-        </section>
-
-        <section class="productos">
-            <h2>Productos Destacados</h2>
-            <div class="productos-grid">
-                <div class="producto">
-                    <img src="https://via.placeholder.com/150" alt="Producto">
-                    <h3>Nombre del Producto</h3>
-                    <p>$99.99</p>
-                    <button class="btn-agregar">Agregar al Carrito</button>
-                </div>
+        <!-- Letrero centrado -->
+        <div style="text-align: center; margin: 20px 0; font-size: 32px; font-weight: bold; color: #333;">
+            Todos los productos
+        </div>
+        <div class="categoria todos" onclick="location.href='pages/todo.html'">
+            <img src="https://images-na.ssl-images-amazon.com/images/G/33/img24/EVENTS/BuenFin/Onsite_Homepage_BuenFin_2024/Reciprocal_Banners_y_ILMS_Devoluciones/T524_D_Banner_Ofertas_BlackFriday_1500x200.jpg" alt="Ropa">
+            <h3>De todo</h3>
+        </div>
+        <section class="categorias-destacadas">
+            <div class="categoria" onclick="location.href='pages/ropa.html'">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_Softlines._SY304_CB408655762_.jpg" alt="Ropa">
+                <h3>Descubre Ropa de Mujer</h3>
+            </div>
+            <div class="categoria" onclick="location.href='pages/electronicos.html'">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_CE._SY304_CB408649900_.jpg" alt="Electrónicos">
+                <h3>Descubre Electrónicos</h3>
+            </div>
+            <div class="categoria" onclick="location.href='pages/videojuegos.html'">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_VG._SY304_CB408657586_.jpg" alt="Videojuegos">
+                <h3>Descubre Videojuegos</h3>
+            </div>
+            <div class="categoria" onclick="location.href='pages/libros.html'">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_Books._SY304_CB408654706_.jpg" alt="Libros">
+                <h3>Descubre Libros</h3>
+            </div>
+            <div class="categoria" onclick="location.href='pages/cocina.html'">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_kitchen._SY304_CB408652357_.jpg" alt="Hogar y Cocina">
+                <h3>Descubre selección de Hogar y Cocina</h3>
+            </div>
+            <div class="categoria" onclick="location.href='pages/mascotas.html'">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_pets._SY304_CB408652357_.jpg" alt="Mascotas">
+                <h3>Descubre selección para Mascotas</h3>
+            </div>
+            <div class="categoria" onclick="location.href='pages/juguetes.html'">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_Toys._SY304_CB408652357_.jpg" alt="Juguetes">
+                <h3>Descubre selección de Juguetes</h3>
+            </div>
+            <div class="categoria" onclick="location.href='pages/bebidas.html'">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_grocery._SY304_CB408652357_.jpg" alt="Bebidas">
+                <h3>Descubre selección de Bebidas</h3>
             </div>
         </section>
     </main>
-
+    
+    <!-- Footer -->
     <footer class="footer">
         <p>© 2024 Tienda Online. Todos los derechos reservados.</p>
     </footer>
 
-    <script src="index.js"></script>
+    <!-- Script para el menú lateral -->
     <script>
         function toggleMenu() {
             var menu = document.getElementById('sideMenu');
@@ -62,4 +219,3 @@
     </script>
 </body>
 </html>
-
