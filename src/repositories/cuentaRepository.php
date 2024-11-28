@@ -30,7 +30,9 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
                 $usuarioId = $this->conn->lastInsertId();
         
                 if ($usuario->isvendedor) {
+
                     $sqlVendedor = "INSERT INTO vendedor (usr_fk_usuario, usr_ranking, usr_NumVentas) VALUES (:usuarioId, 0, 0)";
+
                     $prepVendedor = $this->conn->prepare($sqlVendedor);
                     $prepVendedor->bindParam(':usuarioId', $usuarioId);
         
@@ -68,7 +70,7 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
         $prep->execute();
         $resultado = $prep->fetch();
         $response = [];
-        
+   
         if (count($resultado) > 0) {
 
             $usuarioid = $resultado['usuarioId'];
@@ -83,11 +85,12 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
                 $response['status'] = 'success';
                 $response['message'] = '¡Bienvenido! Has iniciado sesión correctamente.';
                 $response['redirect'] = '../index.html';
+
                 $response['usuarioId'] = $usuarioId;
                 $response['usuario'] = $usr_usuario;
                 $response['nombre'] = $usr_nombre;
                 $response['correo'] = $usr_correo;
-
+              
             } else {
                 $response['status'] = 'error';
                 $response['message'] = 'Contraseña incorrecta';
@@ -99,7 +102,9 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
 
         echo json_encode($response);
         exit;
+
         return $response;
+
     }
 
     public function cerrarSesion() {
@@ -115,7 +120,9 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
     
         echo json_encode($response);
         exit;
+
         return $response; 
+
     }
 
     public function actualizarUsuario($usuario)

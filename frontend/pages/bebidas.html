@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bebidas - Tienda Online</title>
+    <link rel="stylesheet" href="../index.css">
+    <style>
+        .productos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .producto {
+            background-color: white;
+            border-radius: 5px;
+            text-align: center;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .producto img {
+            max-width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .producto h4 {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .producto .precio {
+            color: #0073e6;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .producto button {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #0073e6;
+            border: none;
+            border-radius: 3px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .producto button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Tienda Online</div>
+        <nav class="nav-links">
+            <a href="../index.html">Inicio</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1 style="text-align: center; margin-top: 20px;">Productos bebidas</h1>
+        <section class="productos">
+            <div class="producto">
+                <img src="https://m.media-amazon.com/images/I/51yA+smxd4L._AC_UL320_.jpg" alt="coca-cola">
+                <h4>coca-cola</h4>
+                <p class="precio">$180</p>
+                <button>Agregar al carrito</button>
+            </div>
+            <div class="producto">
+                <img src="https://m.media-amazon.com/images/I/61kqRkk5tuL._AC_UL320_.jpg" alt="pepsi-paquete">
+                <h4>pepsi-paquete - (12 pack)</h4>
+                <p class="precio">$149</p>
+                <button>Agregar al carrito</button>
+            </div>
+            <div class="producto">
+                <img src="https://m.media-amazon.com/images/I/61dFBjN5h3L._AC_UL320_.jpg" alt="GVFYY">
+                <h4>Dr Pepper, Cream Soda 355 ml, Lata Sleek (12 pack)</h4>
+                <p class="precio">$240</p>
+                <button>Agregar al carrito</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© 2024 Tienda Online. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
