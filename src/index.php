@@ -48,7 +48,7 @@ $router->post('/usuario/vendedor/detalle', function() use ($VendedorController) 
 
 
 //*******USUARIO**********
-$router->get('/usuario', function() use ($UsuarioController) {
+$router->get('/usuario/productos', function() use ($UsuarioController) {
     return json_encode($UsuarioController->obtenerProductos());
 });
 

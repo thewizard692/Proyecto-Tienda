@@ -30,7 +30,11 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
                 $usuarioId = $this->conn->lastInsertId();
         
                 if ($usuario->isvendedor) {
+<<<<<<< HEAD
                     $sqlVendedor = "INSERT INTO vendedor (usr_fk_usuario) VALUES (:usuarioId)";
+=======
+                    $sqlVendedor = "INSERT INTO vendedor (usr_fk_usuario, usr_ranking, usr_NumVentas) VALUES (:usuarioId, 0, 0)";
+>>>>>>> 54859fbcaca63a34924dd1b2f867a05ff18ddf8c
                     $prepVendedor = $this->conn->prepare($sqlVendedor);
                     $prepVendedor->bindParam(':usuarioId', $usuarioId);
         
@@ -68,23 +72,41 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
         $prep->execute();
         $resultado = $prep->fetch();
         $response = [];
+<<<<<<< HEAD
         if (count($resultado) > 0) {
 
+=======
+        
+        if (count($resultado) > 0) {
+
+            $usuarioid = $resultado['usuarioId'];
+>>>>>>> 54859fbcaca63a34924dd1b2f867a05ff18ddf8c
             $usr_usuario = $resultado['usr_usuario'];
             $usr_psword = $resultado['usr_psword'];
             $usr_nombre = $resultado['usr_nombre'];
 
             if (password_verify($password, $usr_psword)) {
         
+<<<<<<< HEAD
                 $_SESSION['usuario'] = $usr_usuario;
                 $_SESSION['nombre'] = $usr_nombre;
                 $_SESSION['correo'] = $usr_correo;
 
+=======
+>>>>>>> 54859fbcaca63a34924dd1b2f867a05ff18ddf8c
                 session_start();
 
                 $response['status'] = 'success';
                 $response['message'] = '¡Bienvenido! Has iniciado sesión correctamente.';
                 $response['redirect'] = '../index.html';
+<<<<<<< HEAD
+=======
+                $response['usuarioId'] = $usuarioId;
+                $response['usuario'] = $usr_usuario;
+                $response['nombre'] = $usr_nombre;
+                $response['correo'] = $usr_correo;
+
+>>>>>>> 54859fbcaca63a34924dd1b2f867a05ff18ddf8c
             } else {
                 $response['status'] = 'error';
                 $response['message'] = 'Contraseña incorrecta';
@@ -96,6 +118,10 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
 
         echo json_encode($response);
         exit;
+<<<<<<< HEAD
+=======
+        return $response;
+>>>>>>> 54859fbcaca63a34924dd1b2f867a05ff18ddf8c
     }
 
     public function cerrarSesion() {
@@ -111,6 +137,10 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
     
         echo json_encode($response);
         exit;
+<<<<<<< HEAD
+=======
+        return $response; 
+>>>>>>> 54859fbcaca63a34924dd1b2f867a05ff18ddf8c
     }
 
     public function actualizarUsuario($usuario)
@@ -157,7 +187,7 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
     
     public function borrarusuario($idusuario)
     {
-        $sql = "DELETE FROM usuarios WHERE usr_id = :idusuario";
+        $sql = "DELETE FROM usuarios WHERE usuarioId = :idusuario";
         $resultado = $this->conn->prepare($sql);
         $resultado->bindParam(':idusuario',$idusuario);
        
@@ -170,7 +200,7 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
 
     public function obtenerusuarioPorId($id)
     {
-        $sql = "SELECT * FROM usuarios WHERE usr_id = :id";
+        $sql = "SELECT * FROM usuarios WHERE usuarioId = :id";
         $resultado = $this->conn->prepare($sql);
         $resultado->bindParam(':id',$id);
         $resultado->execute();

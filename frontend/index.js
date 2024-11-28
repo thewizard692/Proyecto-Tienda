@@ -7,6 +7,7 @@ const btnSubmit = document.getElementById('submitBtn')
 //Carrito
 document.addEventListener('DOMContentLoaded', () => {
     const botonesAgregar = document.querySelectorAll('.btn-agregar');
+    loadProductos()
 
     botonesAgregar.forEach(boton => {
         boton.addEventListener('click', () => {
@@ -14,29 +15,43 @@ document.addEventListener('DOMContentLoaded', () => {
             agregarAlCarrito();
         });
     });
+  });
 
-});
+const obtenerProductos = async () => {
 
-//Productos
-document.addEventListener('DOMContentLoaded', () => {
-    loadProductos()
-  })
+    const url = `${apiURL}/usuario/productos`;
+    const method = 'POST';
+    const respuesta = await fetch(url, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+    const resultado = await respuesta.json();
 
+}
 
+const obtenerProductosPorNombre = async () => {
 
-//******FUNCIONES PARA CARRITO******
-const agregarAlCarrito = async () => {
-    const idproducto = document.getElementById('idproducto').value
+    $search = document.getElementById('loginLink');
     
-=======
-        loginLink.classList.remove('hide-on-login');
-        registerlink.classList.remove('hide-on-login');
-        logoutLink.classList.add('hide-on-login');
-    }
-});
-const agregarAlCarrito = async () => {
-    const productId = document.getElementById('productId').value
+    const url = `${apiURL}/usuario/productos`;
+    const method = 'POST';
+    const respuesta = await fetch(url, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+    const resultado = await respuesta.json();
 
+  };
+
+
+
+const agregarAlCarrito = async () => {
+
+    const idproducto = document.getElementById('idproducto').value
 
     const producto = {
         usuario: document.getElementById('nombre').value || 'N/A',
@@ -233,4 +248,3 @@ const borrarProducto = async (id) => {
   }
   
   
-

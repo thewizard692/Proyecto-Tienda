@@ -1,6 +1,6 @@
 <?php
   class Usuario {
-    public $usr_id;
+    public $usuarioId;
     public $usr_nombre;
     public $usr_usuario;
     public $usr_apaterno;
