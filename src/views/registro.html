@@ -10,8 +10,16 @@
 <body>
     <div class="container mt-5">
         <h1 class="text-center">Gestión de Usuarios</h1>
+
+        <!-- Mostrar alerta si existe -->
+        <?php if (isset($alerta)): ?>
+            <div class="alert alert-success" role="alert">
+                <?php echo $alerta; ?>
+            </div>
+        <?php endif; ?>
+
         <!-- Formulario de agregar usuario -->
-        <form action="insertar.php" method="post">
+        <form action="" method="post">
             <div class="mb-3">
                 <label for="usr_nombre" class="form-label">Nombre</label>
                 <input type="text" name="usr_nombre" class="form-control" required>
@@ -46,7 +54,7 @@
             </div>
             <!-- Botones para agregar o cancelar -->
             <div class="d-flex justify-content-between">
-                <a href="index.html" btn btn-secondary>Cancelar</a>
+                <a href="index.html" class="btn btn-secondary">Cancelar</a>
                 <button class="btn btn-primary" type="submit">Agregar</button>
             </div>
         </form>

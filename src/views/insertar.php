@@ -40,10 +40,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt_insertar->execute()) {
         // Redirigir con mensaje de éxito
-        header('Location: index.html?mensaje=success');
+        header('Location: registro.html?mensaje=success');
     } else {
         // Redirigir con mensaje de error en la inserción
-        header('Location: index.html?error=no_se_pudo_insertar');
+        header('Location: registro.html?error=no_se_pudo_insertar');
     }
 
     // Cerrar las declaraciones
