@@ -21,7 +21,7 @@ $VendedorController = new VendedorController();
 $UsuarioController = new UsuarioController();
 $CuentaController = new CuentaController();
 
-//*******VENDEDOR**********
+//*******VENDEDOR CON FUNCIONES PARA PRODUCTOS**********
 $router->post('/usuario/vendedor', function() use ($VendedorController) {
     $data = json_decode(file_get_contents("php://input"), true);
     return json_encode($VendedorController->crearProducto($data));
