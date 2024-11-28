@@ -14,24 +14,24 @@ class usuarioRepository implements IUsuario
 
     public function obtenerProductos()
     {
-        $sql = "SELECT * FROM Productos";
+        $sql = "SELECT * FROM productos";
         $resultado = $this->conn->prepare($sql);
         $resultado->execute();
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function obtenerProductosPorNombre($nombre)
+    public function obtenerProductosPorBusqueda($busqueda)
     {
-        $sql = "SELECT * FROM Productos WHERE prd_nombre = :nombre";
+        $sql = "SELECT * FROM productos WHERE prd_nombre = :prd_nombre";
         $resultado = $this->conn->prepare($sql);
-        $resultado->bindParam(':nombre', $nombre);
+        $resultado->bindParam(':prd_nombre', $busqueda);
         $resultado->execute();
         return $resultado->fetch(PDO::FETCH_ASSOC);
     }
 
     public function obtenerProductosPorCategoria($categoria)
     {
-        $sql = "SELECT * FROM Productos WHERE prd_categoria = :categoria";
+        $sql = "SELECT * FROM productos WHERE prd_categoria = :categoria";
         $resultado = $this->conn->prepare($sql);
         $resultado->bindParam(':categoria', $categoria);
         $resultado->execute();
@@ -58,6 +58,7 @@ class usuarioRepository implements IUsuario
             ];
         }
     }
+
 
     public function quitarDelCarrito($idproducto, $usuarioId)
     {
