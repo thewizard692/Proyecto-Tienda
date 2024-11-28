@@ -38,8 +38,8 @@
       return $this->vendedorRepository->obtenerProductos();
     }
 
-    public function obtenerProductosPorNombre($nombre) {
-      return $this->vendedorRepository->obtenerProductosPorNombre($nombre);
+    public function obtenerProductosPorBusqueda($busqueda) {
+      return $this->vendedorRepository->obtenerProductosPorBusqueda($busqueda);
     }
 
     public function obtenerProductoPorId($id) {
