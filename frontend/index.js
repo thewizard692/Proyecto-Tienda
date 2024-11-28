@@ -48,14 +48,13 @@ function toggleMenu() {
     menu.classList.toggle('open');
 }
 
-const obtenerProductos = async () => {
-
-    const url = `${apiURL}/usuario/productos`;
-    const method = 'POST';
-    const respuesta = await fetch(url, {
-        method: method,
-        headers: {
-            'Content-Type': 'application/json',
+//************FUNCIONES PARA LA BARRA DE BUSQUEDA */
+//BUSQUEDA POR NOMBRE
+const obtenerProductosPorBusqueda = async (busqueda) => {
+    $search = document.getElementById('BarraBusqueda');
+      try {
+        const send = {
+          busqueda: busqueda
         }
         const res = await fetch(apiURL +'/usuario/busqueda', {
           method: 'POST',
