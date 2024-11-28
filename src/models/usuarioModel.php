@@ -9,6 +9,7 @@
     public $usr_correo;
     public $usr_telefono;
     public $usr_direccion;
+    public $isvendedor;
   }
 
 ?>

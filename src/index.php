@@ -77,10 +77,14 @@ $router->post('/cuenta', function() use ($CuentaController) {
     return json_encode($CuentaController->crearUsuario($data));
 });
 
-$router->post('/cuentaini', function() use ($CuentaController) {
+$router->post('/cuenta/iniciarSesion', function() use ($CuentaController) {
     $data = json_decode(file_get_contents("php://input"), true);
     error_log(print_r($data, true)); 
     return json_encode($CuentaController->iniciarSesion($data));
+});
+
+$router->post('/cuenta/cerrarSesion', function() use ($CuentaController) {
+    return json_encode($CuentaController->cerrarSesion());
 });
 
 $router->put('/cuenta', function() use ($CuentaController) {

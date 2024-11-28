@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             agregarAlCarrito();
         });
     });
+
 });
 
 //Productos
@@ -21,55 +22,22 @@ document.addEventListener('DOMContentLoaded', () => {
     loadProductos()
   })
 
-//********FUNCIONES PARA USUARIOS*******
-const crearUsuario = async () => {
-    //const usuarioId = document.getElementById('usuarioId').value;
-    
-    const usuario = {
-        nombre: document.getElementById('nombre').value || 'N/A',
-        apaterno: document.getElementById('apaterno').value || 'N/A',
-        amaterno: document.getElementById('amaterno').value || 'N/A',
-        usuario: document.getElementById('usuario').value || 'usuario_default',
-        password: document.getElementById('password').value || '',
-        correo: document.getElementById('correo').value || 'correo@dominio.com',
-        telefono: document.getElementById('telefono').value || '0000000000',
-        direccion: document.getElementById('direccion').value || 'Dirección no especificada',
-    };
 
-    const url = `${apiURL}/cuenta`;
-    const method = 'POST';
-    const respuesta = await fetch(url, {
-        method: method,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(usuario),
-    });
-
-    const resultado = await respuesta.json();
-    console.log(resultado);
-
-    /*const response = await resultado.json();
-    if (response.mensaje === 'Usuario Creado') {
-        showAlert('Usuario Registrado Correctamente', 'success');
-        loadUsuario();
-        userForm.reset();
-    } else if (response.mensaje === 'Usuario Actualizado') {
-        showAlert('Usuario Actualizado Correctamente', 'success');
-        loadUsuario();
-        userForm.reset();
-    } else {
-        showAlert('Error al registrar el usuario', 'danger');
-    }*/
-
-    //document.getElementById('usuarioId').value = '';
-    //console.log('@@@ response => ', response);
-};
 
 //******FUNCIONES PARA CARRITO******
 const agregarAlCarrito = async () => {
     const idproducto = document.getElementById('idproducto').value
     
+=======
+        loginLink.classList.remove('hide-on-login');
+        registerlink.classList.remove('hide-on-login');
+        logoutLink.classList.add('hide-on-login');
+    }
+});
+const agregarAlCarrito = async () => {
+    const productId = document.getElementById('productId').value
+
+
     const producto = {
         usuario: document.getElementById('nombre').value || 'N/A',
         producto: document.getElementById('descripcion').value || 'Descripción no disponible'
@@ -87,7 +55,7 @@ const agregarAlCarrito = async () => {
         method: method,
         body: JSON.stringify(producto)
     })
-    
+
     const response = await resultado.json()
     if (response.mensaje === 'Producto Creado') {
         showAlert('Producto Agregado', 'success')
