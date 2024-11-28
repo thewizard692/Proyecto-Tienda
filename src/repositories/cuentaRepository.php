@@ -30,7 +30,7 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
                 $usuarioId = $this->conn->lastInsertId();
         
                 if ($usuario->isvendedor) {
-                    $sqlVendedor = "INSERT INTO vendedor (usr_fk_usuario) VALUES (:usuarioId)";
+                    $sqlVendedor = "INSERT INTO vendedor (usr_fk_usuario, usr_ranking, usr_NumVentas) VALUES (:usuarioId, 0, 0)";
                     $prepVendedor = $this->conn->prepare($sqlVendedor);
                     $prepVendedor->bindParam(':usuarioId', $usuarioId);
         
@@ -68,8 +68,10 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
         $prep->execute();
         $resultado = $prep->fetch();
         $response = [];
+        
         if (count($resultado) > 0) {
 
+            $usuarioid = $resultado['usuarioId'];
             $usr_usuario = $resultado['usr_usuario'];
             $usr_psword = $resultado['usr_psword'];
             $usr_nombre = $resultado['usr_nombre'];
@@ -157,7 +159,7 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
     
     public function borrarusuario($idusuario)
     {
-        $sql = "DELETE FROM usuarios WHERE usr_id = :idusuario";
+        $sql = "DELETE FROM usuarios WHERE usuarioId = :idusuario";
         $resultado = $this->conn->prepare($sql);
         $resultado->bindParam(':idusuario',$idusuario);
        
@@ -170,7 +172,7 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
 
     public function obtenerusuarioPorId($id)
     {
-        $sql = "SELECT * FROM usuarios WHERE usr_id = :id";
+        $sql = "SELECT * FROM usuarios WHERE usuarioId = :id";
         $resultado = $this->conn->prepare($sql);
         $resultado->bindParam(':id',$id);
         $resultado->execute();
