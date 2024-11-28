@@ -14,14 +14,15 @@ class VendedorRepository implements IVendedor
 
     public function crearProducto($producto)
     {
-        $sql = "INSERT INTO Productos (prd_nombre, prd_descripcion, prd_tipo, prd_precio, prd_estado, prd_categoria) VALUES (:nombre, :descripcion, :tipo, :precio, :estado,:categoria)";
+        $sql = "INSERT INTO productos (prd_nombre,  prd_descrip, prd_precio, prd_marca, prd_estado) 
+                              VALUES  (:prd_nombre,:prd_descrip,:prd_precio,:prd_marca,:prd_estado)";                 
         $resultado = $this->conn->prepare($sql);
-        $resultado->bindParam(':nombre',$producto->prd_nombre);
-        $resultado->bindParam(':descripcion',$producto->prd_descripcion);
-        $resultado->bindParam(':tipo',$producto->prd_tipo);
-        $resultado->bindParam(':precio',$producto->prd_precio);
-        $resultado->bindParam(':estado',$producto->prd_estado);
-        $resultado->bindParam(':categoria',$producto->prd_categoria);
+        $resultado->bindParam(':prd_nombre',$producto->prd_nombre);
+        $resultado->bindParam(':prd_descrip',$producto->prd_descrip);
+        $resultado->bindParam(':prd_precio',$producto->prd_precio);
+        $resultado->bindParam(':prd_marca',$producto->prd_marca);
+        $resultado->bindParam(':prd_estado',$producto->prd_estado);
+
         if($resultado->execute()){
             return ['mensaje' => 'Producto Creado'];
         } else{
@@ -31,17 +32,20 @@ class VendedorRepository implements IVendedor
 
     public function actualizarProducto($producto)
     {
-        $sql = "UPDATE Productos SET prd_nombre = :nombre, prd_descripcion = :descripcion, prd_tipo = :tipo, prd_precio = :precio, prd_estado =:estado, prd_categoria = :categoria,
-         WHERE idproducto = :idproducto";
+        $sql = "UPDATE productos SET 
+        prd_nombre = :prd_nombre, 
+        prd_descrip= :prd_descrip, 
+        prd_precio = :prd_precio, 
+        prd_marca  = :prd_marca,
+        prd_estado = :prd_estado,
+        WHERE idproducto = :idproducto";
         $resultado = $this->conn->prepare($sql);
-        $resultado->bindParam(':idproducto',$producto->prd_idproducto);
-        $resultado->bindParam(':nombre',$producto->prd_nombre);
-        $resultado->bindParam(':descripcion',$producto->prd_descripcion);
-        $resultado->bindParam(':tipo',$producto->prd_tipo);
-        $resultado->bindParam(':precio',$producto->prd_precio);
-        $resultado->bindParam(':estado',$producto->prd_estado);
-        $resultado->bindParam(':categoria',$producto->prd_categoria);
-      
+        $resultado->bindParam(':idproducto',$producto->idproducto);
+        $resultado->bindParam(':prd_nombre',$producto->prd_nombre);
+        $resultado->bindParam(':prd_descrip',$producto->prd_descrip);
+        $resultado->bindParam(':prd_precio',$producto->prd_precio);
+        $resultado->bindParam(':prd_marca',$producto->prd_marca);
+        $resultado->bindParam(':prd_estado',$producto->prd_estado);
 
         if($resultado->execute()){
             return ['mensaje' => 'Producto Actualizado'];
@@ -52,7 +56,7 @@ class VendedorRepository implements IVendedor
 
     public function borrarProducto($idproducto)
     {
-        $sql = "DELETE FROM Productos WHERE idproducto = :idproducto";
+        $sql = "DELETE FROM productos WHERE idproducto = :idproducto";
         $resultado = $this->conn->prepare($sql);
         $resultado->bindParam(':idproducto',$idproducto);
        
@@ -65,7 +69,7 @@ class VendedorRepository implements IVendedor
 
     public function obtenerProductos()
     {
-        $sql = "SELECT * FROM Productos";
+        $sql = "SELECT * FROM productos";
         $resultado = $this->conn->prepare($sql);
         $resultado->execute();
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -73,18 +77,18 @@ class VendedorRepository implements IVendedor
 
     public function obtenerProductosPorNombre($nombre)
     {
-        $sql = "SELECT * FROM Productos WHERE prd_nombre = :nombre";
+        $sql = "SELECT * FROM productos WHERE prd_nombre = :prd_nombre";
         $resultado = $this->conn->prepare($sql);
-        $resultado->bindParam(':nombre',$nombre->nombre);
+        $resultado->bindParam(':prd_nombre',$nombre->prd_nombre);
         $resultado->execute();
         return $resultado->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function obtenerProductoPorId($id)
+    public function obtenerProductoPorId($idproducto)
     {
-        $sql = "SELECT * FROM Productos WHERE idproducto = :id";
+        $sql = "SELECT * FROM productos WHERE idproducto = :idproducto";
         $resultado = $this->conn->prepare($sql);
-        $resultado->bindParam(':id',$id);
+        $resultado->bindParam(':idproducto',$idproducto);
         $resultado->execute();
         return $resultado->fetch(PDO::FETCH_ASSOC);
     }
