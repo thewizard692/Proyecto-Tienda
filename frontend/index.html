@@ -16,15 +16,25 @@
             <button>Buscar</button>
         </div>
         <nav class="nav-links">
-            <a href="./pages/carrito.html">Carrito</a>
+            <a class="menu-btn" href="./pages/carrito.html">Carrito</a>
             <button class="menu-btn" onclick="toggleMenu()">Mi Cuenta</button>
         </nav>
     </header>
 
     <div class="side-menu" id="sideMenu">
-        <a href="./pages/login.html" id="loginLink">Iniciar Sesión</a>
-        <a href="./pages/registro.html" id="registerLink">Registrar</a>
-        <a href="#" id="logoutLink" onclick="cerrarSesion()">Cerrar Sesión</a>
+        <div class="hide-on-login" id="logoutMenu">
+            <a href="./pages/login.html" id="loginLink">Iniciar Sesión</a>
+            <a href="./pages/registro.html" id="registerLink">Registrar</a>
+        </div>
+        <div class="hide-on-login" id="loginMenu">
+            <p id="loginName">Nombre</p>
+            <p href="#" id="loginEmail">Correo</p>
+            <a href="#" id="loginUserName">Usuario</a>
+            <div class="hide-on-vendor" id="loginVendor">
+                <a href=".\pages\productos.html" id="loginVendedor">Ventas e Inventario</a>
+            </div>
+            <a href="#" id="logoutLink" onclick="cerrarSesion()">Cerrar Sesión</a>
+        </div>
     </div>
 
     <main>

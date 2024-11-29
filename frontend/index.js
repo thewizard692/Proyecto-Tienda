@@ -1,8 +1,5 @@
 const apiURL = 'http://localhost:8888/Proyecto-Tienda/src/index.php'
-const productForm = document.getElementById('productForm')
 const alertContainer = document.getElementById('alertContainer')
-const productTableBody = document.getElementById('productTableBody')
-const btnSubmit = document.getElementById('submitBtn')
 
 //Carrito
 document.addEventListener('DOMContentLoaded', () => {
@@ -17,18 +14,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const isLoggedIn = sessionStorage.getItem('loggedIn'); 
-    const loginLink = document.getElementById('loginLink');
-    const logoutLink = document.getElementById('logoutLink');
-    const registerlink = document.getElementById('registerLink');
-        
+    const loginMenu = document.getElementById('loginMenu');
+    const logoutMenu = document.getElementById('logoutMenu');
+    const loginEmail = document.getElementById('loginEmail');
+    const loginName = document.getElementById('loginName');
+    const loginUserName = document.getElementById('loginUserName');
+
+    const isVendedor = sessionStorage.getItem('isVendedor'); 
+    const loginVendor = document.getElementById('loginVendor');
+  
     if (isLoggedIn === 'true') {
-        loginLink.classList.add('hide-on-login');
-        registerlink.classList.add('hide-on-login');
-        logoutLink.classList.remove('hide-on-login');
+      loginMenu.classList.toggle('hide-on-login', false);
+      logoutMenu.classList.toggle('hide-on-login', true);
+      loginEmail.textContent = sessionStorage.getItem('correo');
+      loginName.textContent = sessionStorage.getItem('nombre');
+      loginUserName.textContent = "Tu Cuenta: " + sessionStorage.getItem('usuario');
+
+      if(isVendedor){
+        loginVendor.classList.toggle('hide-on-vendor', false);
+      }else{
+        loginVendor.classList.toggle('hide-on-vendor', true);
+      }
+
     } else {
-        loginLink.classList.remove('hide-on-login');
-        registerlink.classList.remove('hide-on-login');
-        logoutLink.classList.add('hide-on-login');
+      loginMenu.classList.toggle('hide-on-login', true);
+      loginVendor.classList.toggle('hide-on-vendor', true);
+      logoutMenu.classList.toggle('hide-on-login', false);
     }
 });
 
@@ -91,7 +102,10 @@ const getProducto = async (id) => {
   }
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 04d7bafed69dbaae9a4a5b44afa996ca5bb85112
 const agregarAlCarrito = async () => {
     const idproducto = document.getElementById('idproducto').value
     
@@ -129,6 +143,7 @@ const agregarAlCarrito = async () => {
 
     console.log('@@@ response => ', response)
 }
+<<<<<<< HEAD
 
 //****FUNCIONES PARA PRODUCTOS******
   //AGREGAR PRODUCTOS - CAMBIO
@@ -261,6 +276,8 @@ const borrarProducto = async (id) => {
     event.preventDefault()
     crearProducto()
   })*/
+=======
+>>>>>>> 04d7bafed69dbaae9a4a5b44afa996ca5bb85112
   
   const showAlert = (mensaje, tipo) => {
     alertContainer.innerHTML = 
