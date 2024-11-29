@@ -13,8 +13,8 @@
       return $this->usuarioRepository->obtenerProductos();
     }
 
-    public function obtenerProductosPorNombre($nombre) {
-      return $this->usuarioRepository->obtenerProductosPorNombre($nombre);
+    public function obtenerProductosPorBusqueda($busqueda) {
+      return $this->usuarioRepository->obtenerProductosPorBusqueda($busqueda);
     }
 
     public function obtenerProductosPorCategoria($id) {

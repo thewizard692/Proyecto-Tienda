@@ -52,11 +52,11 @@ $router->get('/usuario/productos', function() use ($UsuarioController) {
     return json_encode($UsuarioController->obtenerProductos());
 });
 
-$router->get('/usuario', function() use ($UsuarioController) {
-    return json_encode($UsuarioController->obtenerProductosPorNombre());
-});
+/*$router->get('/usuario/busqueda', function() use ($UsuarioController) {
+    return json_encode($UsuarioController->obtenerProductosPorBusqueda($busqueda));
+}); */
 
-$router->get('/usuario', function() use ($UsuarioController) {
+$router->get('/usuario/busqueda', function() use ($UsuarioController) {
     return json_encode($UsuarioController->obtenerProductosPorCategoria());
 });
 

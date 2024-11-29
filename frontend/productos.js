@@ -20,6 +20,7 @@ const crearProducto = async () => {
             prd_descrip: document.getElementById('prd_descrip').value,
             prd_precio: document.getElementById('prd_precio').value,
             prd_marca: document.getElementById('prd_marca').value,
+            prd_imagen: document.getElementById('prd_imagen').value,
             prd_estado: document.getElementById('prd_estado').value,
         }
     } else {
@@ -28,6 +29,7 @@ const crearProducto = async () => {
             prd_descrip: document.getElementById('prd_descrip').value,
             prd_precio: document.getElementById('prd_precio').value,
             prd_marca: document.getElementById('prd_marca').value,
+            prd_imagen: document.getElementById('prd_imagen').value,
             prd_estado: document.getElementById('prd_estado').value,
         }
     }
@@ -75,6 +77,7 @@ const getProducto = async (id) => {
             document.getElementById('prd_descrip').value = producto.prd_descrip
             document.getElementById('prd_precio').value = producto.prd_precio
             document.getElementById('prd_marca').value = producto.prd_marca
+            document.getElementById('prd_imagen').value = producto.prd_imagen
             document.getElementById('prd_estado').value = producto.prd_estado
         }
         console.log('@@ producto =>', producto)
@@ -103,6 +106,7 @@ const loadProductos = async () => {
           <td>${item.prd_descrip}</td>
           <td>${item.prd_precio}</td>
           <td>${item.prd_marca}</td>
+          <img src="${item.prd_imagen}" width="100">
           <td>${item.prd_estado}</td>
           <td>
             <button class="btn btn-warning btn-sm" data_id="${item.idproducto}">Editar</button>
