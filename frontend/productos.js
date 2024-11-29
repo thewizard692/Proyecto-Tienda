@@ -4,6 +4,10 @@ const productForm = document.getElementById('productForm')
 const productTableBody = document.getElementById('productTableBody')
 const btnSubmit = document.getElementById('submitBtn')
 
+document.addEventListener('DOMContentLoaded', () => {
+    loadProductos() 
+});
+
 //****FUNCIONES PARA PRODUCTOS******
 //AGREGAR PRODUCTOS - CAMBIO
 const crearProducto = async () => {
@@ -134,7 +138,7 @@ const borrarProducto = async (id) => {
     }
 }
 
-/*productTableBody.addEventListener('click', (e) => {
+productTableBody.addEventListener('click', (e) => {
   if (e.target.classList.contains('btn-danger')) {
     borrarProducto(e.target.getAttribute('data_id'))
   }
@@ -146,7 +150,7 @@ const borrarProducto = async (id) => {
 btnSubmit.addEventListener('click', (event) => {
   event.preventDefault()
   crearProducto()
-})*/
+})
 
 const showAlert = (mensaje, tipo) => {
     alertContainer.innerHTML =
