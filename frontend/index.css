@@ -315,4 +315,42 @@ body {
 
 #loginUserName {
     margin-top: 15px;
+    background-color: #dc3545;
+    color: white;
+    font-weight: bold;
+}
+
+  /* Estilo básico para los productos */
+  .categorias-destacadas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.categoria {
+    text-align: center;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.categoria:hover {
+    transform: scale(1.05);
+}
+
+.categoria img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+.categoria h3 {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
 }
