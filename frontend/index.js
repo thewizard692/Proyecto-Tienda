@@ -67,6 +67,7 @@ const obtenerProductosPorBusqueda = async (busqueda) => {
           document.getElementById('prd_descrip').value = producto.prd_descrip
           document.getElementById('prd_precio').value = producto.prd_precio
           document.getElementById('prd_marca').value = producto.prd_marca
+          document.getElementById('prd_imagen').value = producto.prd_imagen
           document.getElementById('prd_estado').value = producto.prd_estado
         }
         console.log('@@ producto =>', producto)
@@ -74,32 +75,6 @@ const obtenerProductosPorBusqueda = async (busqueda) => {
       catch (error) {
         console.error('Error: ', error)
       }
-}
-
-//OBTENER PRODUCTO POR ID - DETALLES
-const getProducto = async (id) => {
-  try {
-    const send = {
-      id: id
-    }
-    const res = await fetch(apiURL + '/usuario/vendedor', {
-      method: 'POST',
-      body: JSON.stringify(send)
-    })
-    const producto = await res.json()
-    if (producto) {
-      document.getElementById('idproducto').value = producto.idproducto
-      document.getElementById('prd_nombre').value = producto.prd_nombre
-      document.getElementById('prd_descrip').value = producto.prd_descrip
-      document.getElementById('prd_precio').value = producto.prd_precio
-      document.getElementById('prd_marca').value = producto.prd_marca
-      document.getElementById('prd_estado').value = producto.prd_estado
-    }
-    console.log('@@ producto =>', producto)
-    } 
-  catch (error) {
-    console.error('Error: ', error)
-  }
 }
 
 

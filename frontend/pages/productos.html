@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="container mt-5">
-      <h1 class="text-center">Bienvenido Vendedor! Esta es tu página de registro de prodcutos </h1>
+      <h1 class="text-center">Bienvenido Vendedor! Esta es tu página de registro de productos </h1>
       <div id="alertContainer" class="my-3"></div>
 
       <div class="row">
@@ -45,13 +45,19 @@
                   <input type="text" class="form-control" id="prd_marca" required>
                 </div>
                 <div class="mb-3">
+                  <label for="imagen" class="form-label">
+                    Imagen del Producto (agrega un URL)
+                  </label>
+                  <input type="text" class="form-control" id="prd_imagen" required>
+                </div>
+                <div class="mb-3">
                   <label for="estado" class="form-label">
                     Estado del Producto
                   </label>
                   <input type="text" class="form-control" id="prd_estado" required>
                 </div>
                 <button type="submit" id="submitBtn" class="btn btn-primary">
-                  Agregar Producto
+                  Agregar Producto 
                 </button>
               </form>
             </div>
@@ -69,10 +75,10 @@
                     <th>Id</th>
                     <th>Nombre</th>
                     <th>Descripcion</th>
-                    <th>Marca</th>
-                    <th>Estado</th>
                     <th>Precio</th>
-                    <th>Acciones</th>
+                    <th>Marca</th>
+                    <th>Imagen</th>
+                    <th>Estado</th>
                   </tr>
                 </thead>
                 <tbody id="productTableBody"></tbody>
