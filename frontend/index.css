@@ -354,3 +354,24 @@ body {
     font-size: 16px;
     color: #333;
 }
+
+/* Centrar los productos en la fila */
+.row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Para que los productos se ajusten a la siguiente línea si es necesario */
+    gap: 20px; /* Espaciado entre las tarjetas */
+}
+
+/* Asegúrate de que las tarjetas se mantengan correctamente dentro de su contenedor */
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos dentro de cada tarjeta */
+}
+
+/* Centra las imágenes dentro de las tarjetas */
+.card-img-top {
+    max-width: 100%;
+    height: auto;
+}
