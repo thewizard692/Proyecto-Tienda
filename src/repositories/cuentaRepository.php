@@ -69,13 +69,16 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
         $resultado = $prep->fetch();
         $response = [];
         
-        if (count($resultado) > 0) {
+        if (!empty($resultado)) {
 
-            $usuarioid = $resultado['usuarioId'];
+            $usuarioId = $resultado['usuarioId'];
             $usr_usuario = $resultado['usr_usuario'];
             $usr_psword = $resultado['usr_psword'];
             $usr_nombre = $resultado['usr_nombre'];
-
+            $usr_apaterno = $resultado['usr_apaterno'];
+            $usr_amaterno = $resultado['usr_amaterno'];
+            $usr_correo = $resultado['usr_correo'];
+            
             if (password_verify($password, $usr_psword)) {
         
                 session_start();
@@ -85,8 +88,18 @@ require_once BASE_PATH . '/interfaces/cuentainterface.php';
                 $response['redirect'] = '../index.html';
                 $response['usuarioId'] = $usuarioId;
                 $response['usuario'] = $usr_usuario;
-                $response['nombre'] = $usr_nombre;
+                $response['nombre'] = $usr_nombre . " " . $usr_apaterno . " " . $usr_amaterno;
                 $response['correo'] = $usr_correo;
+
+                $sql = 'SELECT * FROM vendedor WHERE usr_fk_usuario = :usr_usuario';
+                $prep = $this->conn->prepare($sql);
+                $prep->bindParam(':usr_usuario', $usuarioId);
+                $prep->execute();
+                $resultado = $prep->fetch();
+                
+                if (!empty($resultado)) {
+                    $response['vendedor'] = TRUE;
+                }
 
             } else {
                 $response['status'] = 'error';

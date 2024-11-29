@@ -20,17 +20,16 @@ const iniciarSesion = async () => {
     const resultado = await respuesta.json();
 
     alert(resultado.message);
-
+    console.log(resultado);
     if (resultado.status === 'success') {
 
         sessionStorage.setItem('loggedIn', 'true');
-        sessionStorage.setItem('name', resultado.nombre);
-        
+        sessionStorage.setItem('nombre', resultado.nombre);
+        sessionStorage.setItem('usuario', resultado.usuario);
+        sessionStorage.setItem('correo', resultado.correo);
+        sessionStorage.setItem('isVendedor', resultado.vendedor);
         window.location.href = resultado.redirect;
-
-        document.getElementById('loginLink').classList.add('hide-on-login');
-        document.getElementById('logoutLink').classList.remove('hide-on-login');
-        document.getElementById('logoutLink').classList.add('show-on-login');
+        
     }
 
     console.log(resultado);
