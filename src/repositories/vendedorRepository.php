@@ -15,8 +15,8 @@ class VendedorRepository implements IVendedor
     public function crearProducto($producto)
      {
         
-        $sql = "INSERT INTO productos (prd_nombre,  prd_descrip, prd_precio, prd_marca, prd_estado) 
-                              VALUES  (:prd_nombre,:prd_descrip,:prd_precio,:prd_marca,:prd_estado)";                 
+        $sql = "INSERT INTO productos (prd_nombre,  prd_descrip, prd_precio, prd_marca, prd_imagen, prd_estado) 
+                              VALUES  (:prd_nombre,:prd_descrip,:prd_precio,:prd_marca,:prd_imagen, :prd_estado)";                 
 
 
         $resultado = $this->conn->prepare($sql);
@@ -24,6 +24,7 @@ class VendedorRepository implements IVendedor
         $resultado->bindParam(':prd_descrip',$producto->prd_descrip);
         $resultado->bindParam(':prd_precio',$producto->prd_precio);
         $resultado->bindParam(':prd_marca',$producto->prd_marca);
+        $resultado->bindParam(':prd_imagen',$producto->prd_imagen);
         $resultado->bindParam(':prd_estado',$producto->prd_estado);
 
         if($resultado->execute()){
@@ -40,6 +41,7 @@ class VendedorRepository implements IVendedor
         prd_descrip= :prd_descrip, 
         prd_precio = :prd_precio, 
         prd_marca  = :prd_marca,
+        prd_imagen = :prd_imagen,
         prd_estado = :prd_estado,
         WHERE idproducto = :idproducto";
 
@@ -49,6 +51,7 @@ class VendedorRepository implements IVendedor
         $resultado->bindParam(':prd_descrip',$producto->prd_descrip);
         $resultado->bindParam(':prd_precio',$producto->prd_precio);
         $resultado->bindParam(':prd_marca',$producto->prd_marca);
+        $resultado->bindParam(':prd_imagen',$producto->prd_imagen);
         $resultado->bindParam(':prd_estado',$producto->prd_estado);
 
         if($resultado->execute()){
