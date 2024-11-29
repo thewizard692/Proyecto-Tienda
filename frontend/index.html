@@ -9,7 +9,7 @@
 <body>
 
     <header class="header">
-        <div class="logo">Tienda online</div>
+        <a href="./index.html" class="logo">Tienda online</a>
         <div class="search-bar">
             <input type="text" id ="BarraBusqueda" placeholder="Buscar productos...">
 
@@ -17,7 +17,7 @@
         </div>
         <nav class="nav-links">
             <a class="menu-btn" href="./pages/carrito.html">Carrito</a>
-            <button class="menu-btn" onclick="toggleMenu()">Mi Cuenta</button>
+            <button class="logged-out logged-in menu-btn" id="cuentaBtn" onclick="toggleMenu()">Mi Cuenta</button>
         </nav>
     </header>
 
@@ -27,8 +27,10 @@
             <a href="./pages/registro.html" id="registerLink">Registrar</a>
         </div>
         <div class="hide-on-login" id="loginMenu">
-            <p id="loginName">Nombre</p>
-            <p href="#" id="loginEmail">Correo</p>
+            <div class="userinfo">
+                <p id="loginName">Nombre</p>
+                <p id="loginEmail">Correo</p>
+            </div>
             <a href="#" id="loginUserName">Usuario</a>
             <div class="hide-on-vendor" id="loginVendor">
                 <a href=".\pages\productos.html" id="loginVendedor">Ventas e Inventario</a>

@@ -19,6 +19,8 @@ body {
 .header .logo {
     font-size: 24px;
     font-weight: bold;
+    color: white;         
+    text-decoration: none;
 }
 
 .header .search-bar input {
@@ -187,21 +189,26 @@ body {
 .header .nav-links a:hover {
     text-decoration: underline;
 }
-    
-  #loginMenu #loginName {
-    font-size: 12px;
-    color: white;
-    margin: 0;
-    padding-left: 20px;
-    margin-bottom: 2px;
-  }
   
-  #loginMenu #loginEmail {
+.userinfo {
+    background-color: #3b5069;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+#loginMenu #loginName, #loginMenu #loginEmail {
     font-size: 12px;
     color: white;
     margin: 0;
-    padding-left: 20px;
-  }
+    padding-left: 12px;
+}
+
+#loginMenu #loginName {
+    margin-bottom: 2px;
+}
 
 .side-menu {
     display: none;
@@ -299,13 +306,13 @@ body {
 }
 
 .logged-in {
-    background-color: #28a745;
-    color: white;
-    font-weight: bold;
+   border: 2px solid #28a745;
 }
 
 .logged-out {
-    background-color: #dc3545;
-    color: white;
-    font-weight: bold;
+    border: 2px solid #dc3545;
+}
+
+#loginUserName {
+    margin-top: 15px;
 }
