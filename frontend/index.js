@@ -1,8 +1,5 @@
 const apiURL = 'http://localhost:8888/Proyecto-Tienda/src/index.php'
-const productForm = document.getElementById('productForm')
 const alertContainer = document.getElementById('alertContainer')
-const productTableBody = document.getElementById('productTableBody')
-const btnSubmit = document.getElementById('submitBtn')
 
 //Carrito
 document.addEventListener('DOMContentLoaded', () => {
@@ -17,18 +14,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const isLoggedIn = sessionStorage.getItem('loggedIn'); 
-    const loginLink = document.getElementById('loginLink');
-    const logoutLink = document.getElementById('logoutLink');
-    const registerlink = document.getElementById('registerLink');
-        
+    const loginMenu = document.getElementById('loginMenu');
+    const logoutMenu = document.getElementById('logoutMenu');
+    const loginEmail = document.getElementById('loginEmail');
+    const loginName = document.getElementById('loginName');
+    const loginUserName = document.getElementById('loginUserName');
+
+    const isVendedor = sessionStorage.getItem('isVendedor'); 
+    const loginVendor = document.getElementById('loginVendor');
+  
     if (isLoggedIn === 'true') {
-        loginLink.classList.add('hide-on-login');
-        registerlink.classList.add('hide-on-login');
-        logoutLink.classList.remove('hide-on-login');
+      loginMenu.classList.toggle('hide-on-login', false);
+      logoutMenu.classList.toggle('hide-on-login', true);
+      loginEmail.textContent = sessionStorage.getItem('correo');
+      loginName.textContent = sessionStorage.getItem('nombre');
+      loginUserName.textContent = "Tu Cuenta: " + sessionStorage.getItem('usuario');
+
+      if(isVendedor){
+        loginVendor.classList.toggle('hide-on-vendor', false);
+      }else{
+        loginVendor.classList.toggle('hide-on-vendor', true);
+      }
+
     } else {
-        loginLink.classList.remove('hide-on-login');
-        registerlink.classList.remove('hide-on-login');
-        logoutLink.classList.add('hide-on-login');
+      loginMenu.classList.toggle('hide-on-login', true);
+      loginVendor.classList.toggle('hide-on-vendor', true);
+      logoutMenu.classList.toggle('hide-on-login', false);
     }
 });
 
@@ -66,6 +77,7 @@ const obtenerProductosPorNombre = async () => {
     const resultado = await respuesta.json();
 
 }
+
 const agregarAlCarrito = async () => {
     const idproducto = document.getElementById('idproducto').value
     
@@ -103,150 +115,6 @@ const agregarAlCarrito = async () => {
 
     console.log('@@@ response => ', response)
 }
-
-//****FUNCIONES PARA PRODUCTOS******
-  //AGREGAR PRODUCTOS - CAMBIO
-  const crearProducto = async () => {
-    const idproducto = document.getElementById('idproducto').value
-    let producto
-    if (idproducto){
-      producto = {
-        idproducto: idproducto,
-        prd_nombre: document.getElementById('prd_nombre').value,
-        prd_descrip: document.getElementById('prd_descrip').value,
-        prd_precio: document.getElementById('prd_precio').value,
-        prd_marca: document.getElementById('prd_marca').value,
-        prd_estado: document.getElementById('prd_estado').value,
-      }
-    }else {
-    producto = {
-      prd_nombre: document.getElementById('prd_nombre').value,
-      prd_descrip: document.getElementById('prd_descrip').value,
-      prd_precio: document.getElementById('prd_precio').value,
-      prd_marca: document.getElementById('prd_marca').value,
-      prd_estado: document.getElementById('prd_estado').value,
-    }
-  }
-    const url = `${apiURL}/usuario/vendedor`
-    const method = idproducto ? 'PUT' : 'POST'
-    console.log('@@@ ruta y metodo => ', url, method, producto) //sal
-    const resultado = await fetch(url, {
-      method: method,
-      body: JSON.stringify(producto)
-    })
-  
-    //mensajes del sistema
-    const response = await resultado.json()
-    if (response.mensaje === 'Producto Creado') {
-      showAlert('Producto Agregado', 'success')
-      loadProductos()
-      productForm.reset()
-    }else if(response.mensaje === 'Producto Actualizado'){
-      showAlert('ProductoActualizado', 'warning')
-      loadProductos()
-      productForm.reset()
-    }else {
-      showAlert('Error al agregar el producto', 'danger')
-    }
-    document.getElementById('idproducto').value = ''
-  
-    console.log('@@@ response => ', response)
-  } //FIN DE AGREGAR PRODUCTOS
-  
-  
-  //OBTENER PRODUCTO POR ID - DETALLES
-  const getProducto = async (id) => {
-    try {
-      const send = {
-        id: id
-      }
-      const res = await fetch(apiURL + '/usuario/vendedor', {
-        method: 'POST',
-        body: JSON.stringify(send)
-      })
-      const producto = await res.json()
-      if (producto) {
-        document.getElementById('idproducto').value = producto.idproducto
-        document.getElementById('prd_nombre').value = producto.prd_nombre
-        document.getElementById('prd_descrip').value = producto.prd_descrip
-        document.getElementById('prd_precio').value = producto.prd_precio
-        document.getElementById('prd_marca').value = producto.prd_marca
-        document.getElementById('prd_estado').value = producto.prd_estado
-      }
-      console.log('@@ producto =>', producto)
-      } 
-    catch (error) {
-      console.error('Error: ', error)
-    }
-  }
-  //CARGA DE PRODUCTOS Y MUESTRA EN LA TABLA
-  const loadProductos = async () => {
-    try {
-      const res = await fetch(apiURL + '/usuario/vendedor', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      const productos = await res.json()
-      productTableBody.innerHTML = ''
-      productos.forEach((item) => {
-        const row = document.createElement('tr')
-        row.innerHTML =
-        `
-          <td>${item.idproducto}</td>
-          <td>${item.prd_nombre}</td>
-          <td>${item.prd_descrip}</td>
-          <td>${item.prd_precio}</td>
-          <td>${item.prd_marca}</td>
-          <td>${item.prd_estado}</td>
-          <td>
-            <button class="btn btn-warning btn-sm" data_id="${item.idproducto}">Editar</button>
-            <button class="btn btn-danger btn-sm" data_id="${item.idproducto}">Borrar</button>
-          </td>
-        `
-        productTableBody.appendChild(row)
-      })
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  }
-
-//BORRAR PRODUCTOS
-const borrarProducto = async (id) => {
-    try {
-      const send = {
-        id: id
-      }
-      const res = await fetch(apiURL + '/usuario/vendedor', {
-        method: 'DELETE',
-        body: JSON.stringify(send)
-      })
-      const borrado = await res.json()
-      console.log('@@@ borrado =>', borrado.mensaje)
-      if (borrado && borrado.mensaje && borrado.mensaje === 'Producto Borrado') {
-        showAlert('Producto Borrado', 'danger')
-        loadProductos()
-      }
-      console.log('@@@ res => ', borrado)
-    } catch (error) {
-      console.error('Error: ', error)
-    }
-  }
-  
-  /*productTableBody.addEventListener('click', (e) => {
-    if (e.target.classList.contains('btn-danger')) {
-      borrarProducto(e.target.getAttribute('data_id'))
-    }
-    if (e.target.classList.contains('btn-warning')) {
-      getProducto(e.target.getAttribute('data_id'))
-    }
-  })
-  
-  btnSubmit.addEventListener('click', (event) => {
-    event.preventDefault()
-    crearProducto()
-  })*/
   
   const showAlert = (mensaje, tipo) => {
     alertContainer.innerHTML = 

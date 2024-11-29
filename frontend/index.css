@@ -28,6 +28,23 @@ body {
     border-radius: 3px;
 }
 
+.menu-btn {
+    background-color: #232f3e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.menu-btn:hover {
+    background-color: #FFFF;
+    color:#232f3e;
+  }
+  
 .header .search-bar button {
     padding: 6px 10px;
     background-color: #febd69;
@@ -170,6 +187,22 @@ body {
 .header .nav-links a:hover {
     text-decoration: underline;
 }
+    
+  #loginMenu #loginName {
+    font-size: 12px;
+    color: white;
+    margin: 0;
+    padding-left: 20px;
+    margin-bottom: 2px;
+  }
+  
+  #loginMenu #loginEmail {
+    font-size: 12px;
+    color: white;
+    margin: 0;
+    padding-left: 20px;
+  }
+
 .side-menu {
     display: none;
     position: fixed;
@@ -254,6 +287,10 @@ body {
 }
 
 .hide-on-login {
+    display: none !important;
+}
+
+.hide-on-vendor {
     display: none !important;
 }
 
