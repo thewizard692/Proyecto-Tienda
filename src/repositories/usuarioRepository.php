@@ -22,11 +22,12 @@ class usuarioRepository implements IUsuario
 
     public function obtenerProductosPorBusqueda($busqueda)
     {
-        $sql = "SELECT * FROM productos WHERE prd_nombre = :prd_nombre";
+        $sql = "SELECT * FROM productos WHERE prd_nombre LIKE :busqueda";
         $resultado = $this->conn->prepare($sql);
-        $resultado->bindParam(':prd_nombre', $busqueda);
+        $busqueda = "%" . $busqueda . "%";
+        $resultado->bindParam(':busqueda', $busqueda);
         $resultado->execute();
-        return $resultado->fetch(PDO::FETCH_ASSOC);
+        return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function obtenerProductosPorCategoria($categoria)
@@ -38,53 +39,88 @@ class usuarioRepository implements IUsuario
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function agregarAlCarrito($idproducto, $usuarioId)
+    public function agregarAlCarrito($usuarioId, $productoid, $cantidad = 1)
     {
-        $sql = "INSERT INTO carrito (car_fk_producto, car_fk_usuario) VALUES (:idproducto, :idusuario)";
-        $resultado = $this->conn->prepare($sql);
+        try {
 
-        $resultado->bindParam(':idproducto', $idproducto);
-        $resultado->bindParam(':idusuario', $usuarioId);
-
-        if ($resultado->execute()) {
-            $response = [
-                'status' => 'success',
-                'message' => 'Se ha agregado el producto al carrito.'
-            ];
-        } else {
-            $response = [
-                'status' => 'error',
-                'message' => 'Hubo un error al agregar al carrito.'
-            ];
+            $sqlCheck = "SELECT cantidad FROM carrito WHERE usuarioid = :usuarioid AND productoid = :productoid";
+            $stmtCheck = $this->conn->prepare($sqlCheck);
+            $stmtCheck->bindParam(':usuarioid', $usuarioId);
+            $stmtCheck->bindParam(':productoid', $productoid);
+            $stmtCheck->execute();
+            $result = $stmtCheck->fetch(PDO::FETCH_ASSOC);
+    
+            if ($result) {
+                $sqlUpdate = "UPDATE carrito SET cantidad = cantidad + :cantidad WHERE usuarioid = :usuarioid AND productoid = :productoid";
+                $stmtUpdate = $this->conn->prepare($sqlUpdate);
+                $stmtUpdate->bindParam(':cantidad', $cantidad);
+                $stmtUpdate->bindParam(':usuarioid', $usuarioId);
+                $stmtUpdate->bindParam(':productoid', $productoid);
+                $stmtUpdate->execute();
+            } else {
+                $sqlInsert = "INSERT INTO carrito (usuarioid, productoid, cantidad) VALUES (:usuarioid, :productoid, :cantidad)";
+                $stmtInsert = $this->conn->prepare($sqlInsert);
+                $stmtInsert->bindParam(':usuarioid', $usuarioId);
+                $stmtInsert->bindParam(':productoid', $productoid);
+                $stmtInsert->bindParam(':cantidad', $cantidad);
+                $stmtInsert->execute();
+            }
+    
+            return ['status' => 'success', 'message' => 'Producto agregado o actualizado en el carrito.'];
+        } catch (Exception $e) {
+            return ['status' => 'error', 'message' => 'Error al agregar producto al carrito: ' . $e->getMessage()];
         }
     }
+    
 
-
-    public function quitarDelCarrito($idproducto, $usuarioId)
+    public function quitarDelCarrito($usuarioId, $productoid, $cantidad = 1)
     {
-        $sql = "DELETE FROM Carrito WHERE car_fk_producto = :idproducto AND car_fk_usuario = :idusuario";
-        $resultado = $this->conn->prepare($sql);
-
-        $resultado->bindParam(':idproducto', $idproducto);
-        $resultado->bindParam(':idusuario', $usuarioId);
-
-        if ($resultado->execute()) {
-            return ['mensaje' => 'Producto eliminado del carrito'];
-        } else {
-            return ['mensaje' => 'Error al eliminar el producto del carrito.'];
+        try {
+            $sqlCheck = "SELECT cantidad FROM carrito WHERE usuarioid = :usuarioid AND productoid = :productoid";
+            $stmtCheck = $this->conn->prepare($sqlCheck);
+            $stmtCheck->bindParam(':usuarioid', $usuarioId);
+            $stmtCheck->bindParam(':productoid', $productoid);
+            $stmtCheck->execute();
+            $result = $stmtCheck->fetch(PDO::FETCH_ASSOC);
+    
+            if ($result) {
+                $nuevaCantidad = $result['cantidad'] - $cantidad;
+    
+                if ($nuevaCantidad > 0) {
+                    $sqlUpdate = "UPDATE carrito SET cantidad = :cantidad WHERE usuarioid = :usuarioid AND productoid = :productoid";
+                    $stmtUpdate = $this->conn->prepare($sqlUpdate);
+                    $stmtUpdate->bindParam(':cantidad', $nuevaCantidad);
+                    $stmtUpdate->bindParam(':usuarioid', $usuarioId);
+                    $stmtUpdate->bindParam(':productoid', $productoid);
+                    $stmtUpdate->execute();
+                } else {
+                    $sqlDelete = "DELETE FROM carrito WHERE usuarioid = :usuarioid AND productoid = :productoid";
+                    $stmtDelete = $this->conn->prepare($sqlDelete);
+                    $stmtDelete->bindParam(':usuarioid', $usuarioId);
+                    $stmtDelete->bindParam(':productoid', $productoid);
+                    $stmtDelete->execute();
+                }
+    
+                return ['status' => 'success', 'message' => 'Producto actualizado o eliminado del carrito.'];
+            } else {
+                return ['status' => 'error', 'message' => 'El producto no está en el carrito.'];
+            }
+        } catch (Exception $e) {
+            return ['status' => 'error', 'message' => 'Error al quitar producto del carrito: ' . $e->getMessage()];
         }
     }
-
+    
     public function obtenerCarritoPorUsuario($usuarioId)
     {
-        $sql = "SELECT p.prd_id, p.prd_nombre, p.prd_precio, c.cardet_cantidad
-                FROM Productos p
-                JOIN Carrito c ON p.prd_id = c.car_fk_producto
-                WHERE c.car_fk_usuario = :idusuario";
+        $sql = "SELECT p.idproducto AS prd_id, p.prd_nombre, p.prd_precio, c.cantidad AS cardet_cantidad
+                FROM productos p
+                JOIN carrito c ON p.idproducto = c.productoid
+                WHERE c.usuarioid = :usuarioid";
         $resultado = $this->conn->prepare($sql);
-        $resultado->bindParam(':idusuario', $usuarioId);
+        $resultado->bindParam(':usuarioid', $usuarioId);
         $resultado->execute();
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
+    
 }
 ?>
