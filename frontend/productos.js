@@ -142,6 +142,38 @@ const borrarProducto = async (id) => {
     }
 }
 
+/*const obtenerCategorias = async (categoria) => {
+    try {
+        const send = {
+            categoria: categoria
+        }
+        const res = await fetch(apiURL + '/usuario/vendedor/categoria', {
+            method: 'POST',
+            body: JSON.stringify(send)
+        })
+        const categoria = await res.json()
+        if (categoria) {
+        /*
+        <select name="categorias" id="id">
+        <option value="1"></option>
+        <option value="2"></option>
+        <option value="3"></option>
+        <option value="4"></option>
+        <option value="5"></option>
+        <option value="6"></option>
+        <option value="7"></option>
+        <option value="8"></option>
+        </select>
+            
+        }
+        console.log('@@ categoria =>', categoria)
+    }
+    catch (error) {
+        console.error('Error: ', error)
+    }
+} */
+
+
 productTableBody.addEventListener('click', (e) => {
   if (e.target.classList.contains('btn-danger')) {
     borrarProducto(e.target.getAttribute('data_id'))
