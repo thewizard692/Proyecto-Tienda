@@ -66,11 +66,12 @@ $router->POST('/usuario/productos/categoria', function() use ($UsuarioController
     return json_encode($UsuarioController->obtenerProductosPorCategoria($id));
 });
 
-$router->post('/usuario', function() use ($UsuarioController) {
+//CARRITO
+$router->post('/usuario/carrito/agregar', function() use ($UsuarioController) {
     return json_encode($UsuarioController->agregarAlCarrito());
 });
 
-$router->delete('/usuario', function() use ($UsuarioController) {
+$router->delete('/usuario/garrito/quitar', function() use ($UsuarioController) {
     return json_encode($UsuarioController->quitarDelCarrito());
 });
 
@@ -78,7 +79,7 @@ $router->get('/usuario/carrito', function() use ($UsuarioController) {
     return json_encode($UsuarioController->obtenerCarritoPorUsuario());
 });
 
-$router->post('/usuario/orden', function() use ($UsuarioController) {
+$router->post('/usuario/carrito/orden', function() use ($UsuarioController) {
     return json_encode($UsuarioController->crearOrden());
 });
 
