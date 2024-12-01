@@ -68,6 +68,13 @@ $router->delete('/usuario', function() use ($UsuarioController) {
     return json_encode($UsuarioController->quitarDelCarrito());
 });
 
+$router->get('/usuario/carrito', function() use ($UsuarioController) {
+    return json_encode($UsuarioController->obtenerCarritoPorUsuario());
+});
+
+$router->post('/usuario/orden', function() use ($UsuarioController) {
+    return json_encode($UsuarioController->crearOrden());
+});
 
 //*******CUENTA**********
 
