@@ -5,43 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Carrito</title>
     <link rel="stylesheet" href="../carrito.css">
+    <!-- Importar Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
     <header>
         <h1>Mi Carrito</h1>
         <nav>
-            <a href="../index.html">Inicio</a>
-            <a href="../index.html">Categorías</a>
-            <a href="../pages/usuario.html">Perfil</a>
+            <a href="../index.html">
+                <i class="bi bi-house"></i> Inicio
+            </a>
+            <a href="../index.html">
+                <i class="bi bi-tags"></i> Categorías
+            </a>
+            <a href="../pages/usuario.html">
+                <i class="bi bi-person-circle"></i> Perfil
+            </a>
         </nav>
     </header>
-<div class="container">
-    <h2>Productos en tu carrito</h2>
-    <!-- Producto 1 -->
-    <div class="cart-item">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLMPTS-jP4o9IxH2y38TH2tSdamzRo4Ahs3Q&s" alt="Producto 1">
-        <div>
-            <h3>Producto 1</h3>
-            <p>Precio: $20.00</p>
-            <button>Eliminar</button>
-        </div>
-    </div>
-    <!-- Producto 2 -->
-    <div class="cart-item">
-        <img src="" alt="Producto 2">
-        <div>
-            <h3>Producto 2</h3>
-            <p>Precio: $15.00</p>
-            <button>Eliminar</button>
-        </div>
-    </div>
-    <!-- Resumen -->
-    <div class="cart-summary">
-        <h3>Total: $35.00</h3>
-        <button>Proceder al pago</button>
+    <div class="container">
+        <h2>Productos en tu carrito</h2>
+        <!-- Tabla para los productos -->
+        <table id="tabla-carrito" border="1">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los productos se agregarán dinámicamente -->
+            </tbody>
+        </table>
+        <h3 id="total">Total: $0.00</h3>
+        <button id="pay-button">Pagar Pedido</button>
+        <!-- Modal de pago -->
+<div id="payment-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3>Pago con tarjeta</h3>
+        <form id="payment-form">
+            <label for="card-number">Número de tarjeta:</label>
+            <input type="text" id="card-number" name="card-number" required>
+            <label for="expiry-date">Fecha de expiración:</label>
+            <input type="text" id="expiry-date" name="expiry-date" required>
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" required>
+            <button type="submit">Pagar</button>
+        </form>
     </div>
 </div>
-<script src="../carrito.js"></script>
-
+            </div>
+        </div>
+    </div>
+    <script src="../carrito.js"></script>
 </body>
 </html>
+
+

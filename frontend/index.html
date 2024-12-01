@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda online</title>
     <link rel="stylesheet" href="index.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
 
@@ -15,7 +16,9 @@
             <button id="btnBuscar">Buscar</button>
         </div>
         <nav class="nav-links">
-            <a class="menu-btn" href="./pages/carrito.html">Carrito</a>
+            <a href="./pages/carrito.html" class="btn btn-success"> 
+                <i class="bi bi-cart custom-icon"></i> Carrito
+            </a> 
             <button class="logged-out logged-in menu-btn" id="cuentaBtn" onclick="toggleMenu()">Mi Cuenta</button>
         </nav>
     </header>
