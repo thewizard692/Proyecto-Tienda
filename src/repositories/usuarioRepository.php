@@ -124,8 +124,6 @@ class usuarioRepository implements IUsuario
     
     public function crearOrden($usuarioId, $vendedorId)
     {
-    try {
-   
         $this->conn->beginTransaction();
 
         $sqlOrden = "INSERT INTO ordenes (ord_vendedor, ord_cliente, ord_fecha_pedido, ord_fecha_entrega)
@@ -163,12 +161,7 @@ class usuarioRepository implements IUsuario
         $this->conn->commit();
 
         return ['status' => 'success', 'message' => 'Orden creada correctamente.'];
-
-    } catch (Exception $e) {
-        $this->conn->rollBack();
-        return ['status' => 'error', 'message' => 'Error al crear la orden: ' . $e->getMessage()];
     }
-}
 
 }
 ?>
