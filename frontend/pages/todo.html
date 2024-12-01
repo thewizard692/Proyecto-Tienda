@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda online</title>
+    <link rel="stylesheet" href="../index.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Tienda online</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar productos...">
+            <button>Buscar</button>
+        </div>
+        <nav class="nav-links">
+            <a class="menu-btn" href="carrito.html">Carrito</a>
+            <button class="menu-btn" onclick="toggleMenu()">Mi Cuenta</button>
+        </nav>
+    </header>
+
+    <div class="side-menu" id="sideMenu">
+        <div class="hide-on-login" id="logoutMenu">
+            <a href="login.html" id="loginLink">Iniciar Sesión</a>
+            <a href="registro.html" id="registerLink">Registrar</a>
+        </div>
+        <div class="hide-on-login" id="loginMenu">
+            <p id="loginName">Nombre</p>
+            <p href="#" id="loginEmail">Correo</p>
+            <a href="#" id="loginUserName">Usuario</a>
+            <div class="hide-on-vendor" id="loginVendor">
+                <a href="productos.html" id="loginVendedor">Ventas e Inventario</a>
+            </div>
+            <a href="#" id="logoutLink" onclick="cerrarSesion()">Cerrar Sesión</a>
+        </div>
+    </div>
+
+    <div class="row" id="card">
+        <!-- Plantilla para los productos -->
+        <template id="template-card">
+            <article class="col-md-6 col-lg-3 mb-3">
+                <div class="card text-center shadow">
+                    <img src="" alt="Imagen del producto" class="card-img-top">
+                    <div class="divProducto">
+                        <h5 class="card-title text-primary lead">Nombre del producto</h5>
+                        <p class="lead text-secondary">Descripción: Descripción</p>
+                        <p class="lead text-secondary">Precio: $0.00</p>
+                        <p class="lead text-secondary">Marca: Marca</p>
+                        <p class="lead text-secondary">Estado: Estado</p>
+                    </div>
+                </div>
+            </article>
+        </template>
+    </div>
+
+    <footer class="footer">
+        <p>© 2024 Tienda Online. Todos los derechos reservados.</p>
+    </footer>
+    <script src="../todosproductos.js"></script>
+</body>
+</html>
+
