@@ -8,14 +8,14 @@
 </head>
 <body>
     <header class="header">
-        <div class="logo">Tienda online</div>
+        <a href="../index.html" class="logo">Tienda online</a>
         <div class="search-bar">
-            <input type="text" placeholder="Buscar productos...">
-            <button>Buscar</button>
+            <input type="text" id ="BarraBusqueda" placeholder="Buscar productos...">
+            <button id="btnBuscar">Buscar</button>
         </div>
         <nav class="nav-links">
-            <a class="menu-btn" href="carrito.html">Carrito</a>
-            <button class="menu-btn" onclick="toggleMenu()">Mi Cuenta</button>
+            <a class="menu-btn" href="./carrito.html">Carrito</a>
+            <button class="logged-out logged-in menu-btn" id="cuentaBtn" onclick="toggleMenu()">Mi Cuenta</button>
         </nav>
     </header>
 

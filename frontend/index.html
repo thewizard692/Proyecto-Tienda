@@ -12,8 +12,7 @@
         <a href="./index.html" class="logo">Tienda online</a>
         <div class="search-bar">
             <input type="text" id ="BarraBusqueda" placeholder="Buscar productos...">
-
-            <button>Buscar</button>
+            <button id="btnBuscar">Buscar</button>
         </div>
         <nav class="nav-links">
             <a class="menu-btn" href="./pages/carrito.html">Carrito</a>
@@ -49,39 +48,39 @@
             <h3>De todo</h3>
         </div>
         <section class="categorias-destacadas">
-            <div class="categoria" onclick="location.href='pages/ropa.html'">
+            <div class="categoria" data-id="1">
                 <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_Softlines._SY304_CB408655762_.jpg" alt="Ropa">
                 <h3>Descubre Ropa de Mujer</h3>
             </div>
-            <div class="categoria" onclick="location.href='pages/electronicos.html'">
+            <div class="categoria" data-id="2">
                 <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_CE._SY304_CB408649900_.jpg" alt="Electrónicos">
                 <h3>Descubre Electrónicos</h3>
             </div>
-            <div class="categoria" onclick="location.href='pages/videojuegos.html'">
+            <div class="categoria" data-id="3">
                 <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_VG._SY304_CB408657586_.jpg" alt="Videojuegos">
                 <h3>Descubre Videojuegos</h3>
             </div>
-            <div class="categoria" onclick="location.href='pages/libros.html'">
+            <div class="categoria" data-id="4">
                 <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_Books._SY304_CB408654706_.jpg" alt="Libros">
                 <h3>Descubre Libros</h3>
             </div>
-            <div class="categoria" onclick="location.href='pages/cocina.html'">
+            <div class="categoria" data-id="5">
                 <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_kitchen._SY304_CB408652357_.jpg" alt="Hogar y Cocina">
                 <h3>Descubre selección de Hogar y Cocina</h3>
             </div>
-            <div class="categoria" onclick="location.href='pages/mascotas.html'">
+            <div class="categoria" data-id="6">
                 <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_pets._SY304_CB408652357_.jpg" alt="Mascotas">
                 <h3>Descubre selección para Mascotas</h3>
             </div>
-            <div class="categoria" onclick="location.href='pages/juguetes.html'">
+            <div class="categoria" data-id="7">
                 <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_Toys._SY304_CB408652357_.jpg" alt="Juguetes">
                 <h3>Descubre selección de Juguetes</h3>
             </div>
-            <div class="categoria" onclick="location.href='pages/bebidas.html'">
+            <div class="categoria" data-id="8">
                 <img src="https://images-na.ssl-images-amazon.com/images/G/33/img20/GW/StaticFallback/379X304_grocery._SY304_CB408652357_.jpg" alt="Bebidas">
                 <h3>Descubre selección de Bebidas</h3>
             </div>
-        </section>
+        </section>        
     </main>
     <footer class="footer">
         <p>© 2024 Tienda Online. Todos los derechos reservados.</p>
