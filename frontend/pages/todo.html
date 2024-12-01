@@ -10,7 +10,7 @@
     <header class="header">
         <a href="../index.html" class="logo">Tienda online</a>
         <div class="search-bar">
-            <input type="text" id ="BarraBusqueda" placeholder="Buscar productos...">
+            <input type="text" id="BarraBusqueda" placeholder="Buscar productos...">
             <button id="btnBuscar">Buscar</button>
         </div>
         <nav class="nav-links">
@@ -56,7 +56,21 @@
     <footer class="footer">
         <p>© 2024 Tienda Online. Todos los derechos reservados.</p>
     </footer>
+
+    <!--script que maneja la lógica de la página -->
     <script src="../todosproductos.js"></script>
+
+    <!-- Script para manejar el evento de búsqueda -->
+    <script>
+        document.getElementById('btnBuscar').addEventListener('click', function() {
+            const busqueda = document.getElementById('BarraBusqueda').value.trim();
+            if (busqueda) {
+                // Redirigir a todos.html con el término de búsqueda en la URL
+                window.location.href = `todos.html?busqueda=${encodeURIComponent(busqueda)}`;
+            }
+        });
+    </script>
 </body>
 </html>
+
 
