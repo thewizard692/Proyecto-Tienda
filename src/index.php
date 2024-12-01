@@ -71,7 +71,7 @@ $router->post('/usuario/carrito/agregar', function() use ($UsuarioController) {
     return json_encode($UsuarioController->agregarAlCarrito());
 });
 
-$router->delete('/usuario/garrito/quitar', function() use ($UsuarioController) {
+$router->delete('/usuario/carrito/quitar', function() use ($UsuarioController) {
     return json_encode($UsuarioController->quitarDelCarrito());
 });
 
