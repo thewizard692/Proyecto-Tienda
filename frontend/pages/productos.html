@@ -16,77 +16,65 @@
     </header>
 
     <div class="container mt-5">
-     
       <div id="alertContainer" class="my-3"></div>
-
-      <div class="row">
-        <div class="col-5">
-          <div class="card mb-4">
-            <div class="card-header">
-              Agregar/Modificar Producto para venta 
-            </div>
+      <div class="row d-flex">
+        <div class="col-lg-5 col-md-12 mb-4">
+          <div class="card">
+            <div class="card-header">Agregar/Modificar Producto para venta</div>
             <div class="card-body">
               <form id="productForm">
                 <input type="hidden" id="idproducto">
                 <div class="mb-3">
-                  <label for="nombre" class="form-label">
-                    Nombre del Producto
-                  </label>
+                  <label for="nombre" class="form-label">Nombre del Producto</label>
                   <input type="text" class="form-control" id="prd_nombre" required>
                 </div>
                 <div class="mb-3">
-                  <label for="descripcion" class="form-label">
-                    Descripcion del Producto
-                  </label>
+                  <label for="descripcion" class="form-label">Descripción del Producto</label>
                   <textarea type="text" class="form-control" id="prd_descrip" rows="5" required></textarea>
                 </div>
                 <div class="mb-3">
-                  <label for="precio" class="form-label">
-                    Precio del Producto
-                  </label>
-                <div class="mb-3">
+                  <label for="precio" class="form-label">Precio del Producto</label>
                   <input type="number" class="form-control" id="prd_precio" required>
                 </div>
-                  <label for="marca" class="form-label">
-                    Marca del Producto
-                  </label>
+                <div class="mb-3">
+                  <label for="marca" class="form-label">Marca del Producto</label>
                   <input type="text" class="form-control" id="prd_marca" required>
                 </div>
                 <div class="mb-3">
-                  <label for="imagen" class="form-label">
-                    Imagen del Producto (agrega un URL)
-                  </label>
+                  <label for="imagen" class="form-label">Imagen del Producto (agrega un URL)</label>
                   <input type="text" class="form-control" id="prd_imagen" required>
                 </div>
                 <div class="mb-3">
-                  <label for="estado" class="form-label">
-                    Estado del Producto
-                  </label>
+                  <label for="estado" class="form-label">Estado del Producto</label>
                   <input type="text" class="form-control" id="prd_estado" required>
                 </div>
-                <button type="submit" id="submitBtn" class="btn btnColor">
-                  Agregar Producto 
-                </button>
+                <div class="mb-3">
+                  <label for="categoria" class="form-label">Categoría del Producto</label>
+                  <select id="prd_categoria" class="form-control" required>
+                    <option value="">-- Selecciona una categoría --</option>
+                  </select>
+                </div>
+                <button type="submit" id="submitBtn" class="btn btnColor">Agregar Producto</button>
               </form>
             </div>
           </div>
         </div>
-        <div class="col-7">
+        <div class="col-lg-7 col-md-12">
           <div class="card">
-            <div class="card-header">
-              Lista de tus productos para venta
-            </div>
+            <div class="card-header">Lista de tus productos para venta</div>
             <div class="card-body">
               <table class="table table-striped">
                 <thead class="table-success">
                   <tr>
                     <th>Id</th>
                     <th>Nombre</th>
-                    <th>Descripcion</th>
+                    <th>Descripción</th>
                     <th>Precio</th>
                     <th>Marca</th>
+                    <th>Categoría</th>
                     <th>Imagen</th>
                     <th>Estado</th>
+                    <th>Acciones</th>
                   </tr>
                 </thead>
                 <tbody id="productTableBody"></tbody>
@@ -96,7 +84,7 @@
         </div>
       </div>
     </div>
-
+    
     <footer class="footer">
       <p>© 2024 Tienda Online. Todos los derechos reservados.</p>
     </footer>

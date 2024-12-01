@@ -15,6 +15,7 @@
       $producto->prd_descrip = $data['prd_descrip'];
       $producto->prd_precio = $data['prd_precio'];
       $producto->prd_marca = $data['prd_marca'];
+      $producto->prd_categoria = $data['prd_categoria'];
       $producto->prd_imagen = $data['prd_imagen'];
       $producto->prd_estado = $data['prd_estado'];
       return $this->vendedorRepository->crearProducto($producto);
@@ -27,6 +28,7 @@
       $producto->prd_descrip = $data['prd_descrip'];
       $producto->prd_precio = $data['prd_precio'];
       $producto->prd_marca = $data['prd_marca'];
+      $producto->prd_categoria = $data['prd_categoria'];
       $producto->prd_imagen = $data['prd_imagen'];
       $producto->prd_estado = $data['prd_estado'];
       return $this->vendedorRepository->actualizarProducto($producto);
@@ -44,9 +46,12 @@
       return $this->vendedorRepository->obtenerProductosPorBusqueda($busqueda);
     }
 
-    public function obtenerProductoPorId($id) {
-      //se tiene que poner $id['id'] para que mande el valor del atributo y no el arreglo completo del id
-      return $this->vendedorRepository->obtenerProductoPorId($id['id']);
+    public function obtenerProductoPorId($idproducto) {
+      return $this->vendedorRepository->obtenerProductoPorId($idproducto['id']);
+    }
+
+    public function obtenerCategorias() {
+      return $this->vendedorRepository->obtenerCategorias();
     }
   }
 ?>

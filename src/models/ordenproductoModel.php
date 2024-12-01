@@ -4,5 +4,4 @@
         public $ordenproducto_cantidad;
     }
 
-
 ?>

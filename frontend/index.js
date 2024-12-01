@@ -3,15 +3,6 @@ const alertContainer = document.getElementById('alertContainer')
 
 //Carrito
 document.addEventListener('DOMContentLoaded', () => {
-    const botonesAgregar = document.querySelectorAll('.btn-agregar');
-    //loadProductos()
-
-    botonesAgregar.forEach(boton => {
-        boton.addEventListener('click', () => {
-            alert('Producto agregado al carrito');
-            agregarAlCarrito();
-        });
-    });
 
     const isLoggedIn = sessionStorage.getItem('loggedIn'); 
     const loginMenu = document.getElementById('loginMenu');
@@ -53,74 +44,21 @@ function toggleMenu() {
     menu.classList.toggle('open');
 }
 
-//************FUNCIONES PARA LA BARRA DE BUSQUEDA */
-//BUSQUEDA POR NOMBRE
-const obtenerProductosPorBusqueda = async (busqueda) => {
-    $search = document.getElementById('BarraBusqueda');
-      try {
-        const send = {
-          busqueda: busqueda
-        }
-        const res = await fetch(apiURL +'/usuario/busqueda', {
-          method: 'POST',
-          body: JSON.stringify(send)
-        })
-        const producto = await res.json()
-        if (producto) {
-          document.getElementById('idproducto').value = producto.idproducto
-          document.getElementById('prd_nombre').value = producto.prd_nombre
-          document.getElementById('prd_descrip').value = producto.prd_descrip
-          document.getElementById('prd_precio').value = producto.prd_precio
-          document.getElementById('prd_marca').value = producto.prd_marca
-          document.getElementById('prd_imagen').value = producto.prd_imagen
-          document.getElementById('prd_estado').value = producto.prd_estado
-        }
-        console.log('@@ producto =>', producto)
-        } 
-      catch (error) {
-        console.error('Error: ', error)
-      }
-}
+document.querySelector('.categorias-destacadas').addEventListener('click', (event) => {
+  const categoria = event.target.closest('.categoria');
+  if (categoria) {
+      const categoriaId = categoria.getAttribute('data-id');
+      location.href = `./pages/todo.html?categoriaId=${categoriaId}`;
+  }
+});
 
+document.getElementById('btnBuscar').addEventListener('click', (event) => {
+  const busqueda = document.getElementById('BarraBusqueda').value;
+  if (busqueda) {
+      location.href = `./pages/todo.html?busqueda=${busqueda}`;
+  }
+});
 
-const agregarAlCarrito = async () => {
-    const idproducto = document.getElementById('idproducto').value
-    
-    const producto = {
-        usuario: document.getElementById('nombre').value || 'N/A',
-        producto: document.getElementById('descripcion').value || 'Descripción no disponible'
-    }
-
-    if (idproducto) {
-        producto.idproducto = idproducto
-    }
-
-    const url = `${apiURL}/usuario`
-    const method = idproducto ? 'PUT' : 'POST'
-
-    console.log('ruta y metodo => ', url, method, producto)
-    const resultado = await fetch(url, {
-        method: method,
-        body: JSON.stringify(producto)
-    })
-
-    const response = await resultado.json()
-    if (response.mensaje === 'Producto Creado') {
-        showAlert('Producto Agregado', 'success')
-        loadProductos()
-        productForm.reset()
-    } else if (response.mensaje === 'Producto Actualizado') {
-        showAlert('Producto Actualizado', 'success')
-        loadProductos()
-        productForm.reset()
-    } else {
-        showAlert('Error al agregar el producto', 'danger')
-    }
-    document.getElementById('idproducto').value = ''
-
-    console.log('@@@ response => ', response)
-}
-  
   const showAlert = (mensaje, tipo) => {
     alertContainer.innerHTML = 
     `
