@@ -122,5 +122,53 @@ class usuarioRepository implements IUsuario
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
     
+    public function crearOrden($usuarioId, $vendedorId)
+    {
+    try {
+   
+        $this->conn->beginTransaction();
+
+        $sqlOrden = "INSERT INTO ordenes (ord_vendedor, ord_cliente, ord_fecha_pedido, ord_fecha_entrega)
+                     VALUES (:vendedorid, :clienteid, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY))";
+        $stmtOrden = $this->conn->prepare($sqlOrden);
+        $stmtOrden->bindParam(':vendedorid', $vendedorId);
+        $stmtOrden->bindParam(':clienteid', $usuarioId);
+        $stmtOrden->execute();
+
+        $ordenId = $this->conn->lastInsertId();
+
+        $sqlCarrito = "SELECT c.productoid, c.cantidad, p.prd_precio
+                       FROM carrito c
+                       JOIN productos p ON c.productoid = p.idproducto
+                       WHERE c.usuarioid = :usuarioid";
+        $stmtCarrito = $this->conn->prepare($sqlCarrito);
+        $stmtCarrito->bindParam(':usuarioid', $usuarioId);
+        $stmtCarrito->execute();
+
+        while ($producto = $stmtCarrito->fetch(PDO::FETCH_ASSOC)) {
+            $sqlOrdenProducto = "INSERT INTO orden_productos (orpd_fk_orden_id, orpd_idproducto, orpd_cantidad)
+                                 VALUES (:ordenid, :productoid, :cantidad)";
+            $stmtOrdenProducto = $this->conn->prepare($sqlOrdenProducto);
+            $stmtOrdenProducto->bindParam(':ordenid', $ordenId);
+            $stmtOrdenProducto->bindParam(':productoid', $producto['productoid']);
+            $stmtOrdenProducto->bindParam(':cantidad', $producto['cantidad']);
+            $stmtOrdenProducto->execute();
+        }
+
+        $sqlEliminarCarrito = "DELETE FROM carrito WHERE usuarioid = :usuarioid";
+        $stmtEliminarCarrito = $this->conn->prepare($sqlEliminarCarrito);
+        $stmtEliminarCarrito->bindParam(':usuarioid', $usuarioId);
+        $stmtEliminarCarrito->execute();
+
+        $this->conn->commit();
+
+        return ['status' => 'success', 'message' => 'Orden creada correctamente.'];
+
+    } catch (Exception $e) {
+        $this->conn->rollBack();
+        return ['status' => 'error', 'message' => 'Error al crear la orden: ' . $e->getMessage()];
+    }
+}
+
 }
 ?>

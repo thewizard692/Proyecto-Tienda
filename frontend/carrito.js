@@ -92,6 +92,5 @@ if (window.location.pathname.includes("carrito.html")) {
     mostrarCarrito();
 }
 
-
 // Inicializa el total al cargar la página
 actualizarTotal();

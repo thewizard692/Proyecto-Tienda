@@ -29,5 +29,13 @@
       return $this->usuarioRepository->quitarDelCarrito($idproducto, $usuarioId);
     }
 
+    public function obtenerCarritoPorUsuario($usuarioId){
+      return $this->usuarioRepository->obtenerCarritoPorUsuario($usuarioId);
+    }
+
+    public function crearOrden($usuarioId, $vendedorId){
+      return $this->usuarioRepository->crearOrden($usuarioId, $vendedorId);
+    }
+
   }
 ?>
