@@ -41,9 +41,13 @@ $router->get('/usuario/vendedor', function() use ($VendedorController) {
     return json_encode($VendedorController->obtenerProductos());
 });
 
-$router->post('/usuario/vendedor/detalle', function() use ($VendedorController) {
-    $id = json_decode(file_get_contents("php://input"), true);
-    return json_encode($VendedorController->obtenerProductoPorId($id));
+$router->get('/usuario/vendedor/categoria', function() use ($VendedorController) {
+    return json_encode($VendedorController->obtenerCategorias());
+});
+
+$router->POST('/usuario/vendedor/producto', function() use ($VendedorController) {
+    $idproducto = json_decode(file_get_contents("php://input"), true);
+    return json_encode($VendedorController->obtenerProductoPorId($idproducto));
 });
 
 
@@ -52,19 +56,22 @@ $router->get('/usuario/productos', function() use ($UsuarioController) {
     return json_encode($UsuarioController->obtenerProductos());
 });
 
-/*$router->get('/usuario/busqueda', function() use ($UsuarioController) {
+$router->post('/usuario/productos/busqueda', function() use ($UsuarioController) {
+    $busqueda = json_decode(file_get_contents("php://input"), true);
     return json_encode($UsuarioController->obtenerProductosPorBusqueda($busqueda));
-}); */
+}); 
 
-$router->get('/usuario/busqueda', function() use ($UsuarioController) {
-    return json_encode($UsuarioController->obtenerProductosPorCategoria());
+$router->POST('/usuario/productos/categoria', function() use ($UsuarioController) {
+    $id = json_decode(file_get_contents("php://input"), true);
+    return json_encode($UsuarioController->obtenerProductosPorCategoria($id));
 });
 
-$router->post('/usuario', function() use ($UsuarioController) {
+//CARRITO
+$router->post('/usuario/carrito/agregar', function() use ($UsuarioController) {
     return json_encode($UsuarioController->agregarAlCarrito());
 });
 
-$router->delete('/usuario', function() use ($UsuarioController) {
+$router->delete('/usuario/carrito/quitar', function() use ($UsuarioController) {
     return json_encode($UsuarioController->quitarDelCarrito());
 });
 
@@ -72,7 +79,7 @@ $router->get('/usuario/carrito', function() use ($UsuarioController) {
     return json_encode($UsuarioController->obtenerCarritoPorUsuario());
 });
 
-$router->post('/usuario/orden', function() use ($UsuarioController) {
+$router->post('/usuario/carrito/orden', function() use ($UsuarioController) {
     return json_encode($UsuarioController->crearOrden());
 });
 

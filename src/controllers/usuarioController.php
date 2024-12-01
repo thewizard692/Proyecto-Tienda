@@ -14,7 +14,7 @@
     }
 
     public function obtenerProductosPorBusqueda($busqueda) {
-      return $this->usuarioRepository->obtenerProductosPorBusqueda($busqueda);
+      return $this->usuarioRepository->obtenerProductosPorBusqueda($busqueda['busqueda']);
     }
 
     public function obtenerProductosPorCategoria($id) {
