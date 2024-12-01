@@ -1,96 +1,80 @@
-// Selecciona todos los botones "Eliminar"
-const eliminarBtns = document.querySelectorAll(".cart-item button");
-const cartSummary = document.querySelector(".cart-summary h3");
+// Simula una llamada a la base de datos para obtener los productos del carrito
+const obtenerProductos = async () => {
+    try {
+        // Simula una API o base de datos con fetch
+        const response = await fetch('https://localhost:8889/Proyecto-tienda/src/index.php'); // Reemplaza esta URL con tu API real
+        if (!response.ok) throw new Error('Error al obtener los productos');
+        const productos = await response.json();
+        return productos;
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
+};
 
-// Función para calcular el total
-function actualizarTotal() {
+// Renderiza los productos en la tabla del carrito
+const renderizarCarrito = (productos) => {
+    const tablaCarrito = document.getElementById('tabla-carrito').getElementsByTagName('tbody')[0];
+    const totalContainer = document.getElementById('total');
     let total = 0;
-    const precios = document.querySelectorAll(".cart-item p");
-    precios.forEach(precio => {
-        const valor = parseFloat(precio.textContent.replace("Precio: $", ""));
-        total += valor;
+
+    // Limpiar la tabla antes de cargar los productos
+    tablaCarrito.innerHTML = '';
+
+    // Agregar productos a la tabla
+    productos.forEach((producto, index) => {
+        const row = tablaCarrito.insertRow();
+        row.insertCell(0).textContent = producto.name;
+        row.insertCell(1).textContent = `$${producto.price.toFixed(2)}`;
+        row.insertCell(2).textContent = producto.quantity;
+        row.insertCell(3).textContent = `$${(producto.price * producto.quantity).toFixed(2)}`;
+
+        // Botón de eliminar
+        const eliminarCell = row.insertCell(4);
+        const eliminarBtn = document.createElement('button');
+        eliminarBtn.textContent = 'Eliminar';
+        eliminarBtn.style.backgroundColor = 'red';
+        eliminarBtn.style.color = 'white';
+        eliminarBtn.addEventListener('click', () => eliminarProducto(index, productos));
+        eliminarCell.appendChild(eliminarBtn);
+
+        // Sumar al total
+        total += producto.price * producto.quantity;
     });
-    cartSummary.textContent = `Total: $${total.toFixed(2)}`;
-}
 
-// Evento para eliminar productos
-eliminarBtns.forEach(btn => {
-    btn.addEventListener("click", function () {
-        const cartItem = this.closest(".cart-item");
-        cartItem.remove(); // Elimina el producto del DOM
-        actualizarTotal(); // Actualiza el total
-    });
-});
+    // Mostrar el total
+    totalContainer.textContent = `Total: $${total.toFixed(2)}`;
+};
 
-// Obtiene el carrito del localStorage o inicializa uno vacío
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+// Elimina un producto del carrito
+const eliminarProducto = (index, productos) => {
+    productos.splice(index, 1); // Elimina el producto del array
+    renderizarCarrito(productos); // Vuelve a renderizar el carrito
+};
 
-// Función para agregar un producto al carrito
-function agregarAlCarrito(id, name, price) {
-    // Verifica si el producto ya está en el carrito
-    const productoExistente = carrito.find(item => item.id === id);
-    if (productoExistente) {
-        productoExistente.cantidad += 1;
+// Acción del botón de "Pagar Pedido"
+const pagarPedido = () => {
+    const totalText = document.getElementById('total').textContent;
+    const total = parseFloat(totalText.replace('Total: $', ''));
+    if (total > 0) {
+        alert('¡Gracias por tu compra! Total pagado: ' + totalText);
+        // Simula vaciar el carrito tras el pago
+        renderizarCarrito([]);
     } else {
-        carrito.push({ id, name, price, cantidad: 1 });
+        alert('No hay productos en el carrito para pagar.');
     }
+};
 
-    // Actualiza el localStorage
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-    alert(`${name} ha sido agregado al carrito`);
-}
+// Cargar productos y configurar eventos
+const cargarCarrito = async () => {
+    const productos = await obtenerProductos();
+    renderizarCarrito(productos);
 
-// Escucha los clics en los botones "Agregar al carrito"
-document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("add-to-cart")) {
-        const id = parseInt(e.target.dataset.id);
-        const name = e.target.dataset.name;
-        const price = parseFloat(e.target.dataset.price);
-        agregarAlCarrito(id, name, price);
-    }
-});
+    // Configura el botón de pagar
+    const pagarBtn = document.querySelector('.pay-button');
+    pagarBtn.addEventListener('click', pagarPedido);
+};
 
-// Función para mostrar productos en la página del carrito
-function mostrarCarrito() {
-    const container = document.querySelector(".container");
-    container.innerHTML = "<h2>Productos en tu carrito</h2>";
+// Inicializar el carrito al cargar la página
+document.addEventListener('DOMContentLoaded', cargarCarrito);
 
-    if (carrito.length === 0) {
-        container.innerHTML += "<p>Tu carrito está vacío</p>";
-        return;
-    }
-
-    carrito.forEach(producto => {
-        const item = document.createElement("div");
-        item.classList.add("cart-item");
-        item.innerHTML = `
-            <h3>${producto.name}</h3>
-            <p>Precio: $${producto.price.toFixed(2)}</p>
-            <p>Cantidad: ${producto.cantidad}</p>
-            <button class="eliminar" data-id="${producto.id}">Eliminar</button>
-        `;
-        container.appendChild(item);
-    });
-
-    // Mostrar total
-    const total = carrito.reduce((sum, producto) => sum + producto.price * producto.cantidad, 0);
-    container.innerHTML += `<h3>Total: $${total.toFixed(2)}</h3>`;
-}
-
-// Elimina productos del carrito
-document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("eliminar")) {
-        const id = parseInt(e.target.dataset.id);
-        carrito = carrito.filter(item => item.id !== id);
-        localStorage.setItem("carrito", JSON.stringify(carrito));
-        mostrarCarrito();
-    }
-});
-
-// Llama a mostrarCarrito cuando la página del carrito se carga
-if (window.location.pathname.includes("carrito.html")) {
-    mostrarCarrito();
-}
-
-// Inicializa el total al cargar la página
-actualizarTotal();
