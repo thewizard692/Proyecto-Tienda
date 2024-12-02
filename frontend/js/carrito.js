@@ -3,7 +3,6 @@ const tablaCarrito = document.getElementById('tabla-carrito').getElementsByTagNa
 const totalContainer = document.getElementById('total');
 const payButton = document.getElementById('pay-button');
 
-// Función para cargar los productos del carrito
 const cargarCarrito = async () => {
     try {
         const url = `${apiURL}/usuario/carrito`;
@@ -14,7 +13,7 @@ const cargarCarrito = async () => {
         }
 
         const productos = await respuesta.json();
-        tablaCarrito.innerHTML = ''; // Limpiar la tabla antes de agregar productos
+        tablaCarrito.innerHTML = '';
         let total = 0;
 
         productos.forEach((producto) => {
@@ -25,7 +24,6 @@ const cargarCarrito = async () => {
             row.insertCell(2).textContent = producto.cantidad;
             row.insertCell(3).textContent = `$${(producto.precio * producto.cantidad).toFixed(2)}`;
 
-            // Botón para eliminar producto
             const eliminarCell = row.insertCell(4);
             const eliminarBtn = document.createElement('button');
             eliminarBtn.textContent = 'Eliminar';
@@ -34,7 +32,7 @@ const cargarCarrito = async () => {
             eliminarBtn.addEventListener('click', () => eliminarProducto(producto.id));
             eliminarCell.appendChild(eliminarBtn);
 
-            total += producto.precio * producto.cantidad; // Calcular el total
+            total += producto.precio * producto.cantidad;
         });
 
         totalContainer.textContent = `Total: $${total.toFixed(2)}`;
@@ -44,7 +42,6 @@ const cargarCarrito = async () => {
     }
 };
 
-// Función para agregar un producto al carrito (opcional si es requerido)
 const agregarProducto = async (producto) => {
     try {
         const url = `${apiURL}/usuario/carrito/agregar`;
@@ -67,7 +64,6 @@ const agregarProducto = async (producto) => {
     }
 };
 
-// Función para eliminar un producto del carrito
 const eliminarProducto = async (productoId) => {
     try {
         const url = `${apiURL}/usuario/carrito/quitar`;
@@ -90,7 +86,6 @@ const eliminarProducto = async (productoId) => {
     }
 };
 
-// Función para procesar el pago
 const pagarPedido = async () => {
     try {
         const url = `${apiURL}/usuario/carrito/orden`;
@@ -99,7 +94,7 @@ const pagarPedido = async () => {
         const resultado = await respuesta.json();
         if (resultado.status === 'success') {
             alert('Productos pagados correctamente.');
-            cargarCarrito(); // Limpiar el carrito después del pago
+            cargarCarrito(); 
         } else {
             alert(`Error: ${resultado.message}`);
         }
@@ -109,9 +104,7 @@ const pagarPedido = async () => {
     }
 };
 
-// Agregar evento al botón de pagar pedido
 payButton.addEventListener('click', pagarPedido);
 
-// Cargar el carrito al iniciar
 cargarCarrito();
 

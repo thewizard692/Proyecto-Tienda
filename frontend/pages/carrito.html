@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Carrito</title>
-    <link rel="stylesheet" href="../carrito.css">
+    <link rel="stylesheet" href="../styles/carrito.css">
     <link rel="stylesheet" href="../index.css">
-    <!-- Importar Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
@@ -26,7 +25,6 @@
     </header>
     <div class="container">
         <h2>Productos en tu carrito</h2>
-        <!-- Tabla para los productos -->
         <table id="tabla-carrito" border="1">
             <thead>
                 <tr>
@@ -38,12 +36,11 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Los productos se agregarán dinámicamente -->
             </tbody>
         </table>
         <h3 id="total">Total: $0.00</h3>
         <button id="pay-button">Pagar Pedido</button>
-        <!-- Modal de pago -->
+
 <div id="payment-modal" class="modal">
     <div class="modal-content">
         <span class="close-btn">&times;</span>
@@ -62,8 +59,8 @@
             </div>
         </div>
     </div>
-    <script src="../carrito.js"></script>
-    <script src="../Nieve.js"></script>
+    <script src="../pages/carrito.js"></script>
+    <script src="../pages/nieve.js"></script>
 </body>
 </html>
 
