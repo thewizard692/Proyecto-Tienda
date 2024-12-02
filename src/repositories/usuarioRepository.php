@@ -39,7 +39,7 @@ class usuarioRepository implements IUsuario
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function agregarAlCarrito($usuarioId, $productoid, $cantidad = 1)
+     public function agregarAlCarrito($usuarioId, $productoid, $cantidad = 1)
     {
         try {
 
@@ -70,8 +70,9 @@ class usuarioRepository implements IUsuario
         } catch (Exception $e) {
             return ['status' => 'error', 'message' => 'Error al agregar producto al carrito: ' . $e->getMessage()];
         }
-    }
-    
+    } 
+
+
 
     public function quitarDelCarrito($usuarioId, $productoid, $cantidad = 1)
     {

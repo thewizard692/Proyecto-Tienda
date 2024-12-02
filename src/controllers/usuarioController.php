@@ -21,10 +21,14 @@
       return $this->usuarioRepository->obtenerProductosPorCategoria($id['id']);
     }
 
-    public function agregarAlCarrito($idproducto, $usuarioId){
-      return $this->usuarioRepository->agregarAlCarrito($idproducto, $usuarioId);
+    //Nueva funcion de carrito para cale nomas
+    //no toma la clase carrito
+    public function agregarAlCarrito($usuarioId, $idproducto, $cantidad = 1){
+           $carrito = new Carrito();
+           $carrito->car_fk_usuario = $usuarioId['car_fk_usuario'];
+           $carrito->car_fk_producto = $idproducto['car_fk_usuario'];
+           return this->usuarioRepository->agregarAlCarrito($carrito);
     }
-
     public function quitarDelCarrito($idproducto, $usuarioId){
       return $this->usuarioRepository->quitarDelCarrito($idproducto, $usuarioId);
     }

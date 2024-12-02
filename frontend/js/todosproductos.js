@@ -152,26 +152,22 @@ const agregarProducto = async (producto) => {
 
 //Para el carrito y contrl en todo.html
 const agregaralCarrito = async (usuarioId, productoid) => {
-    try {
+    {
+        const send = {
+            usuarioId: usuarioId,
+            productoid: productoid
+        }
         const res = await fetch(apiURL + '/usuario/carrito/agregar', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            method: 'POST',
+            body: JSON.stringify(send)
         })
         const carrito = await res.json()
-        productTableBody.innerHTML = ''
-        carrito.forEach((item) => {
-            const row = document.createElement('tr')
-            row.innerHTML =
-                `
-          <td>${item.usuarioid}</td>
-          <td>${item.productoid}</td>
-                `
-            productTableBody.appendChild(row)
-        })
-    } catch (error) {
-        console.error('Error:', error);
+        if (carrito) {
+            document.getElementById('usuarioid').value = carrito.car_fk_usuario
+            document.getElementById('productoid').value = carrito.car_fk_producto
+          
+        }
+        console.log('@@ carrito =>', carrito)
     }
 };
 // listener del botonsillo para agregar al carrito
