@@ -260,7 +260,7 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `carrito`
   ADD CONSTRAINT `carrito_ibfk_1` FOREIGN KEY (`car_fk_producto`) REFERENCES `productos` (`idproducto`),
-  ADD CONSTRAINT `carrito_ibfk_2` FOREIGN KEY (`car_fk_usuario`) REFERENCES `usuarios` (`usuarioId`);
+  ADD CONSTRAINT `carrito_ibfk_2` FOREIGN KEY (`car_fk_usuario`) REFERENCES `usuarios` (`usuarioid`);
 
 --
 -- Filtros para la tabla `inventario`
