@@ -68,7 +68,11 @@ $router->POST('/usuario/productos/categoria', function() use ($UsuarioController
 
 //CARRITO
 $router->post('/usuario/carrito/agregar', function() use ($UsuarioController) {
-    return json_encode($UsuarioController->agregarAlCarrito());
+    $idproducto = json_decode(file_get_contents("php://input"), true);
+    $usuarioId = json_decode(file_get_contents("php://input"), true);
+    //$cantidad = json_decode(file_get_contents("php://input"), true);
+    return json_encode($UsuarioController->agregarAlCarrito($idproducto,$usuarioId ));
+    //no puse el argumento de cantidad, me dice que son demasiados argumentos, solo acepta dos, sera porque cantidad es fijo?
 });
 
 $router->delete('/usuario/carrito/quitar', function() use ($UsuarioController) {

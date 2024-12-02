@@ -127,4 +127,55 @@ const obtenerProductos = async () => {
         console.error('Error al obtener los productos:', error);
     }
 };
+/*
+const agregarProducto = async (producto) => {
+    try {
+        const url = `${apiURL}/usuario/carrito/agregar`;
+        const respuesta = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(producto),
+        });
 
+        const resultado = await respuesta.json();
+        if (resultado.status === 'success') {
+            alert('Producto agregado al carrito.');
+            cargarCarrito();
+        } else {
+            alert(`Error: ${resultado.message}`);
+        }
+    } catch (error) {
+        console.error('Error al agregar producto:', error);
+        alert('Ocurrió un error al agregar el producto.');
+    }
+}; */
+
+//Para el carrito y contrl en todo.html
+const agregaralCarrito = async (usuarioId, productoid) => {
+    try {
+        const res = await fetch(apiURL + '/usuario/carrito/agregar', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        const carrito = await res.json()
+        productTableBody.innerHTML = ''
+        carrito.forEach((item) => {
+            const row = document.createElement('tr')
+            row.innerHTML =
+                `
+          <td>${item.usuarioid}</td>
+          <td>${item.productoid}</td>
+                `
+            productTableBody.appendChild(row)
+        })
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};
+// listener del botonsillo para agregar al carrito
+btnSubmitCarr.addEventListener('click', (event) => {
+    event.preventDefault()
+    agregaralCarrito()
+  })
