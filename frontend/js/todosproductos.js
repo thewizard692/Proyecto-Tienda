@@ -38,6 +38,7 @@ const obtenerProductosPorCategoria = async (categoriaId) => {
         resultado.forEach((item) => {
             const clone = templateCard.cloneNode(true);
             clone.querySelector('h5').textContent = item.prd_nombre;
+            clone.getElementById("idproducto").value = `${item.idproducto}`;
             clone.querySelector('p:nth-child(2)').textContent = `Descripción: ${item.prd_descrip}`;
             clone.querySelector('p:nth-child(3)').textContent = `Precio: $${item.prd_precio}`;
             clone.querySelector('p:nth-child(4)').textContent = `Marca: ${item.prd_marca}`;
@@ -75,6 +76,7 @@ const obtenerProductosPorBusqueda = async (busqueda) => {
             resultado.forEach((item) => {
                 const clone = templateCard.cloneNode(true);
                 clone.querySelector('h5').textContent = item.prd_nombre;
+                clone.getElementById("idproducto").value = `${item.idproducto}`;
                 clone.querySelector('p:nth-child(2)').textContent = `Descripción: ${item.prd_descrip}`;
                 clone.querySelector('p:nth-child(3)').textContent = `Precio: $${item.prd_precio}`;
                 clone.querySelector('p:nth-child(4)').textContent = `Marca: ${item.prd_marca}`;
@@ -114,6 +116,7 @@ const obtenerProductos = async () => {
         resultado.forEach((item) => {
             const clone = templateCard.cloneNode(true);
             clone.querySelector('h5').textContent = item.prd_nombre;
+            clone.getElementById("idproducto").value = `${item.idproducto}`;
             clone.querySelector('p:nth-child(2)').textContent = `Descripción: ${item.prd_descrip}`;
             clone.querySelector('p:nth-child(3)').textContent = `Precio: $${item.prd_precio}`;
             clone.querySelector('p:nth-child(4)').textContent = `Marca: ${item.prd_marca}`;
@@ -127,51 +130,20 @@ const obtenerProductos = async () => {
         console.error('Error al obtener los productos:', error);
     }
 };
-/*
-const agregarProducto = async (producto) => {
-    try {
-        const url = `${apiURL}/usuario/carrito/agregar`;
-        const respuesta = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(producto),
-        });
 
-        const resultado = await respuesta.json();
-        if (resultado.status === 'success') {
-            alert('Producto agregado al carrito.');
-            cargarCarrito();
-        } else {
-            alert(`Error: ${resultado.message}`);
-        }
-    } catch (error) {
-        console.error('Error al agregar producto:', error);
-        alert('Ocurrió un error al agregar el producto.');
-    }
-}; */
-
-//Para el carrito y contrl en todo.html
-const agregaralCarrito = async (usuarioId, productoid) => {
+const agregaralCarrito = async () => {
     {
+        const usuarioid = sessionStorage.getItem('usuarioid');
+        const idproducto = document.getElementById('idproducto').value
         const send = {
-            usuarioId: usuarioId,
-            productoid: productoid
+            usuarioid: usuarioid,
+            idproducto: idproducto
         }
         const res = await fetch(apiURL + '/usuario/carrito/agregar', {
-            method: 'POST',
+            method: 'PUT',
             body: JSON.stringify(send)
         })
         const carrito = await res.json()
-        if (carrito) {
-            document.getElementById('usuarioid').value = carrito.car_fk_usuario
-            document.getElementById('productoid').value = carrito.car_fk_producto
-          
-        }
         console.log('@@ carrito =>', carrito)
     }
 };
-// listener del botonsillo para agregar al carrito
-btnSubmitCarr.addEventListener('click', (event) => {
-    event.preventDefault()
-    agregaralCarrito()
-  })

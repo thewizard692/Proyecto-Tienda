@@ -1,6 +1,7 @@
 <?php
   require_once BASE_PATH . '/repositories/usuarioRepository.php';
   require_once BASE_PATH . '/models/productoModel.php';
+  require_once BASE_PATH . '/models/carritoModel.php';
 
   class UsuarioController {
     private $usuarioRepository;
@@ -21,24 +22,23 @@
       return $this->usuarioRepository->obtenerProductosPorCategoria($id['id']);
     }
 
-    //Nueva funcion de carrito para cale nomas
-    //no toma la clase carrito
-    public function agregarAlCarrito($usuarioId, $idproducto, $cantidad = 1){
-           $carrito = new Carrito();
-           $carrito->car_fk_usuario = $usuarioId['car_fk_usuario'];
-           $carrito->car_fk_producto = $idproducto['car_fk_usuario'];
-           return this->usuarioRepository->agregarAlCarrito($carrito);
+    public function agregarAlCarrito($carrito){
+           $carritos = new Carrito();
+           $carritos->car_fk_usuario = $carrito['usuarioid'];
+           $carritos->car_fk_producto = $carrito['idproducto'];
+           return $this->usuarioRepository->agregarAlCarrito($carritos);
     }
-    public function quitarDelCarrito($idproducto, $usuarioId){
-      return $this->usuarioRepository->quitarDelCarrito($idproducto, $usuarioId);
-    }
-
-    public function obtenerCarritoPorUsuario($usuarioId){
-      return $this->usuarioRepository->obtenerCarritoPorUsuario($usuarioId);
+    
+    public function quitarDelCarrito($idproducto, $usuarioid){
+      return $this->usuarioRepository->quitarDelCarrito($idproducto, $usuarioid);
     }
 
-    public function crearOrden($usuarioId, $vendedorId){
-      return $this->usuarioRepository->crearOrden($usuarioId, $vendedorId);
+    public function obtenerCarritoPorUsuario($usuarioid){
+      return $this->usuarioRepository->obtenerCarritoPorUsuario($usuarioid["usuarioid"]);
+    }
+
+    public function crearOrden($usuarioid, $vendedorId){
+      return $this->usuarioRepository->crearOrden($usuarioid, $vendedorId);
     }
 
   }
