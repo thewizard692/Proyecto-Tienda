@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Obtener productos por categoría desde la API
 const obtenerProductosPorCategoria = async (categoriaId) => {
     const url = `${apiURL}/usuario/productos/categoria`;
     const method = 'POST';
@@ -34,7 +33,7 @@ const obtenerProductosPorCategoria = async (categoriaId) => {
 
         const resultado = await respuesta.json();
         const fragment = document.createDocumentFragment();
-        cards.textContent = ''; // Limpiar los productos anteriores
+        cards.textContent = '';
 
         resultado.forEach((item) => {
             const clone = templateCard.cloneNode(true);
@@ -53,7 +52,6 @@ const obtenerProductosPorCategoria = async (categoriaId) => {
     }
 };
 
-// Obtener productos por búsqueda desde la API
 const obtenerProductosPorBusqueda = async (busqueda) => {
     const url = `${apiURL}/usuario/productos/busqueda`;
     const method = 'POST';
@@ -71,7 +69,7 @@ const obtenerProductosPorBusqueda = async (busqueda) => {
 
         const resultado = await respuesta.json();
         const fragment = document.createDocumentFragment();
-        cards.textContent = ''; // Limpiar los productos anteriores
+        cards.textContent = '';
 
         if (resultado && resultado.length > 0) {
             resultado.forEach((item) => {
@@ -97,7 +95,6 @@ const obtenerProductosPorBusqueda = async (busqueda) => {
     }
 };
 
-// Obtener todos los productos desde la API
 const obtenerProductos = async () => {
     const url = `${apiURL}/usuario/productos`;
     const method = 'GET';
@@ -112,7 +109,7 @@ const obtenerProductos = async () => {
 
         const resultado = await respuesta.json();
         const fragment = document.createDocumentFragment();
-        cards.textContent = ''; // Limpiar los productos anteriores
+        cards.textContent = ''; 
 
         resultado.forEach((item) => {
             const clone = templateCard.cloneNode(true);

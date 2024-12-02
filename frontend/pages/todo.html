@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda online</title>
-    <link rel="stylesheet" href="../todos.css">
+    <link rel="stylesheet" href="../styles/todos.css">
     <link rel="stylesheet" href="../index.css">
 </head>
 <body>
@@ -15,7 +15,7 @@
             <button id="btnBuscar">Buscar</button>
         </div>
         <nav class="nav-links">
-            <a class="menu-btn" href="./carrito.html">Carrito</a>
+            <a class="menu-btn" href="../pages/carrito.html">Carrito</a>
             <button class="logged-out logged-in menu-btn" id="cuentaBtn" onclick="toggleMenu()">Mi Cuenta</button>
         </nav>
     </header>
@@ -37,7 +37,7 @@
     </div>
 
     <div class="row" id="card">
-        <!-- Plantilla para los productos -->
+
         <template id="template-card">
             <article class="col-md-6 col-lg-3 mb-3">
                 <div class="card text-center shadow">
@@ -58,16 +58,13 @@
         <p>© 2024 Tienda Online. Todos los derechos reservados.</p>
     </footer>
 
-    <!--script que maneja la lógica de la página -->
-    <script src="../todosproductos.js"></script>
-    <script src="../Nieve.js"></script>
+    <script src="../js/todosproductos.js"></script>
+    <script src="../js/nieve.js"></script>
 
-    <!-- Script para manejar el evento de búsqueda -->
     <script>
         document.getElementById('btnBuscar').addEventListener('click', function() {
             const busqueda = document.getElementById('BarraBusqueda').value.trim();
             if (busqueda) {
-                // Redirigir a todos.html con el término de búsqueda en la URL
                 window.location.href = `todos.html?busqueda=${encodeURIComponent(busqueda)}`;
             }
         });
