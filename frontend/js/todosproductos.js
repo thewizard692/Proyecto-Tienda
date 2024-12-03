@@ -131,10 +131,10 @@ const obtenerProductos = async () => {
     }
 };
 
-const agregaralCarrito = async () => {
+const agregaralCarrito = async (button) => {
     {
         const usuarioid = sessionStorage.getItem('usuarioid');
-        const idproducto = document.getElementById('idproducto').value
+        const idproducto = button.closest('.card').querySelector('#idproducto').value;
         const send = {
             usuarioid: usuarioid,
             idproducto: idproducto

@@ -49,8 +49,8 @@
                         <p class="lead text-secondary">Precio: $0.00</p>
                         <p class="lead text-secondary">Marca: Marca</p>
                         <p class="lead text-secondary">Estado: Estado</p>
-                        <button type="submit" id="submitBtnCarr" class="btn btnColor" onclick="agregaralCarrito()">Agregar al carrito</button> 
                         <input type="hidden" id="idproducto">
+                        <button type="submit" id="submitBtnCarr" class="btn btnColor" onclick="agregaralCarrito(this)">Agregar al carrito</button>                    
                     </div>
                 </div>
             </article>
@@ -68,7 +68,7 @@
         document.getElementById('btnBuscar').addEventListener('click', function() {
             const busqueda = document.getElementById('BarraBusqueda').value.trim();
             if (busqueda) {
-                window.location.href = `todos.html?busqueda=${encodeURIComponent(busqueda)}`;
+                window.location.href = `todo.html?busqueda=${encodeURIComponent(busqueda)}`;
             }
         });
     </script>

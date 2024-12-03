@@ -46,7 +46,7 @@ class usuarioRepository implements IUsuario
             $usuarioid = $carrito->car_fk_usuario;
             $idproducto = $carrito->car_fk_producto;
             $cantidad = 1;
-
+            echo json_encode($idproducto);
             $sqlCheck = "SELECT cantidad FROM carrito WHERE car_fk_usuario = :car_fk_usuario AND car_fk_producto = :car_fk_producto";
             $stmtCheck = $this->conn->prepare($sqlCheck);
             $stmtCheck->bindParam(':car_fk_usuario', $usuarioid);
@@ -55,7 +55,7 @@ class usuarioRepository implements IUsuario
             $result = $stmtCheck->fetch(PDO::FETCH_ASSOC);
     
             if ($result) {
-                $sqlUpdate = "UPDATE carrito SET cantidad = cantidad + :cantidad WHERE car_fk_usuario = :car_fk_usuario AND idproducto = :car_fk_producto";
+                $sqlUpdate = "UPDATE carrito SET cantidad = cantidad + :cantidad WHERE car_fk_usuario = :car_fk_usuario AND car_fk_producto = :car_fk_producto";
                 $stmtUpdate = $this->conn->prepare($sqlUpdate);
                 $stmtUpdate->bindParam(':cantidad', $cantidad);
                 $stmtUpdate->bindParam(':car_fk_usuario', $usuarioid);
